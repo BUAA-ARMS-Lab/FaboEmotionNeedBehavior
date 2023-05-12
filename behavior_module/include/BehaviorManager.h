@@ -176,8 +176,8 @@ public:
         publisher_idlestate_ = n_.advertise<behavior_module::idleState>("/idleState",1000);
         subscriber_need_ = n_.subscribe("/need_lists", 1000, &BehaviorManager::need_msg_callback, this);
         subscriber_behavior_feedback_ = n_.subscribe("/BehaviorFeedback", 1000, &BehaviorManager::behavior_feedback_callback, this);
-        readinBehaviorLibrary(data_path);
-        tellIdleState(true, nullptr);
+        ReadInBehaviorLibrary(data_path);
+        TellIdleState(true, nullptr);
     };
 
 private:
@@ -193,37 +193,37 @@ private:
     bool mbNewBehFlag;
     thread *mtWaitToUpdate;
 
-    void readinBehaviorLibrary(const string &config_file);
-    int addNewBehavior(Behavior &new_behavior);
-    void tellIdleState(bool state, Behavior *completedBehavior);
-    Behavior* getBehaviorByName(string name);
-    bool readInNewNeed(const behavior_module::need_msg &msg);
-    void printAllBehaviors();
+    void ReadInBehaviorLibrary(const string &config_file);
+    int AddNewBehavior(Behavior &new_behavior);
+    void TellIdleState(bool state, Behavior *completedBehavior);
+    Behavior* GetBehaviorByName(string name);
+    bool ReadInNewNeed(const behavior_module::need_msg &msg);
+    void PrintBehaviorLibraryInfo();
 
-    behavior_module::behavior_msg generateOrderMsgByBehavior(const Behavior& beh);
+    behavior_module::behavior_msg GenerateBehaviorMsg(const Behavior& beh);
 
-    void waitToUpdate(float wait_seconds);
+    void WaitToUpdate(float wait_seconds);
 
-    void updateBehaviorPub();
+    void UpdateBehaviorPub();
     void need_msg_callback(const behavior_module::need_msg &msg)
     {
         cout << "\n---------------------------------------------------" << endl;
         printInColor("【Received need_msg】", BLUE);
         cout << msg.need_name << endl << endl;
-        readInNewNeed(msg);
+        ReadInNewNeed(msg);
     }
 
     void behavior_feedback_callback(const behavior_module::behavior_feedback_msg &msg);
 
-    int insertBehavior(Behavior &new_behavior);
+    int InsertBehavior(Behavior &new_behavior);
 
-    int computeParallel();
+    int ComputeParallel();
 
-    void printCurrentSeries();
+    void PrintBehaviorseries();
 
-    void printBehaviors(vector<Behavior> &behaviors);
+    void PrintBehaviors(vector<Behavior> &behaviors);
 
-    void printMsgInfo(behavior_module::behavior_msg);
+    void PrintBehaviorMsgInfo(behavior_module::behavior_msg);
 
     // 数据库所有行为名称的集合，用于在响应需求时判断是否有对应的行为
     set<std::string> msbehaviorsCatalog;

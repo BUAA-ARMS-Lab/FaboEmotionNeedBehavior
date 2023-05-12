@@ -1,16 +1,11 @@
 #include "BehaviorManager.h"
 
-bool judgeSameStamp(const std_msgs::Header& header1, const std_msgs::Header& header2) {
-    if (header1.stamp.sec == header2.stamp.sec)
-        return true;
-    else
-    {
-        return false;
-    }
+bool JudgeStampSame(const std_msgs::Header& header1, const std_msgs::Header& header2) {
+    return (header1.stamp.sec == header2.stamp.sec)
 }
 
 // Read behavior data from .json file and save in mmbehaviorsLibrary.
-void BehaviorManager::readinBehaviorLibrary(const string &config_file)
+void BehaviorManager::ReadInBehaviorLibrary(const string &config_file)
 {
     cout << "Reading behavior data..." << endl;
     Json::Value root;
@@ -95,7 +90,7 @@ void BehaviorManager::readinBehaviorLibrary(const string &config_file)
     cout << "Finish mmbehaviorsLibrary creation." << endl;
 }
 
-Behavior* BehaviorManager::getBehaviorByName(string name)
+Behavior* BehaviorManager::GetBehaviorByName(string name)
 {
     auto behavior_index = mmbehaviorsLibrary.find(name);
     if (behavior_index == mmbehaviorsLibrary.end()){
@@ -109,14 +104,14 @@ Behavior* BehaviorManager::getBehaviorByName(string name)
 
 // Handle need message and generate the behavior instance 
 // with mmbehaviorsLibrary data and need message's configuration.
-bool BehaviorManager::readInNewNeed(const behavior_module::need_msg &msg)
+bool BehaviorManager::ReadInNewNeed(const behavior_module::need_msg &msg)
 {
     string need_name = msg.need_name;
     printInColor("【Add new behavior】", BLUE);
     cout << need_name;
 
     // 1. Query the need in mmbehaviorsLibrary.
-    Behavior* new_behavior = getBehaviorByName(need_name);
+    Behavior* new_behavior = GetBehaviorByName(need_name);
     string result = (new_behavior != nullptr)?", succeeds.":", fails.";
     cout << result << endl << endl;
 
@@ -126,25 +121,25 @@ bool BehaviorManager::readInNewNeed(const behavior_module::need_msg &msg)
     }
     else {
         (*new_behavior).configureByNeedMsg(msg);
-        int insert_location = addNewBehavior(*new_behavior);
-        computeParallel();
+        int insert_location = AddNewBehavior(*new_behavior);
+        ComputeParallel();
 
         if (insert_location <= mParallelNum){
-            updateBehaviorPub();
+            UpdateBehaviorPub();
         }
         else
         {
             if (new_behavior->type=="INTERACTION")
             {
                 string need_name = "TellToWait";
-                Behavior* tell_behavior = getBehaviorByName(need_name);
+                Behavior* tell_behavior = GetBehaviorByName(need_name);
                 if (tell_behavior!=nullptr) {
                     tell_behavior->target = new_behavior->target;
                     tell_behavior->target_angle = new_behavior->target_angle;
                     tell_behavior->target_distance = new_behavior->target_distance;
-                    addNewBehavior(*tell_behavior);
-                    computeParallel();
-                    updateBehaviorPub();
+                    AddNewBehavior(*tell_behavior);
+                    ComputeParallel();
+                    UpdateBehaviorPub();
                 }
                 else {
                     cout << "No behavior called " << need_name;
@@ -152,14 +147,14 @@ bool BehaviorManager::readInNewNeed(const behavior_module::need_msg &msg)
                 }
             }
         }
-        printCurrentSeries();
+        PrintBehaviorseries();
         return true;
     }
 }
 
 // Delete light behavior, add the new behavior instance into mvbehaviorsTotal
 // and judge whether it is among the parallel behaviors to be execute.
-int BehaviorManager::addNewBehavior(Behavior &new_behavior)
+int BehaviorManager::AddNewBehavior(Behavior &new_behavior)
 {
     // Judge if mvbehaviorsTotal is empty.
     {
@@ -168,22 +163,22 @@ int BehaviorManager::addNewBehavior(Behavior &new_behavior)
     }
 
     if (mvbehaviorsTotal.empty()) {
-        tellIdleState(false, nullptr);
-        insertBehavior(new_behavior);
+        TellIdleState(false, nullptr);
+        InsertBehavior(new_behavior);
         return 1;
     }
 
     // Judge if a light behavior exists.
     if (mvbehaviorsTotal[0].is_light){
-        insertBehavior(new_behavior);
+        InsertBehavior(new_behavior);
         return 1;
     }
     
-    int insert_location = insertBehavior(new_behavior);
+    int insert_location = InsertBehavior(new_behavior);
     return insert_location;
 }
 
-void BehaviorManager::tellIdleState(bool state, Behavior *completedBehavior)
+void BehaviorManager::TellIdleState(bool state, Behavior *completedBehavior)
 {
     //TODO: tell EmotionModule the idle state
     behavior_module::idleState msg;
@@ -205,7 +200,7 @@ void BehaviorManager::tellIdleState(bool state, Behavior *completedBehavior)
     cout << state << ", Behavior : " << msg.hehavior_name << endl << endl;
 }
 
-void BehaviorManager::waitToUpdate(float wait_seconds)
+void BehaviorManager::WaitToUpdate(float wait_seconds)
 {
     {
         unique_lock<mutex> lock(mutexCheckNewBeh);
@@ -215,15 +210,15 @@ void BehaviorManager::waitToUpdate(float wait_seconds)
     {
         unique_lock<mutex> lock(mutexCheckNewBeh);
         if (!mbNewBehFlag) {
-            computeParallel();
-            updateBehaviorPub();
+            ComputeParallel();
+            UpdateBehaviorPub();
         }
     }
 }
 
 // Make the necessary judge, update the parallel behaviors to be execute
 // and finally pub them.
-void BehaviorManager::updateBehaviorPub()
+void BehaviorManager::UpdateBehaviorPub()
 {
     if (mvbehaviorsTotal.empty()){
         return;
@@ -236,7 +231,7 @@ void BehaviorManager::updateBehaviorPub()
         {
             msg.name = "Stop_All_Actions";
             publisher_behavior_.publish(msg);
-            printMsgInfo(msg);
+            PrintBehaviorMsgInfo(msg);
             mbPauseFlag = true;
         }
         return;
@@ -246,7 +241,7 @@ void BehaviorManager::updateBehaviorPub()
 
     for(int i = 0 ; i < mParallelNum ; i++){
         mvbehaviorsCurrent.push_back(mvbehaviorsTotal[i]);
-        msg = generateOrderMsgByBehavior(mvbehaviorsTotal[i]);
+        msg = GenerateBehaviorMsg(mvbehaviorsTotal[i]);
 
         for(int j = 0 ; j < 5 ; j ++) {
             msg.occupancy[j] = 0;
@@ -264,14 +259,14 @@ void BehaviorManager::updateBehaviorPub()
     for(auto &one_msg:msgs)
     {
         publisher_behavior_.publish(one_msg);
-        printMsgInfo(one_msg);
+        PrintBehaviorMsgInfo(one_msg);
     }
 }
 
 // Handle feedback from perform_module:
 // 1. Update progress of sub-behaviors into mvbehaviorsTotal and parallelBehaviorSeries.
 // 2. Delete completed behaviors in mvbehaviorsTotal and parallelBehaviorSeries.
-// 3. Start function updateBehaviorPub when necessary.
+// 3. Start function UpdateBehaviorPub when necessary.
 void BehaviorManager::behavior_feedback_callback(const behavior_module::behavior_feedback_msg &msg)
 {
     printInColor("【BehaviorFeedback】", GREEN);
@@ -283,16 +278,16 @@ void BehaviorManager::behavior_feedback_callback(const behavior_module::behavior
     vector<Behavior>::iterator itor = mvbehaviorsTotal.begin();
 
     for (auto &behavior : mvbehaviorsTotal){
-        if (behavior.name == msg.hehavior_name && judgeSameStamp(behavior.header, msg.header)){
+        if (behavior.name == msg.hehavior_name && JudgeStampSame(behavior.header, msg.header)){
             rightBehaviorFlag = true;
-            if(msg.current_phase > behavior.current_phase && 
+            if(msg.current_phase >= behavior.current_phase && 
                             msg.current_phase <= behavior.total_phase)
             {
                 behavior.current_phase = msg.current_phase;
                 if (msg.current_phase == behavior.total_phase || behavior.is_light) {
                     completeFlag = true;
                 }
-                // printCurrentSeries();
+                // PrintBehaviorseries();
                 break;
             }
             else
@@ -306,7 +301,7 @@ void BehaviorManager::behavior_feedback_callback(const behavior_module::behavior
 
     if (completeFlag == true){
         bool idleState = (mvbehaviorsTotal.size() == 1);
-        tellIdleState(idleState, &(*itor));
+        TellIdleState(idleState, &(*itor));
         mvbehaviorsTotal.erase(itor);
     }
 
@@ -319,7 +314,7 @@ void BehaviorManager::behavior_feedback_callback(const behavior_module::behavior
     itor = mvbehaviorsCurrent.begin();
 
     for (auto &behavior : mvbehaviorsCurrent){
-        if(judgeSameStamp(behavior.header, msg.header)){
+        if(JudgeStampSame(behavior.header, msg.header)){
 
             rightBehaviorFlag = false;
             behavior.current_phase = msg.current_phase;
@@ -332,15 +327,11 @@ void BehaviorManager::behavior_feedback_callback(const behavior_module::behavior
                     mviOccupancy = {1,1,1,1,1};
                     mbPauseFlag = false;
                     // TODO: SetWaitTimeHere
-                    mtWaitToUpdate = new thread(&BehaviorManager::waitToUpdate, this, 20);
+                    mtWaitToUpdate = new thread(&BehaviorManager::WaitToUpdate, this, 20);
                     mtWaitToUpdate->detach();
-                    // updateBehaviorPub();
-                }
-                else if (mvbehaviorsTotal.empty()) {
-                    // tellIdleState(true);
                 }
             }
-            printCurrentSeries();
+            PrintBehaviorseries();
             return;
         }
         itor++;
@@ -350,7 +341,7 @@ void BehaviorManager::behavior_feedback_callback(const behavior_module::behavior
     return;
 }
 
-void BehaviorManager::printAllBehaviors()
+void BehaviorManager::PrintBehaviorLibraryInfo()
 {
     cout << "Behavior num : " << msbehaviorsCatalog.size() << "\n\n";
     cout << "Behavior names:\n";
@@ -383,7 +374,7 @@ void BehaviorManager::printAllBehaviors()
     cout << "    }\n";
 }
 
-behavior_module::behavior_msg BehaviorManager::generateOrderMsgByBehavior(const Behavior& beh)
+behavior_module::behavior_msg BehaviorManager::GenerateBehaviorMsg(const Behavior& beh)
 {
     behavior_module::behavior_msg msg;
     {
@@ -410,14 +401,14 @@ behavior_module::behavior_msg BehaviorManager::generateOrderMsgByBehavior(const 
     return msg;
 }
 
-int BehaviorManager::insertBehavior(Behavior &new_behavior)
+int BehaviorManager::InsertBehavior(Behavior &new_behavior)
 {
     int index = 0;
     unique_lock<mutex> lock(mutexBehaviorsTotal);
     int num = mvbehaviorsTotal.size();
     if(!num){
         mvbehaviorsTotal.push_back(new_behavior);
-        // printCurrentSeries();
+        // PrintBehaviorseries();
         return 1;
     }
     double new_weight = new_behavior.weight;
@@ -427,7 +418,7 @@ int BehaviorManager::insertBehavior(Behavior &new_behavior)
 
     if(index==num){
         mvbehaviorsTotal.push_back(new_behavior);
-        // printCurrentSeries();
+        // PrintBehaviorseries();
         return index + 1;
     }
     else{
@@ -437,11 +428,11 @@ int BehaviorManager::insertBehavior(Behavior &new_behavior)
         mvbehaviorsTotal[i] = mvbehaviorsTotal[i - 1];
     }
     mvbehaviorsTotal[index] = new_behavior;
-    // printCurrentSeries();
+    // PrintBehaviorseries();
     return index + 1;
 }
 
-int BehaviorManager::computeParallel()
+int BehaviorManager::ComputeParallel()
 {
     int parallel_num = 0;
     vector<int> count = {0,0,0,0,0};
@@ -469,7 +460,7 @@ int BehaviorManager::computeParallel()
     return parallel_num;
 }
 
-void BehaviorManager::printCurrentSeries()
+void BehaviorManager::PrintBehaviorseries()
 {
     printInColor("【printBehaviorList】\n", BLUE);
     if(mvbehaviorsTotal.empty()){
@@ -477,9 +468,9 @@ void BehaviorManager::printCurrentSeries()
         return;
     }
     printInColor("- BehaviorsTotal: \n", CYAN);
-    printBehaviors(mvbehaviorsTotal);
+    PrintBehaviors(mvbehaviorsTotal);
     printInColor("- BehaviorsCurrent: \n", CYAN);
-    printBehaviors(mvbehaviorsCurrent);
+    PrintBehaviors(mvbehaviorsCurrent);
 
     cout << endl;
     cout << " - 行为停止后有待并行的行为数量 :" << mParallelNum << endl;
@@ -489,7 +480,7 @@ void BehaviorManager::printCurrentSeries()
     return;
 }
 
-void BehaviorManager::printMsgInfo(behavior_module::behavior_msg msg)
+void BehaviorManager::PrintBehaviorMsgInfo(behavior_module::behavior_msg msg)
 {
     printInColor("【Sent behavior_msg】", BLUE);
     cout << "   " <<  msg.name << "\t" << msg.target << "\t" << msg.type << "\t" << (int)msg.current_phase << "/" << (int)msg.total_phase << "\t";
@@ -500,7 +491,7 @@ void BehaviorManager::printMsgInfo(behavior_module::behavior_msg msg)
     cout << "}" << endl << endl;
 }
 
-void BehaviorManager::printBehaviors(vector<Behavior> &behaviors)
+void BehaviorManager::PrintBehaviors(vector<Behavior> &behaviors)
 {
     cout << "   " << "Order\t" << "weight\t" << "phase\t" << "necessary\t" << "name\t" << "target\t" << "stamp.secs\t" << endl;
     int order = 1;
