@@ -38,6 +38,7 @@ private:
     bool updateInit_perception = false;
     bool updateInit_emotion = false;
     bool updateInit_status = false;
+    bool mPrint_state = false;
 
 private:
     double varianceTop2( social_msg::perception_msg & p ){
@@ -53,32 +54,37 @@ public:
         perceptionClear();
      }
     
+    void SetPrintState(bool state){
+        mPrint_state = state;
+    }
+
     void PerceptionUpdate(social_msg::perception_msg per ){ 
 
         per_list.push_back( per );
         printf(  YELLOW "     Update Peception: "NONE);
-        cout<< per.intention <<" and "<<per.intention_2<< endl;
+        cout<< per.intention ;//<<" and "<<per.intention_2;
+        cout<<" "<< endl;
         updateInit_perception = true;
     }
 
     void RobotEmotionUpdate(double emotion[8] ){ 
-        printf(  YELLOW "     Update Robot Emotion: "NONE);  
+        if(mPrint_state) printf(  YELLOW "     Update Robot Emotion: "NONE);  
         for(int i = 0 ; i < 8 ; i ++ ) {
             emotion_[i] = emotion[i];
-            cout<< emotion[i] << " ";
+            if(mPrint_state) cout<< emotion[i] << " ";
         }
         updateInit_emotion = true;
-        cout<< endl ;   
+        if(mPrint_state)  cout<< endl ;   
     }
 
     void RobotStatusUpdate(double body[8] ){ 
-        printf(  YELLOW "     Update Robot Status: "NONE);
+        if(mPrint_state)  printf(  YELLOW "     Update Robot Status: "NONE);
         for(int i = 0 ; i < 8 ; i ++ ){
             body_[i] = body[i];
-            cout<<  body[i] << " ";
+            if(mPrint_state)  cout<<  body[i] << " ";
         } 
         updateInit_status = true;
-        cout<< endl ; 
+        if(mPrint_state)  cout<< endl ; 
     }
     
     void input_update(social_msg::perception_msg per ,double emotion[8], double body[8] ){ 
@@ -94,7 +100,7 @@ public:
     bool updateInit(){  return (/* updateInit_perception &&  */ updateInit_emotion  /*&& updateInit_status*/ );}
     
     std::vector<need> need_compute_all(){
-        cout<< "Start to Need Computation !!\n";
+        if(mPrint_state) cout<< "Start to Need Computation !!\n";
         std::vector<need> output_need_list;
         std::vector<need> temp;
         
@@ -207,12 +213,15 @@ public:
         if( output_need_list.size() != 0 )
             for(int i = 0; i< output_need_list.size() ; i++  )  
             {
-                std::cout <<  "    Output Need " << i+1 << ": " << output_need_list[i].need_name << " ,Weight: " <<output_need_list[i].weight;
-                if (  output_need_list[i].person_name != "")
-                    std::cout <<" ,for " <<output_need_list[i].person_name<<" as " <<output_need_list[i].IDtype;
-                std::cout<<std::endl;
+                // std::cout <<  "    Output Need " << i+1 << ": " << output_need_list[i].need_name << " ,Weight: " <<output_need_list[i].weight;
+                // if (  output_need_list[i].person_name != "")
+                //     std::cout <<" ,for " <<output_need_list[i].person_name<<" as " <<output_need_list[i].IDtype;
+                // std::cout<<std::endl;
             }     
-        else std::cout<<"    No need generated !\n";
+        else{
+            if(mPrint_state) 
+                std::cout<<"    No need generated !\n";
+        } 
         // 输出
         return output_need_list;
     }
