@@ -46,7 +46,7 @@ void callback(sim::simConfig &config, uint32_t level)
                 }
 
                 //社交态度
-                if(config.attitude_switch == true)
+                if(config.O_____attitude_switch == true)
                 {
                 social_msg::attitude_msg attitude;    
                 attitude.person_name = config.attitude_person_name;
@@ -60,14 +60,20 @@ void callback(sim::simConfig &config, uint32_t level)
                 pub_attitude.publish(attitude);
                 }
 
-        //         //空闲状况
-        //         if(config.idleState_switch == true)
-        //         {
-        //         social_msg::idleState idleState_msg;    
-        //         idleState_msg.hehavior_name = config.satisfy_need;
-        //         idleState_msg.satisfy_value = config.satisfy_value;
-        //         pub_idleState.publish(idleState_msg);
-        //         }
+                //空闲状况
+                if(config.O_____idleState_switch == true)
+                {
+                social_msg::idleState idleState_msg; 
+                idleState_msg.idleState = config.idleState;
+                idleState_msg.hehavior_name = config.idle_hehavior_name;
+                idleState_msg.person_name = config.idle_person_name;
+                idleState_msg.IDtype = config.idle_person_IDtype;
+                idleState_msg.target_angle  = config.idle_target_angle;
+                idleState_msg.target_distance = config.idle_target_distance;
+                idleState_msg.person_emotion = config.idle_person_emotion;
+                idleState_msg.satisfy_value = config.idle_satisfy_value;
+                pub_idleState.publish(idleState_msg);
+                } 
         //         //身体状况 
         //         if(config.O_____body_switch == true)
         //         {

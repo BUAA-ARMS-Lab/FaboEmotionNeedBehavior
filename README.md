@@ -52,6 +52,13 @@ Need Module
 rosrun need_module need_model
 ```
 
+仿真接口: 发送感知信息、社交态度、idleState
+```bash
+roslaunch interface_sim interface_sim_cfg.launch
+```
+修改各topic的内容，从“O_____”开头的选项向下代表一个topic，第一个“O_____”选项，用于开关是否发送此topic，之后的选项用于修改topic的内容。
+发送topic时，先通过点击“O_____”开关，选择要发送的topic；再点击第一行的“publish”，发送topic。
+
 ## Topic publish
 手动发布"机器人闲置状态"
 + 发送“无后续行为”的闲置状态,从而使机器人在闲置30秒后,生成“无聊”的情绪。
