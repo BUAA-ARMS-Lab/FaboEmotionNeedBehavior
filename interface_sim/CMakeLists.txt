@@ -31,10 +31,14 @@ include_directories(
 
 
 generate_dynamic_reconfigure_options(
-   include/cfg.cfg
- )
+    include/cfg.cfg
+    include/behavior_feedback.cfg
+)
  
-add_executable(sim sim.cpp)
-add_dependencies(sim ${PROJECT_NAME}_gencfg)
- 
-target_link_libraries(sim ${catkin_LIBRARIES})
+add_executable(robot_emotion_publisher src/robot_emotion_publisher.cpp)
+add_dependencies(robot_emotion_publisher ${PROJECT_NAME}_gencfg)
+target_link_libraries(robot_emotion_publisher ${catkin_LIBRARIES})
+
+add_executable(behavior_feedback_publisher src/behavior_feedback_publisher.cpp)
+add_dependencies(behavior_feedback_publisher ${PROJECT_NAME}_gencfg)
+target_link_libraries(behavior_feedback_publisher ${catkin_LIBRARIES})

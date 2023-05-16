@@ -1,7 +1,7 @@
 #include "BehaviorManager.h"
 
 bool JudgeStampSame(const std_msgs::Header& header1, const std_msgs::Header& header2) {
-    return (header1.stamp.sec == header2.stamp.sec)
+    return (header1.stamp.sec == header2.stamp.sec);
 }
 
 // Read behavior data from .json file and save in mmbehaviorsLibrary.
