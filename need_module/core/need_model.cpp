@@ -21,6 +21,7 @@ ros::Publisher pub;  //need
 ros::Publisher query_attitude;
 ros::Subscriber sub_idleState;
 //全局变量: 
+bool print_status = false;  //是否实时输出需求模块的状态，默认不输出
 int period_cur = 0;   //每个period的周期时长,由 sleep函数 决定。
 social_msg::attitude_msg  attitude_query_result; 
 
@@ -129,32 +130,32 @@ void BehaviorFinishedUpdate(const social_msg::idleState::ConstPtr& msg,  ros::No
         query.motivation = need_output.need_name;
         query.person_name = need_output.person_name;
         query_attitude.publish(query);
-        ros::Duration timeout(0.5);
+        ros::Duration timeout(5);
         social_msg::attitude_msg::ConstPtr result = ros::topic::waitForMessage<social_msg::attitude_msg>("attitude", *n_ptr, timeout);
         if (result != NULL)
-            {
-                if( need_output.person_name ==  result->person_name &&
-                    need_output.IDtype      ==  result->IDtype &&
-                    need_output.need_name   ==  result->motivation
-                    ){
-                    ROS_INFO("Received right social attitude");
-                    need_output.attitude    = result->attitude;
-                    need_output.move_speed  = result->move_speed;
-                    need_output.distance   = result->distance;
-                    need_output.voice_speed = result->voice_speed;
-                }
-                else{
-                    ROS_INFO("Received wrong social attitude");
-                    need_output.attitude    = "";
-                    need_output.move_speed  = 0;
-                    need_output.distance    = 0;
-                    need_output.voice_speed = 0;
-                }
+        {
+            if( need_output.person_name ==  result->person_name &&
+                need_output.IDtype      ==  result->IDtype &&
+                need_output.need_name   ==  result->motivation
+                ){
+                ROS_INFO("Received right social attitude");
+                need_output.attitude    = result->attitude;
+                need_output.move_speed  = result->move_speed;
+                need_output.distance   = result->distance;
+                need_output.voice_speed = result->voice_speed;
             }
-            else
-            {
-                ROS_WARN("Timeout social attitude within 0.5 seconds");
-            }   
+            else{
+                ROS_INFO("Received wrong social attitude");
+                need_output.attitude    = "enthusiastic";   //enthusiastic,respectful,serious,disgust
+                need_output.move_speed  = 1.0;
+                need_output.distance    = 1.0;
+                need_output.voice_speed = 1.0;
+            }
+        }
+        else
+        {
+            ROS_WARN("Timeout social attitude within 0.5 seconds");
+        }   
         pub.publish(need_output);
         std::cout <<  "    Output Need " << 0+1 << ": " << need_output.need_name << " ,Weight: " <<need_output.weight;
         if (  need_output.person_name != "")
@@ -164,10 +165,17 @@ void BehaviorFinishedUpdate(const social_msg::idleState::ConstPtr& msg,  ros::No
 }
 
 int main(int argc, char** argv){
+    // 是否实时输出需求模块的状态，默认不输出
+    if(argc == 2){
+        print_status = argv[1];
+        PriorNeed.SetPrintState(argv[1]);
+    }
+        
+
     // ROS
     ros::init(argc, argv, "need_module");
     ros::NodeHandle n;
-    cout<< "Start to Subscribe（接收ROS信息） !!\n";
+    cout<< "Need Module Start to Subscribe（接收ROS信息） !!\n";
     
     //状态更新 
     sub_perception = n.subscribe("perceptions", 1000, PerceptionUpdate);
@@ -208,7 +216,7 @@ void run_PriorNeed(ros::NodeHandle*  n_ptr){
     {
         if(PriorNeed.updateInit())
         {
-            printf( GREEN "Run %dth PriorNeed（运行先验模型） !!\n"NONE, period_cur);            
+            if(print_status)  printf( GREEN "Run %dth PriorNeed（运行先验模型） !!\n"NONE, period_cur);            
             vector<need> need_lists = PriorNeed.need_compute_all();
             if( need_lists.size() != 0 )
                 for(int j =0 ; j< need_lists.size(); j++){
@@ -219,9 +227,11 @@ void run_PriorNeed(ros::NodeHandle*  n_ptr){
                     query.motivation = need_lists[j].need_name;
                     query.person_name = need_lists[j].person_name;
                     query_attitude.publish(query);
-                    ros::Duration timeout(0.5);
+                    double t = 1.0;
+                    ros::Duration timeout(t);
+                    ROS_INFO("Need waiting for social attitude");
                     social_msg::attitude_msg::ConstPtr result = ros::topic::waitForMessage<social_msg::attitude_msg>("attitude", *n_ptr, timeout);
-
+                    
                     // 将need发布给行为模块
                     social_msg::need_msg need_output;
                     need_output.person_name =  need_lists[j].person_name;
@@ -250,19 +260,28 @@ void run_PriorNeed(ros::NodeHandle*  n_ptr){
                         }
                         else{
                             ROS_INFO("Received wrong social attitude");
-                            need_output.attitude    = "";
-                            need_output.move_speed  = 0;
-                            need_output.distance    = 0;
-                            need_output.voice_speed = 0;
+                            need_output.attitude    = "enthusiastic";   //enthusiastic,respectful,serious,disgust
+                            need_output.move_speed  = 1.0;
+                            need_output.distance    = 1.0;
+                            need_output.voice_speed = 1.0;
                         }
                     }
                     else
                     {
-                        ROS_WARN("Timeout: Failed to receive social attitude within 0.5 seconds");
+                        ROS_WARN("Timeout: Failed to receive social attitude within %f seconds", t);
+                        need_output.attitude    = "enthusiastic";   //enthusiastic,respectful,serious,disgust
+                        need_output.move_speed  = 1.0;
+                        need_output.distance    = 1.0;
+                        need_output.voice_speed = 1.0;
                     }   
                     pub.publish(need_output);
                     // printf( GREEN "    QT_order: %d:\n"NONE, need_output.qt_order); 
                     // sleep(0.1); // TODO: 重要。
+
+                    std::cout <<  "[Output Need] " << j+1 << ": " << need_output.need_name << " ,Weight: " <<need_output.weight;
+                    if (  need_output.person_name != "")
+                        std::cout <<" ,for " <<need_output.person_name<<" as " <<need_output.IDtype;
+                    std::cout<<std::endl;
                 }
             else{  //此部分用途: 用于刷新qt中need list。如果本周期,没有新的need发送过,那么qt中的need list还是会显示之前的need,就可能会对中期测试中本没有need生成的情况  造成误解。
                     // social_msg::need_msg need_output;

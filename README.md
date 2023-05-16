@@ -21,36 +21,44 @@ catkin_make
 ```
 
 # Usage
-To control robot arms to do designed actions:
++ To control robot arms to do designed actions:
 ```bash
 roslaunch arm_control arm_control.launch
 ```
 
-To test behavior_module only:
++ To test behavior_module only:
 ```bash
 rosrun behavior_module behavior_node
 ```
 
 
-To test behavior_module and perform_module together, controling fabo by bluetooth:
++ To test behavior_module and perform_module together, controling fabo by bluetooth:
 ```bash
 roslaunch behavior_module bluetooth_demo.launch
 ```
 
-Use the following to **publish different topics more easily**:
++ Use the following to **publish different topics more easily**:
 ```bash
 rosrun behavior_module talker.py
 ```
 
-Emotion Module
++ Emotion Module
 ```bash
 rosrun emotion_module main.py
 ```
 
-Need Module
++ Need Module
 ```bash
 rosrun need_module need_model
 ```
+
++ 仿真接口: 
+```bash
+roslaunch interface_sim interface_sim_cfg.launch
+```
+1.   可以发送感知信息、社交态度、idleState等topic
+2.   修改各topic的内容： 从“O_____”开头的选项向下代表一个topic，第一个“O_____”选项，用于开关是否发送此topic，之后的选项用于修改topic的内容。
+3.   发送topic： 先通过点击“O_____”开关，选择要发送的topic；再点击第一行的“publish”，发送topic。
 
 ## Topic publish
 手动发布"机器人闲置状态"

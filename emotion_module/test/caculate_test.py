@@ -36,5 +36,5 @@ while np.any(current_e):
     for i in range(len(current_e)):
         current_t=time.time()
         current_e[i]=natural_attenuation_e(current_e[i],i,current_t,start_time)
-    print(current_e)
+    print("Current emotion:",current_e)
     time.sleep(1)

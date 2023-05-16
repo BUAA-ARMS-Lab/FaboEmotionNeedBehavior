@@ -37,6 +37,9 @@ e_rec=[]                                                   # 记录情感变化�
 # SECRET_KEY = '9oGOc6MmGGkFcYp6aGaRRy1fT87TYQ1t'
 # client = AipNlp(APP_ID, API_KEY, SECRET_KEY)   
 
+# 是否开始print
+print_state = False
+
 # 身体状态对无聊情绪的影响
 # global idleState_last, idleState_flag, time_init, time_cur, idleState_to_boring
 time_init   = 0
@@ -54,7 +57,7 @@ def callback_robot_status( idleState ):
 
        # 现在的: 
        if ( idleState.idleState == 1 ):
-              print("接收到robot 处于闲置状态")
+              print("接收到idleState，机器人进入空闲状态")
               time_init = time.time()
               idleState_flag = 1
        else:
@@ -67,6 +70,7 @@ def callback_robot_status( idleState ):
 pub_query = rospy.Publisher('attitude_query', attitude_query, queue_size=1)
 pub = rospy.Publisher('robot_emotion', robot_emotion, queue_size=10)
 def publish():
+       global print_state
        '''
        robot_emotion消息发布
        '''
@@ -81,7 +85,8 @@ def publish():
        eval.emotion7 = current_e[6]
        eval.emotion8 = current_e[7]
        pub.publish(eval)
-       rospy.loginfo("机器人情感: %f,%f,%f,%f,%f,%f,%f,%f\n", eval.emotion1,eval.emotion2,eval.emotion3,eval.emotion4,eval.emotion5,eval.emotion6,eval.emotion7,eval.emotion8 )
+       if print_state:
+              rospy.loginfo("机器人情感: %f,%f,%f,%f,%f,%f,%f,%f\n", eval.emotion1,eval.emotion2,eval.emotion3,eval.emotion4,eval.emotion5,eval.emotion6,eval.emotion7,eval.emotion8 )
 
 
 def caculate_edelta(csv_name,index_name,index_val,column_val):
@@ -172,8 +177,9 @@ def caculate_e(delta_e,delta_epre):
        ### 情绪增量全零情况
        if not(np.any(delta_e)): 
               if t_flag == 0:
-                     print(t_flag)
-                     print("case1")
+                     if print_state:
+                            print(t_flag)
+                            print("case1")
                      #print("delta_time:", current_t-unique_msg[-1][0]-stimulus_t)
                      for i in range(len(current_e)):
                             current_e[i]=E.natural_attenuation_e(current_e[i],i,current_t,unique_msg[-1][0]+stimulus_t)
@@ -182,16 +188,18 @@ def caculate_e(delta_e,delta_epre):
                      delta_e = copy.deepcopy(delta_epre)
                      ## 情绪强度向量全零情况
                      if not(np.any(current_e)): 
-                            print("case2")
+                            if print_state:
+                                   print("case2")
                             current_e+=delta_e #直接加和情绪增量
                             for i in range(len(current_e)):
                                    current_e[i] = max(min(0, max(current_e[i],h4[i])), min(current_e[i], h4[i])) 
                             current_m=E.update_m() 
                      ## 情绪强度向量非零情况
                      else:
-                            print("case3")
-                            print('current_t:',current_t)
-                            print('start_t:',unique_msg[-1][0])
+                            if print_state:
+                                   print("case3")
+                                   print('current_t:',current_t)
+                                   print('start_t:',unique_msg[-1][0])
                             mode=E.judge_mode()
                             current_e=E.empathize_e(mode,current_t,unique_msg[-1][0])
                             current_m=E.update_m()  
@@ -199,14 +207,16 @@ def caculate_e(delta_e,delta_epre):
        else:
               ## 情绪强度向量全零情况
               if not(np.any(current_e)): 
-                     print("case4")
+                     if print_state:
+                            print("case4")
                      current_e+=delta_e #直接加和情绪增量,形成情绪突跳,对心境无影响
                      for i in range(len(current_e)):
                             current_e[i] = max(min(0, max(current_e[i],h4[i])), min(current_e[i], h4[i]))
                      current_m=E.update_m() 
               ## 情绪强度向量非零情况
               else:
-                     print("case5")
+                     if print_state:
+                            print("case5")
                      mode=E.judge_mode()
                      current_e=E.empathize_e(mode,current_t,unique_msg[-1][0])
                      current_m=E.update_m()      
@@ -277,7 +287,7 @@ def callback_perception(perception_msg):
        query.IDtype  = perception_msg.IDtype 
        query.motivation = "Greet"
        pub_query.publish(query)
-       rospy.loginfo(" 发送查询Greet的社交态度\n")
+       rospy.loginfo(" 查询与%s问好的社交态度",perception_msg.person_name)
 
        # version2:  查询本地列表。默认是热情
        msg_list[4]='none'
@@ -296,12 +306,16 @@ def callback_perception(perception_msg):
        # reload(sys) 
        # sys.setdefaultencoding('utf-8')
        # msg_list[7]=perception_msg.speech.encode().decode("raw_unicode_escape") 
-       msg_list[7]=perception_msg.speech
+       msg_list[7]=perception_msg.person_speech
        # msg_list[7].encode('raw_unicode_escape').decode()
        msg_list[0]=perception_msg.time
 
 
-def data_process():
+def data_process(print_state_):
+       # 是否开启print
+       global print_state 
+       print_state = print_state_
+
        global msg_list,current_e,current_m,delta_e,delta_epre
        # if  (not msg_list):
        #        msg_list=[rospy.get_time(), 'None', 0, 'None', 'None', 'None', 'enthusiastic', 'None']
@@ -311,10 +325,12 @@ def data_process():
        # elif len(msg_list)!=8:
        #        msg_list.insert(1,0)
        #        msg_list.insert(1,'None')
-       print("Msg list: ",msg_list) 
+       if print_state:
+              print("Msg list: ",msg_list) 
        # print('u'+msg_list[7])       
        flag=unique_judge(msg_list)
-       print("Whether_work: ",flag)
+       if print_state:
+              print("Whether_work: ",flag)
        
        #### 更新情绪增量列表
        if flag :
@@ -365,7 +381,7 @@ def data_process():
                             else:
                                    eclass=1
                      except:
-                            print("Emotion recognition failed !")
+                            print("他人评价 Emotion recognition failed !")
                             eclass='none'
                      # senti=Sentiment()
                      # result = senti.sentiment_count("你真棒")
@@ -384,7 +400,9 @@ def data_process():
               delta_echange(need_eval,attitude_eval,perception_eval)
        else:
               delta_e = np.zeros(emtionNumber) # 当信息不构成刺激时,情绪增量向量为0向量
-       print("List of emotion change: ",delta_e)
+       
+       if print_state:        
+              print("List of emotion change: ",delta_e)
 
        
        
@@ -393,12 +411,13 @@ def data_process():
        if idleState_flag :
               #print("运行robot_status_msg to boring ")
               time_cur = time.time()
-              print("机器人~~~~~~闲置了%f秒"%(time_cur - time_init)) 
+              if print_state:
+                     print("机器人~~~~~~闲置了%f秒"%(time_cur - time_init)) 
               if ( (time_cur - time_init) > 30 ):
                      delta_e[7] = 0.6   #current_e  delta_e
                      unique_msg.append([rospy.get_time()-stimulus_t, 'None', 0, 'None', 'None', 'None', 'enthusiastic', 'None'])
                      idleState_flag  = 0
-                     print("无聊情绪置为 0.6")
+                     print("机器人长时间处于空闲状态,无聊情绪置为 0.6")
       
        #### 调用移情计算
        caculate_e(delta_e,delta_epre)
@@ -409,8 +428,10 @@ def data_process():
        #main.visualize_3d()
        # global current_eq
        # current_eq.append(current_e.insert(0,rospy.get_time()))
-
-       print("current_mood:",current_m)       
+       
+       if print_state:
+              print("current_mood:",current_m)       
+       
        #### 机器人情感topic发布
        publish()
        

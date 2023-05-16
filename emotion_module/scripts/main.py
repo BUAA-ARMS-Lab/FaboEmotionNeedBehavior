@@ -17,6 +17,9 @@ from social_msg.msg import attitude_set
 from social_msg.msg import perception_msg
 from social_msg.msg import attitude_query  
 from social_msg.msg import idleState
+# 是否开始print
+print_state = False
+
 class Watcher():
     '''
         *线程管理类,用于键盘结束多线程程序
@@ -57,7 +60,8 @@ class myThread(threading.Thread):
                     break
                 else:
                     time.sleep(1)
-                    Data_processing.data_process()
+                    global print_state
+                    Data_processing.data_process(print_state)
         # else:
         #     visualize_3d()
  
@@ -182,6 +186,9 @@ def visualize_3d():
         
 
 if __name__ == '__main__':
+    args = sys.argv[1:]
+    if len(args) > 0:
+        print_state = sys.argv[1]
     Watcher()
     print("debug: new emotion module ")
     thread1=myThread("Listener-thread",'listener')

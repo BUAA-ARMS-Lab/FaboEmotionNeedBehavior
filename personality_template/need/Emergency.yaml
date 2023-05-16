@@ -4,9 +4,9 @@
   person_emotion: 
   rob_emotion: 
   rob_status: 
-  time: 0
+  time: 
   weight: 1.2
-  satisfy_value: 0
+  satisfy_value: 
 
 - need_name: AvoidHurt
   intention: Hurt
@@ -14,9 +14,9 @@
   person_emotion: 
   rob_emotion: 
   rob_status: 
-  time: 0
+  time: 
   weight: 1.5
-  satisfy_value: 0
+  satisfy_value: 
 
 - need_name: Dormancy
   intention: Fall
@@ -24,6 +24,6 @@
   person_emotion: 
   rob_emotion: 
   rob_status: 
-  time: 0
+  time: 
   weight: 1.5
-  satisfy_value: 0
+  satisfy_value: 
