@@ -33,6 +33,7 @@ include_directories(
 generate_dynamic_reconfigure_options(
     include/cfg.cfg
     include/behavior_feedback.cfg
+    include/need.cfg
 )
  
 add_executable(robot_emotion_publisher src/robot_emotion_publisher.cpp)
@@ -42,3 +43,7 @@ target_link_libraries(robot_emotion_publisher ${catkin_LIBRARIES})
 add_executable(behavior_feedback_publisher src/behavior_feedback_publisher.cpp)
 add_dependencies(behavior_feedback_publisher ${PROJECT_NAME}_gencfg)
 target_link_libraries(behavior_feedback_publisher ${catkin_LIBRARIES})
+
+add_executable(need_publisher src/need_publisher.cpp)
+add_dependencies(need_publisher ${PROJECT_NAME}_gencfg)
+target_link_libraries(need_publisher ${catkin_LIBRARIES})

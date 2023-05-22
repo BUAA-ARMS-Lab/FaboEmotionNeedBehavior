@@ -3,6 +3,7 @@
    # ROS_NAMESPACE=mono rosrun image_proc image_proc   bayer to bgr8
    <node pkg="interface_sim" type="robot_emotion_publisher" name="robot_emotion_publisher"  />
    <node pkg="interface_sim" type="behavior_feedback_publisher" name="behavior_feedback_publisher"  />
+   <node pkg="interface_sim" type="need_publisher" name="need_publisher"  />
    <node pkg="rqt_reconfigure" type="rqt_reconfigure" name="rqt_reconfigure"  >   </node>
    <param name="enable_loop_closing" value="false" />  
 </launch>
