@@ -8,3 +8,5 @@
 #过滤文件夹
 build/
 .vscode/
+interface_sim/cmake-build-debug
+need_module/.idea
