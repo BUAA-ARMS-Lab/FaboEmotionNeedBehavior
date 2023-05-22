@@ -283,6 +283,7 @@ void BehaviorManager::behavior_feedback_callback(const behavior_module::behavior
             if(msg.current_phase >= behavior.current_phase && 
                             msg.current_phase <= behavior.total_phase)
             {
+                
                 behavior.current_phase = msg.current_phase;
                 if (msg.current_phase == behavior.total_phase || behavior.is_light) {
                     completeFlag = true;
