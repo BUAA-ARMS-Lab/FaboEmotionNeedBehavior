@@ -78,8 +78,8 @@
 
 
 
-- need_name: MeasureTempareture
-  intention: MeasureTempareture
+- need_name: MeasureTemperature
+  intention: MeasureTemperature
   IDtype: Teacher
   person_emotion: Happy
   rob_emotion: [0.0, 0, 0, 0, 0, 0, 0, 0 ]
@@ -87,8 +87,8 @@
   time: 0
   weight: 0.75
   satisfy_value: 2
-- need_name: MeasureTempareture
-  intention: MeasureTempareture
+- need_name: MeasureTemperature
+  intention: MeasureTemperature
   IDtype: Student
   person_emotion: Happy
   rob_emotion: [0.0, 0, 0, 0, 0, 0, 0, 0 ]
@@ -96,8 +96,8 @@
   time: 0
   weight: 0.75
   satisfy_value: 2
-- need_name: MeasureTempareture
-  intention: MeasureTempareture
+- need_name: MeasureTemperature
+  intention: MeasureTemperature
   IDtype: Parent
   person_emotion: Happy
   rob_emotion: [0.0, 0, 0, 0, 0, 0, 0, 0 ]
@@ -106,7 +106,7 @@
   weight: 0.75
   satisfy_value: 2
 - need_name: StopStranger
-  intention: MeasureTempareture
+  intention: MeasureTemperature
   IDtype: Stranger
   person_emotion: Happy
   rob_emotion: [0, 0, 0, 0, 0, 0, 0, 0 ]

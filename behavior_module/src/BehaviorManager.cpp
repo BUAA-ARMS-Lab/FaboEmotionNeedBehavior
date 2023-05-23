@@ -308,6 +308,8 @@ void BehaviorManager::behavior_feedback_callback(const behavior_module::behavior
 
     if (!rightBehaviorFlag){
         cout << "There is no behavior \"" << msg.hehavior_name << "\" with stamp.sec==" <<  msg.header.stamp.sec << endl;
+        printInColor("- BehaviorsTotal: \n", CYAN);
+        PrintBehaviors(mvbehaviorsTotal);
         return;
     }
 
@@ -328,7 +330,7 @@ void BehaviorManager::behavior_feedback_callback(const behavior_module::behavior
                     mviOccupancy = {1,1,1,1,1};
                     mbPauseFlag = false;
                     // TODO: SetWaitTimeHere
-                    mtWaitToUpdate = new thread(&BehaviorManager::WaitToUpdate, this, 20);
+                    mtWaitToUpdate = new thread(&BehaviorManager::WaitToUpdate, this, 5);
                     mtWaitToUpdate->detach();
                 }
             }
@@ -338,6 +340,8 @@ void BehaviorManager::behavior_feedback_callback(const behavior_module::behavior
         itor++;
     }
     cout << "   No behavior \"" << msg.hehavior_name << "\" in current behavior series to be paused." << endl << endl;
+    printInColor("- BehaviorsCurrent: \n", CYAN);
+    PrintBehaviors(mvbehaviorsCurrent);
     cout << endl;
     return;
 }
