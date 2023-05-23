@@ -283,11 +283,15 @@ void BehaviorManager::behavior_feedback_callback(const behavior_module::behavior
             if(msg.current_phase >= behavior.current_phase && 
                             msg.current_phase <= behavior.total_phase)
             {
-                
-                behavior.current_phase = msg.current_phase;
                 if (msg.current_phase == behavior.total_phase || behavior.is_light) {
                     completeFlag = true;
                 }
+                else {
+                    for (int i = behavior.current_phase; i < msg.current_phase; i++)
+                        for (int j = 0; j < 5; j++)
+                            behavior.necessary_count[j] -= (behavior.subBehaviorSeries[i].mActuators[j]->is_necessary)?1:0;
+                }
+                behavior.current_phase = msg.current_phase;
                 // PrintBehaviorseries();
                 break;
             }
