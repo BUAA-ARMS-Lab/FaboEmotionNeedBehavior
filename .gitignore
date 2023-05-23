@@ -32,4 +32,6 @@
 *.app
 
 
-interface_sim/cmake-build-debug
+interface_sim/cmake-build-debug/*
+.idea/*
+.vscode/*

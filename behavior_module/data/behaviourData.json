@@ -154,19 +154,47 @@
             "weight" : 0.60, "type" : "INTERACTION", "is_light": false,
             "subBehavior":[
                 {
-                    "discription"   : "ParentsValidation step1.",
+                    "discription"   : "Look to the parents for verification.",
                     "Gaze"          : {"is_necessary" : true, "weight" : 1.0},
                     "Emotion"       : {"is_necessary" : false,  "weight" : 1.0},
-                    "Voice"         : {"is_necessary" : false, "weight" : 1.0},
+                    "Voice"         : {"is_necessary" : true, "weight" : 1.0},
                     "Manipulator"   : {"is_necessary" : false, "weight" : 1.0},
-                    "Mover"         : {"is_necessary" : false,  "weight" : 1.0}
+                    "Mover"         : {"is_necessary" : true,  "weight" : 1.0}
                 },{
-                    "discription"   : "ParentsValidation step2.",
+                    "discription"   : "Inform verification result.",
                     "Gaze"          : {"is_necessary" : true, "weight" : 1.0},
                     "Emotion"       : {"is_necessary" : false,  "weight" : 1.0},
-                    "Voice"         : {"is_necessary" : false, "weight" : 1.0},
+                    "Voice"         : {"is_necessary" : true, "weight" : 1.0},
                     "Manipulator"   : {"is_necessary" : false, "weight" : 1.0},
-                    "Mover"         : {"is_necessary" : false,  "weight" : 1.0}
+                    "Mover"         : {"is_necessary" : true,  "weight" : 1.0}
+                },{
+                    "discription"   : "Move to the person who needs to take the temperature.",
+                    "Gaze"          : {"is_necessary" : true, "weight" : 1.0},
+                    "Emotion"       : {"is_necessary" : false,  "weight" : 1.0},
+                    "Voice"         : {"is_necessary" : true, "weight" : 1.0},
+                    "Manipulator"   : {"is_necessary" : false, "weight" : 1.0},
+                    "Mover"         : {"is_necessary" : true,  "weight" : 1.0}
+                },{
+                    "discription"   : "Inform that the temperature needs to be measured.",
+                    "Gaze"          : {"is_necessary" : true, "weight" : 1.0},
+                    "Emotion"       : {"is_necessary" : false,  "weight" : 1.0},
+                    "Voice"         : {"is_necessary" : true, "weight" : 1.0},
+                    "Manipulator"   : {"is_necessary" : false, "weight" : 1.0},
+                    "Mover"         : {"is_necessary" : true,  "weight" : 1.0}
+                },{
+                    "discription"   : "Hold the interaction object still and begin temperature measurement.",
+                    "Gaze"          : {"is_necessary" : true, "weight" : 1.0},
+                    "Emotion"       : {"is_necessary" : false,  "weight" : 1.0},
+                    "Voice"         : {"is_necessary" : true, "weight" : 1.0},
+                    "Manipulator"   : {"is_necessary" : false, "weight" : 1.0},
+                    "Mover"         : {"is_necessary" : true,  "weight" : 1.0}
+                },{
+                    "discription"   : "Decide whether to release according to the temperature measurement results..",
+                    "Gaze"          : {"is_necessary" : true, "weight" : 1.0},
+                    "Emotion"       : {"is_necessary" : false,  "weight" : 1.0},
+                    "Voice"         : {"is_necessary" : true, "weight" : 1.0},
+                    "Manipulator"   : {"is_necessary" : false, "weight" : 1.0},
+                    "Mover"         : {"is_necessary" : true,  "weight" : 1.0}
                 }
             ]
         },{
