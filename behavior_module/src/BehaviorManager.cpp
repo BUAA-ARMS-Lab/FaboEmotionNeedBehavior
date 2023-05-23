@@ -220,6 +220,7 @@ void BehaviorManager::WaitToUpdate(float wait_seconds)
 // and finally pub them.
 void BehaviorManager::UpdateBehaviorPub()
 {
+    cout << "mParallelNum = " << mParallelNum << endl;
     if (mvbehaviorsTotal.empty()){
         return;
     }
@@ -312,8 +313,7 @@ void BehaviorManager::behavior_feedback_callback(const behavior_module::behavior
 
     if (!rightBehaviorFlag){
         cout << "There is no behavior \"" << msg.hehavior_name << "\" with stamp.sec==" <<  msg.header.stamp.sec << endl;
-        printInColor("- BehaviorsTotal: \n", CYAN);
-        PrintBehaviors(mvbehaviorsTotal);
+        PrintBehaviorseries();
         return;
     }
 
@@ -324,19 +324,23 @@ void BehaviorManager::behavior_feedback_callback(const behavior_module::behavior
         if(JudgeStampSame(behavior.header, msg.header)){
 
             rightBehaviorFlag = false;
-            behavior.current_phase = msg.current_phase;
-
+            
             if (msg.current_phase == behavior.total_phase || mbPauseFlag){
                 // finish one behavior
                 mvbehaviorsCurrent.erase(itor);
                 if(mvbehaviorsCurrent.empty() && !mvbehaviorsTotal.empty()){
-                    if(!mbPauseFlag) mParallelNum = 1;
+                    if(!mbPauseFlag){
+                        mParallelNum = 1;
+                    }
                     mviOccupancy = {1,1,1,1,1};
                     mbPauseFlag = false;
                     // TODO: SetWaitTimeHere
                     mtWaitToUpdate = new thread(&BehaviorManager::WaitToUpdate, this, 5);
                     mtWaitToUpdate->detach();
                 }
+            }
+            else{
+                behavior.current_phase = msg.current_phase;
             }
             PrintBehaviorseries();
             return;
@@ -454,6 +458,7 @@ int BehaviorManager::ComputeParallel()
                 local_count.push_back(i);
                 if(count[i] == 1){
                     // cout << "Compute parallel_num = " << parallel_num << endl;
+                    mParallelNum = parallel_num;
                     return parallel_num;
                 }
             }

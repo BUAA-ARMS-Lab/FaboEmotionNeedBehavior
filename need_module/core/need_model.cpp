@@ -193,7 +193,7 @@ int main(int argc, char** argv){
 
     // 控制需求先验模型的运行周期
     // ros::Rate loop_rate(0.1);  //5s一次
-    ros::Rate loop_rate(0.2);  //5s一次
+    ros::Rate loop_rate(0.35);  //5s一次
 
     // 为需求模型的运行  创建单独的线程 。  
     // std::thread PriorNeedThread(run_PriorNeed);

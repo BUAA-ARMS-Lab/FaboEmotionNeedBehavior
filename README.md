@@ -51,6 +51,10 @@ rosrun emotion_module main.py
 ```bash
 rosrun need_module need_model
 ```
+如果要开启需求模块的调试界面，可以输入参数 1
+```bash
+rosrun need_module need_model 1
+```
 
 + 仿真接口: 
 ```bash
