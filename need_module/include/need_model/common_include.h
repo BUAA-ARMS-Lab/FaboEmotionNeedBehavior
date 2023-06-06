@@ -77,6 +77,7 @@ using namespace std;
 struct need {
     /* 信息 */
     std::string need_name = "";
+    std::string scene = "";
     /* 评价标准 */
     std::string intention = "";
     std::string person_name = "";

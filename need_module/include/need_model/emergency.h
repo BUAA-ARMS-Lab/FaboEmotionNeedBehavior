@@ -40,6 +40,7 @@ class Emergency {
                 if(
                     per_.intention ==  iter->intention  
                 ){
+                    iter->scene = per_.scene;
                     iter->person_name = per_.person_name;
                     iter->target_angle = per_.target_angle;
                     iter->target_distance = per_.target_distance;

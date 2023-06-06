@@ -11,6 +11,7 @@ class inner_need{
         /* need的判断信息 */
         social_msg::perception_msg per_;
         string IDtype_ = "itself";
+
         std::vector<double> rob_emotion_;
         std::string person_emotion_;
         std::vector<double> rob_status_;
@@ -72,7 +73,7 @@ class inner_need{
         need Doubt( ){
             need temp;
             temp.need_name = "Doubt";
-
+            temp.scene = per_.scene;
             temp.intention = "";
             temp.IDtype = IDtype_; 
             temp.target_angle = 0.0;
@@ -102,6 +103,7 @@ class inner_need{
             need temp;
             /* 信息 */
             temp.need_name = "Wander";
+            temp.scene = per_.scene;
             /* 评价标准 */
             temp.intention = "";
             temp.IDtype = ""; 
@@ -139,6 +141,7 @@ class inner_need{
             need temp;
             /* 信息 */
             temp.need_name = "Wander";
+            temp.scene = per_.scene;
             /* 评价标准 */
             temp.intention = "";
             temp.IDtype = ""; 
@@ -164,6 +167,7 @@ class inner_need{
             need temp;
             /* 信息 */
             temp.need_name = "Chat";
+            temp.scene = per_.scene;
             /* 评价标准 */
             temp.intention = "";
             temp.IDtype = IDtype_; 
@@ -189,6 +193,7 @@ class inner_need{
             need temp;
             /* 信息 */
             temp.need_name = "Charge";
+            temp.scene = per_.scene;
             /* 评价标准 */
             temp.intention = "";
             temp.IDtype = ""; 

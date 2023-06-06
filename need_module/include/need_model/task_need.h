@@ -51,6 +51,7 @@ class task_need{
                     vector8_compare(rob_status_ , iter->rob_status ) 
                 ){
                     iter->person_name = per_.person_name;
+                    iter->scene = per_.scene;
                     iter->target_angle = per_.target_angle;
                     iter->target_distance = per_.target_distance;
                     iter->speech = per_.speech;

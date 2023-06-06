@@ -1,6 +1,7 @@
 float64 time            # 时间戳
 string person_name      # 用户的名字
 string IDtype           # 用户的身份
+string scene            # 场景名称 (school, hospital, family)
 float64 target_angle    # 交互对象角度
 float64 target_distance # 交互对象距离
 string intention        # 用户的top1意图
