@@ -91,7 +91,8 @@ public:
             target(beh.target), target_angle(beh.target_angle), target_distance(beh.target_distance),
             speech(beh.speech), rob_emotion(beh.rob_emotion), rob_emotion_intensity(beh.rob_emotion_intensity),
             weight(beh.weight), is_light(beh.is_light), necessary_count(beh.necessary_count),
-            subBehaviorSeries(beh.subBehaviorSeries)
+            subBehaviorSeries(beh.subBehaviorSeries),
+            scene(beh.scene)
     {
         if (reserveStamp)
         {
