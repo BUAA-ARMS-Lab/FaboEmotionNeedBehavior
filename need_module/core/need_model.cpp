@@ -236,6 +236,7 @@ void run_PriorNeed(ros::NodeHandle*  n_ptr){
                     social_msg::need_msg need_output;
                     need_output.person_name =  need_lists[j].person_name;
                     need_output.IDtype = need_lists[j].IDtype;
+                    need_output.scene = need_lists[j].scene;
                     need_output.need_name = need_lists[j].need_name;  
                     need_output.target_angle = need_lists[j].target_angle;
                     need_output.target_distance = need_lists[j].target_distance;

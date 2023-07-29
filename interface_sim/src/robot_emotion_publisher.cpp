@@ -31,6 +31,7 @@ void callback(robot_emotion_publisher::robot_emotion_publisherConfig &config, ui
             perception.time = now.sec;
             perception.person_name = config.per_person_name;
             perception.IDtype = config.per_person_IDtype;
+            perception.scene = config.per_scene;
             perception.intention = config.per_intention;
             perception.p = config.per_p;
             perception.intention_2 = config.per_intention_2;
