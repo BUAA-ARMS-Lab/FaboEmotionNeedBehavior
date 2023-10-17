@@ -98,6 +98,15 @@
         "typeinfo": "cpp",
         "valarray": "cpp",
         "variant": "cpp",
-        "plane": "cpp"
+        "plane": "cpp",
+        "bufferobject": "cpp",
+        "callback": "cpp",
+        "drawable": "cpp",
+        "image": "cpp",
+        "node": "cpp",
+        "state": "cpp",
+        "stateattribute": "cpp",
+        "stateset": "cpp",
+        "uniform": "cpp"
     }
 }

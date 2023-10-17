@@ -182,8 +182,8 @@ void BehaviorManager::TellIdleState(bool state, Behavior *completedBehavior)
 {
     //TODO: tell EmotionModule the idle state
     behavior_module::idleState msg;
-    // msg.idleState = state;
-    msg.idleState = true;
+    msg.idleState = state;
+    // msg.idleState = true;
     if (completedBehavior == nullptr) {
         msg.hehavior_name = "None";
     }

@@ -8,8 +8,8 @@ string intention        # 用户的top1意图
 float64 p               # 用户的top1意图识别概率
 string intention_2      # 用户的top2意图[可以赋空值]
 float64 p_2             # 用户的top2意图识别概率[可以赋空值]
-string intention_3      # 用户的top2意图[可以赋空值]
-float64 p_3             # 用户的top2意图识别概率[可以赋空值]
+# string intention_3      # 用户的top2意图[可以赋空值]
+# float64 p_3             # 用户的top2意图识别概率[可以赋空值]
 string person_speech    # 用户问题文本说的话说的话[用户说的话]
 string speech           # 回答文本[机器人回复的话]
 string person_emotion   # 用户的心情

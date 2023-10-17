@@ -140,8 +140,8 @@ void PerceptionUpdate(const social_msg::perception_msg& msg){
     std::cout << "用户的top1意图识别概率: " << per.p << std::endl;
     std::cout << "用户的top2意图: " << per.intention_2 << std::endl;
     std::cout << "用户的top2意图识别概率: " << per.p_2 << std::endl;
-    std::cout << "用户的top3意图: " << per.intention_3 << std::endl;
-    std::cout << "用户的top3意图识别概率: " << per.p_3 << std::endl;
+    // std::cout << "用户的top3意图: " << per.intention_3 << std::endl;
+    // std::cout << "用户的top3意图识别概率: " << per.p_3 << std::endl;
     std::cout << "用户问题文本说的话: " << per.person_speech << std::endl;
     std::cout << "回答文本: " << per.speech << std::endl;
     std::cout << "用户的心情: " << per.person_emotion << std::endl;
@@ -163,7 +163,7 @@ int main(int argc, char** argv){
     cout<< "Need Module Start to Subscribe（接收ROS信息） !!\n";
 
     // 接受感知信息
-    sub_perception = n.subscribe("perceptions", 1000, PerceptionUpdate);
+    sub_perception = n.subscribe("perception_msg", 1000, PerceptionUpdate);
     ros::spinOnce();
     
     if(single_attitude)

@@ -56,7 +56,7 @@ with open(csv_name, 'r') as f:
 
 def talker():
         rospy.init_node('need_third_test', anonymous=True)
-        pub_perception = rospy.Publisher('perceptions', perception_msg, queue_size=10)
+        pub_perception = rospy.Publisher('perception_msg', perception_msg, queue_size=10)
         pub_emotion = rospy.Publisher('robot_emotion', robot_emotion, queue_size=10)
         pub_body = rospy.Publisher('robot_status', robot_status, queue_size=10)
         # rate = rospy.Rate(5)

@@ -7,7 +7,7 @@ from social_msg.msg import perception_msg
 
 def perception_talker():
     rospy.init_node('perception_talker', anonymous=True)
-    pub = rospy.Publisher('perceptions', perception_msg, queue_size=10)
+    pub = rospy.Publisher('perception_msg', perception_msg, queue_size=10)
     time.sleep(2)
     perc = perception_msg()
     perc.time = rospy.get_time()

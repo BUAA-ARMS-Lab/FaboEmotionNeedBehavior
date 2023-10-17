@@ -71,9 +71,9 @@ def data_get():
         *启动模块,调用Data_processing.py中的函数,订阅三个刺激信息并作处理、发布robot_emotion_msg（进入循环）
         '''
         rospy.init_node('emotion_listener', anonymous=True,disable_signals=True)
-        t1 = message_filters.Subscriber("attitude", attitude_set)
+        t1 = message_filters.Subscriber("attitude_set", attitude_set)
         t2 = message_filters.Subscriber("idleState",idleState)
-        t3 = message_filters.Subscriber("perceptions", perception_msg)
+        t3 = message_filters.Subscriber("perception_msg", perception_msg)
         t4 = message_filters.Subscriber("idleState", idleState)
         # ts = message_filters.ApproximateTimeSynchronizer([t1, t3], 1, 1, allow_headerless=True)
         t1.registerCallback(Data_processing.callback_attitude)
@@ -186,14 +186,14 @@ def visualize_3d():
         
 
 if __name__ == '__main__':
-    args = sys.argv[1:]
-    if len(args) > 0:
-        print_state = sys.argv[1]
+    # args = sys.argv[1:]
+    # if len(args) > 0:
+    #     print_state = sys.argv[1]
     Watcher()
-    print("debug: new emotion module ")
-    thread1=myThread("Listener-thread",'listener')
-    thread2=myThread("Publisher-thread",'publisher')
-    thread3=myThread("Visualize_3D",'visualize')
+    # print("debug: new emotion module ")
+    thread1=myThread("Emotion Listener-thread",'listener')
+    thread2=myThread("Emotion Publisher-thread",'publisher')
+    thread3=myThread("Emotion Visualize_3D",'visualize')
     thread1.start()
     thread2.start()
     # thread3.start()

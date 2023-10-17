@@ -130,7 +130,7 @@ int main(int argc, char **argv)
         ros::init(argc, argv, "need_model_dynamic_reconfigure");
         ros::NodeHandle n;
         // 感知信息
-        pub_perception  = n.advertise<social_msg::perception_msg>("perceptions", 10);
+        pub_perception  = n.advertise<social_msg::perception_msg>("perception_msg", 10);
         pub_attitude  = n.advertise<social_msg::attitude_msg>("attitude", 10);
         pub_body  = n.advertise<social_msg::robot_status>("robot_status", 10);
         pub_idleState  = n.advertise<social_msg::idleState>("idleState", 10);

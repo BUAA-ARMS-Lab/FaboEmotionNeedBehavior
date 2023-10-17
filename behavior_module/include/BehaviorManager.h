@@ -178,9 +178,8 @@ public:
         subscriber_need_ = n_.subscribe("/need_lists", 1000, &BehaviorManager::need_msg_callback, this);
         subscriber_behavior_feedback_ = n_.subscribe("/BehaviorFeedback", 1000, &BehaviorManager::behavior_feedback_callback, this);
         ReadInBehaviorLibrary(data_path);
-        // TellIdleState(true, nullptr);
         sleep(1.2);
-        TellIdleState(false, nullptr);
+        TellIdleState(true, nullptr);
     };
 
 private:

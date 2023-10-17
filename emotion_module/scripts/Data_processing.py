@@ -274,10 +274,11 @@ def callback_attitude(attitude_set):
        # version 2: attitude set
        global local_attitude_set
        local_attitude_set = []
+       print("社交状态集合更新")
        for attitude in attitude_set.attitudes:
               local_attitude_set.append(attitude)
               # debug：情感模块中接受并打印 attitude_set
-              print("person_name:",attitude.person_name,    " ,IDtype:",attitude.IDtype,     " ,motivation:", attitude.motivation,      " ,attitude:",attitude.attitude,     " ,move_speed:",attitude.move_speed,     " ,distance:",attitude.distance,     " ,voice_speed:",attitude.voice_speed)
+              # print("person_name:",attitude.person_name,    " ,IDtype:",attitude.IDtype,     " ,motivation:", attitude.motivation,      " ,attitude:",attitude.attitude,     " ,move_speed:",attitude.move_speed,     " ,distance:",attitude.distance,     " ,voice_speed:",attitude.voice_speed)
 
 # string person_name  # 用户的名字
 # string IDtype       # 用户的身份

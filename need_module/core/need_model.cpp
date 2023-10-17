@@ -178,7 +178,7 @@ int main(int argc, char** argv){
     cout<< "Need Module Start to Subscribe（接收ROS信息） !!\n";
     
     //状态更新 
-    sub_perception = n.subscribe("perceptions", 1000, PerceptionUpdate);
+    sub_perception = n.subscribe("perception_msg", 1000, PerceptionUpdate);
     sub_robot_emotion = n.subscribe("robot_emotion", 1000, RobotEmotionUpdate);
     sub_robot_status = n.subscribe("robot_status", 1000, RobotStatusUpdate);
     sub_idleState = n.subscribe<social_msg::idleState>("idleState", 1000,   boost::bind(&BehaviorFinishedUpdate, _1, &n));

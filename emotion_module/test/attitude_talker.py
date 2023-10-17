@@ -15,7 +15,7 @@ def attitude_talker():
     atti.attitude = "enthusiastic"
     pub.publish(atti)
     rospy.loginfo("subscribe1: %s,%s",atti.person_name,atti.attitude)
-    pub2 = rospy.Publisher('perceptions', perception_msg, queue_size=10)
+    pub2 = rospy.Publisher('perception_msg', perception_msg, queue_size=10)
     
     perc = perception_msg()
     perc.time = rospy.get_time()
