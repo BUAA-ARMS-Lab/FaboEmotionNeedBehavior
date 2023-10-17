@@ -68,3 +68,6 @@ catkin_package(
 add_executable(need_model core/need_model.cpp  core/perception_filter.cpp)
 target_link_libraries(need_model ${catkin_LIBRARIES}  yaml-cpp ${CMAKE_THREAD_LIBS_INIT})
 
+
+add_executable(connection_test src_test/connection_test.cpp)
+target_link_libraries(connection_test ${catkin_LIBRARIES}  yaml-cpp ${CMAKE_THREAD_LIBS_INIT})

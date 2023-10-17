@@ -28,8 +28,13 @@ int period_cur = 0;   //每个period的周期时长,由 sleep函数 决定。
 
 
 void single_need_test(ros::NodeHandle*  n_ptr){
-            if(print_status)  printf( GREEN "Run %dth PriorNeed（运行先验模型） !!\n"NONE, period_cur);            
-            vector<need> need_lists = PriorNeed.need_compute_all();
+            vector<need> need_lists;
+            need need_local;
+            need_local.IDtype = "Teacher";
+            need_local.need_name = "WarmGreet";
+            need_local.person_name = "Teacher_Li";
+            need_lists.push_back(need_local);
+
             if( need_lists.size() != 0 )
                 for(int j =0 ; j< need_lists.size(); j++){
                     
@@ -42,7 +47,11 @@ void single_need_test(ros::NodeHandle*  n_ptr){
                     double t = 1.0;
                     ros::Duration timeout(t);
                     ROS_INFO("Need waiting for social attitude");
+                    auto start = std::chrono::high_resolution_clock::now();
                     social_msg::attitude_msg::ConstPtr result = ros::topic::waitForMessage<social_msg::attitude_msg>("attitude", *n_ptr, timeout);
+                    auto end = std::chrono::high_resolution_clock::now();
+                    auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
+                    
                     
                     // 将need发布给行为模块
                     social_msg::need_msg need_output;
@@ -61,6 +70,9 @@ void single_need_test(ros::NodeHandle*  n_ptr){
                     need_output.satisfy_value = need_lists[j].satisfy_value;
                     if (result != NULL)
                     {
+                        // std::cout << "时间差: " << duration.count() << " 毫秒" << std::endl;
+                        ROS_INFO("[Debug] Attitude Time Duration: %d ms", duration.count());
+                        
                         if( need_output.person_name ==  result->person_name &&
                             need_output.IDtype      ==  result->IDtype &&
                             need_output.need_name   ==  result->motivation
@@ -86,15 +98,7 @@ void single_need_test(ros::NodeHandle*  n_ptr){
                         need_output.move_speed  = 1.0;
                         need_output.distance    = 1.0;
                         need_output.voice_speed = 1.0;
-                    }   
-                    pub.publish(need_output);
-                    // printf( GREEN "    QT_order: %d:\n"NONE, need_output.qt_order); 
-                    // sleep(0.1); // TODO: 重要。
-
-                    std::cout <<  "[Output Need] " << j+1 << ": " << need_output.need_name << " ,Weight: " <<need_output.weight;
-                    if (  need_output.person_name != "")
-                        std::cout <<" ,for " <<need_output.person_name<<" as " <<need_output.IDtype;
-                    std::cout<<std::endl;
+                    }       
                 }
         
             period_cur++;     
