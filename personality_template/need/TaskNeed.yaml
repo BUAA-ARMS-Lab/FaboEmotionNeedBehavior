@@ -1,6 +1,6 @@
 # school scene 
-- need_name: RespectGreet
-  intention: Greet
+- need_name: RespectGreet  #尊敬的问好 #RespectGreet
+  intention: Greet  #问好 #Greet
   IDtype: Teacher
   person_emotion: Happy
   rob_emotion: [0.0, 0, 0, 0, 0, 0, 0, 0 ]
