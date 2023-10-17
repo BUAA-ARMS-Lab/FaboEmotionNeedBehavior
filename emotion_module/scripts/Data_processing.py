@@ -276,6 +276,17 @@ def callback_attitude(attitude_set):
        local_attitude_set = []
        for attitude in attitude_set.attitudes:
               local_attitude_set.append(attitude)
+              # debug：情感模块中接受并打印 attitude_set
+              print("person_name:",attitude.person_name,    " ,IDtype:",attitude.IDtype,     " ,motivation:", attitude.motivation,      " ,attitude:",attitude.attitude,     " ,move_speed:",attitude.move_speed,     " ,distance:",attitude.distance,     " ,voice_speed:",attitude.voice_speed)
+
+# string person_name  # 用户的名字
+# string IDtype       # 用户的身份
+# string motivation   # 社交动机/行为
+# string attitude     # (机器人对用户的)社交态度
+# float64 move_speed  # 移速
+# float64 distance   # 社交距离
+# float64 voice_speed # 语速
+
 
 
 def callback_perception(perception_msg): 
