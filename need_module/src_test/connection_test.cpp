@@ -107,6 +107,48 @@ void single_need_test(ros::NodeHandle*  n_ptr){
 
 
 
+// 回调函数
+void PerceptionUpdate(const social_msg::perception_msg& msg){
+    
+    social_msg::perception_msg per;
+    per = msg;
+    
+    // float64 time            # 时间戳
+    // string person_name      # 用户的名字
+    // string IDtype           # 用户的身份
+    // string scene            # 场景名称 (school, hospital, family)
+    // float64 target_angle    # 交互对象角度
+    // float64 target_distance # 交互对象距离
+    // string intention        # 用户的top1意图
+    // float64 p               # 用户的top1意图识别概率
+    // string intention_2      # 用户的top2意图[可以赋空值]
+    // float64 p_2             # 用户的top2意图识别概率[可以赋空值]
+    // string intention_3      # 用户的top2意图[可以赋空值]
+    // float64 p_3             # 用户的top2意图识别概率[可以赋空值]
+    // string person_speech    # 用户问题文本说的话说的话[用户说的话]
+    // string speech           # 回答文本[机器人回复的话]
+    // string person_emotion   # 用户的心情
+    
+    
+    std::cout << "时间戳: " << per.time << std::endl;
+    std::cout << "用户的名字: " << per.person_name << std::endl;
+    std::cout << "用户的身份: " << per.IDtype << std::endl;
+    std::cout << "场景名称: " << per.scene << std::endl;
+    std::cout << "交互对象角度: " << per.target_angle << std::endl;
+    std::cout << "交互对象距离: " << per.target_distance << std::endl;
+    std::cout << "用户的top1意图: " << per.intention << std::endl;
+    std::cout << "用户的top1意图识别概率: " << per.p << std::endl;
+    std::cout << "用户的top2意图: " << per.intention_2 << std::endl;
+    std::cout << "用户的top2意图识别概率: " << per.p_2 << std::endl;
+    std::cout << "用户的top3意图: " << per.intention_3 << std::endl;
+    std::cout << "用户的top3意图识别概率: " << per.p_3 << std::endl;
+    std::cout << "用户问题文本说的话: " << per.person_speech << std::endl;
+    std::cout << "回答文本: " << per.speech << std::endl;
+    std::cout << "用户的心情: " << per.person_emotion << std::endl;
+    std::cout << std::endl;
+}
+
+
 
 int main(int argc, char** argv){
     // 是否实时输出需求模块的状态，默认不输出
@@ -119,8 +161,9 @@ int main(int argc, char** argv){
     ros::init(argc, argv, "need_module");
     ros::NodeHandle n;
     cout<< "Need Module Start to Subscribe（接收ROS信息） !!\n";
-    
-    
+
+    // 接受感知信息
+    sub_perception = n.subscribe("perceptions", 1000, PerceptionUpdate);
     ros::spinOnce();
     
     if(single_attitude)
@@ -142,7 +185,13 @@ int main(int argc, char** argv){
         }
     }
     else{
-        
+        ros::Rate loop_rate(0.35);  //5s一次
+        while(ros::ok){
+            if( ros::isShuttingDown() )
+                break;
+            ros::spinOnce();
+            loop_rate.sleep();
+        }
     }
     
     return 0;
