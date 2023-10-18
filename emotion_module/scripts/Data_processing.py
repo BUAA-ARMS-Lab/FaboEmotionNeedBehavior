@@ -293,21 +293,31 @@ def callback_attitude(attitude_set):
 def callback_perception(perception_msg): 
        global msg_list
 
-       # version1:  query attitude
-       query = attitude_query()
-       query.person_name = perception_msg.person_name
-       query.IDtype  = perception_msg.IDtype 
-       query.motivation = "Greet"
-       pub_query.publish(query)
-       rospy.loginfo(" 查询与%s问好的社交态度",perception_msg.person_name)
+       # # version1:  query attitude
+       # query = attitude_query()
+       # query.person_name = perception_msg.person_name
+       # query.IDtype  = perception_msg.IDtype 
+       # query.motivation = "Greet"
+       # pub_query.publish(query)
+       # rospy.loginfo(" 查询与%s问好的社交态度",perception_msg.person_name)
 
        # version2:  查询本地列表。默认是热情
        msg_list[4]='none'
        msg_list[6]='enthusiastic'
        for attitude in local_attitude_set:
-              if attitude.person_name == perception_msg.person_name    and attitude.IDtype  == perception_msg.IDtype     and attitude.motivation  == 'Greet':
+              if attitude.person_name == perception_msg.person_name    and attitude.IDtype  == perception_msg.IDtype     and attitude.motivation  == "Greet":
                      msg_list[4]=attitude.person_name
-                     msg_list[6]=attitude.attitude
+                     # 温柔 热情 激动 欢快  真诚 /  认真 恭敬  /  严肃 /  沮丧
+                     # enthusiastic,respectful,serious,disgust
+                     if attitude.attitude == '温柔' or attitude.attitude =='热情' or attitude.attitude =='激动' or attitude.attitude =='欢快' or attitude.attitude =='真诚':
+                            msg_list[6] = 'enthusiastic'
+                     elif attitude.attitude == '认真' or attitude.attitude =='恭敬':
+                            msg_list[6] = 'respectful'
+                     elif attitude.attitude == '严肃':
+                            msg_list[6] = 'serious'
+                     elif attitude.attitude == '沮丧':
+                            msg_list[6] = 'disgust'
+                     
                      # msg_list.extend([attitude_msg.person_name,attitude_msg.attitude])           
        # msg_list.insert(2,perception_msg.person_name)
        # msg_list.insert(4,perception_msg.person_emotion)
