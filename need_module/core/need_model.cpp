@@ -146,10 +146,10 @@ void BehaviorFinishedUpdate(const social_msg::idleState::ConstPtr& msg,  ros::No
             }
             else{
                 ROS_INFO("Received wrong social attitude");
-                need_output.attitude    = "enthusiastic";   //enthusiastic,respectful,serious,disgust
-                need_output.move_speed  = 1.0;
-                need_output.distance    = 1.0;
-                need_output.voice_speed = 1.0;
+                need_output.attitude    = "热情";   //enthusiastic,respectful,serious,disgust
+                need_output.move_speed  = 200;
+                need_output.distance    = 1400;
+                need_output.voice_speed = 50;
             }
         }
         else
@@ -261,19 +261,19 @@ void run_PriorNeed(ros::NodeHandle*  n_ptr){
                         }
                         else{
                             ROS_INFO("Received wrong social attitude");
-                            need_output.attitude    = "enthusiastic";   //enthusiastic,respectful,serious,disgust
-                            need_output.move_speed  = 1.0;
-                            need_output.distance    = 1.0;
-                            need_output.voice_speed = 1.0;
+                            need_output.attitude    = "热情";   //enthusiastic,respectful,serious,disgust
+                            need_output.move_speed  = 200;
+                            need_output.distance    = 1400;
+                            need_output.voice_speed = 50;
                         }
                     }
                     else
                     {
                         ROS_WARN("Timeout: Failed to receive social attitude within %f seconds", t);
-                        need_output.attitude    = "enthusiastic";   //enthusiastic,respectful,serious,disgust
-                        need_output.move_speed  = 1.0;
-                        need_output.distance    = 1.0;
-                        need_output.voice_speed = 1.0;
+                        need_output.attitude    = "热情";   //enthusiastic,respectful,serious,disgust
+                        need_output.move_speed  = 200;
+                        need_output.distance    = 1400;
+                        need_output.voice_speed = 50;
                     }   
                     pub.publish(need_output);
                     // printf( GREEN "    QT_order: %d:\n"NONE, need_output.qt_order); 
