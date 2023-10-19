@@ -10,6 +10,11 @@
 #include "perception_filter.h"
 
 using namespace  std;
+
+#include <mutex>
+std::mutex data_mutex;
+
+
 // time_t inner_need::time_for_wandor  =  0;
 perception_filter *Filter = new perception_filter(30);   //TODO: 确定合适的per过滤时长阈值。
 
@@ -67,7 +72,8 @@ void PerceptionUpdate(const social_msg::perception_msg& msg){
         per.p_2 = msg.p_2;
     }
 
-
+    std::lock_guard<std::mutex> lock(data_mutex);
+    
     if( Filter->Whether_OK(per) )    //如果,“感知过滤器”认为当前感知是有效的,则update
         PriorNeed.PerceptionUpdate(per);
 
@@ -178,7 +184,7 @@ int main(int argc, char** argv){
     cout<< "Need Module Start to Subscribe（接收ROS信息） !!\n";
     
     //状态更新 
-    sub_perception = n.subscribe("perception_msg", 1000, PerceptionUpdate);
+    sub_perception = n.subscribe("perception_msg", 1, PerceptionUpdate);
     sub_robot_emotion = n.subscribe("robot_emotion", 1000, RobotEmotionUpdate);
     sub_robot_status = n.subscribe("robot_status", 1000, RobotStatusUpdate);
     sub_idleState = n.subscribe<social_msg::idleState>("idleState", 1000,   boost::bind(&BehaviorFinishedUpdate, _1, &n));

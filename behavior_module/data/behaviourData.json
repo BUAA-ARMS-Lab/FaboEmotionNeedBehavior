@@ -280,7 +280,7 @@
                 }
             ]
         },{
-            "name" : "Stop_All_Actions",
+            "name" : "Stop_All_Actions_Now",
             "weight" : 0.9, "type" : "INTERACTION", "is_light": false,
             "subBehavior":[
                 {

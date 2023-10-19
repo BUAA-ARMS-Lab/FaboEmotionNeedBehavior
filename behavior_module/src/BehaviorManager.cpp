@@ -234,7 +234,7 @@ void BehaviorManager::UpdateBehaviorPub()
     if (!mvbehaviorsCurrent.empty()){
         if(!mbPauseFlag)
         {
-            msg.name = "Stop_All_Actions";
+            msg.name = "Stop_All_Actions_Now";
             publisher_behavior_.publish(msg);
             PrintBehaviorMsgInfo(msg);
             mbPauseFlag = true;
