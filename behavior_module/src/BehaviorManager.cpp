@@ -99,6 +99,7 @@ Behavior* BehaviorManager::GetBehaviorByName(string name)
     }
     // cout << " succeeds." << endl << endl;
     Behavior* new_behavior = new Behavior(behavior_index->second, false);
+    // new_behavior->configureByNeedMsg();
     return new_behavior;
 }
 
@@ -112,6 +113,7 @@ bool BehaviorManager::ReadInNewNeed(const behavior_module::need_msg &msg)
 
     // 1. Query the need in mmbehaviorsLibrary.
     Behavior* new_behavior = GetBehaviorByName(need_name);
+    // new_behavior->configureByNeedMsg(msg);
     string result = (new_behavior != nullptr)?", succeeds.":", fails.";
     cout << result << endl << endl;
 
@@ -421,7 +423,7 @@ int BehaviorManager::InsertBehavior(Behavior &new_behavior)
     unique_lock<mutex> lock(mutexBehaviorsTotal);
     int num = mvbehaviorsTotal.size();
     if(!num){
-        mvbehaviorsTotal.push_back(new_behavior);
+        mvbehaviorsTotal.emplace_back(new_behavior);
         // PrintBehaviorseries();
         return 1;
     }

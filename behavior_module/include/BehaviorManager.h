@@ -91,13 +91,15 @@ public:
             target(beh.target), target_angle(beh.target_angle), target_distance(beh.target_distance),
             speech(beh.speech), rob_emotion(beh.rob_emotion), rob_emotion_intensity(beh.rob_emotion_intensity),
             weight(beh.weight), is_light(beh.is_light), necessary_count(beh.necessary_count),
-            subBehaviorSeries(beh.subBehaviorSeries),
-            scene(beh.scene)
+            subBehaviorSeries(beh.subBehaviorSeries), scene(beh.scene),
+            IDtype(beh.IDtype), person_emotion(beh.person_emotion), 
+            satisfy_value(beh.satisfy_value), attitude(beh.attitude), 
+            move_speed(beh.move_speed), distance(beh.distance), voice_speed(beh.voice_speed)
     {
         if (reserveStamp)
         {
             header.stamp = beh.header.stamp;
-        }
+        }   
         else{
             header.stamp = ros::Time::now();
         }
@@ -121,6 +123,9 @@ public:
         move_speed = msg.move_speed;
         distance = msg.distance;
         voice_speed = msg.voice_speed;
+        cout << "beh.move_speed = " << move_speed << endl;
+        cout << "beh.distance = " << distance << endl;
+        cout << "beh.voice_speed = " << voice_speed << endl;
     }
 
 public:

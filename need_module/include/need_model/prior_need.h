@@ -97,7 +97,10 @@ public:
         per_list.clear();
     }
     
-    bool updateInit(){  return (/* updateInit_perception &&  */ updateInit_emotion  /*&& updateInit_status*/ );}
+    bool updateInit(){  
+            return true;
+            return (/* updateInit_perception &&  */ updateInit_emotion  /*&& updateInit_status*/ );
+        }
     
     std::vector<need> need_compute_all(){
         if(mPrint_state) cout<< "Start to Need Computation !!\n";
