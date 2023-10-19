@@ -292,7 +292,7 @@ void robot_emotion_num2string(std::vector<double> rob_emotion, string & rob_emot
     
     if (rob_emotion[i_EmotionMax] < emotion_calm_thresh){
         rob_emotion_string = "Calm";
-        rob_emotion_intensity = 0;
+        rob_emotion_intensity = 1;
     }
     else {
         rob_emotion_intensity = robot_emotion_num2intensity(rob_emotion[i_EmotionMax]);
