@@ -16,7 +16,7 @@ std::mutex data_mutex;
 
 
 // time_t inner_need::time_for_wandor  =  0;
-perception_filter *Filter = new perception_filter(30);   //TODO: 确定合适的per过滤时长阈值。
+perception_filter *Filter = new perception_filter(1000000);   //TODO: 确定合适的per过滤时长阈值。
 
 // ros node
 ros::Subscriber sub_perception;
@@ -73,7 +73,7 @@ void PerceptionUpdate(const social_msg::perception_msg& msg){
     }
 
     std::lock_guard<std::mutex> lock(data_mutex);
-    
+
     if( Filter->Whether_OK(per) )    //如果,“感知过滤器”认为当前感知是有效的,则update
         PriorNeed.PerceptionUpdate(per);
 
@@ -154,7 +154,7 @@ void BehaviorFinishedUpdate(const social_msg::idleState::ConstPtr& msg,  ros::No
                 ROS_INFO("Received wrong social attitude");
                 need_output.attitude    = "热情";   //enthusiastic,respectful,serious,disgust
                 need_output.move_speed  = 200;
-                need_output.distance    = 900;
+                need_output.distance    = 500;
                 need_output.voice_speed = 50;
             }
         }
@@ -199,7 +199,7 @@ int main(int argc, char** argv){
 
     // 控制需求先验模型的运行周期
     // ros::Rate loop_rate(0.1);  //5s一次
-    ros::Rate loop_rate(0.35);  //5s一次
+    ros::Rate loop_rate(0.2);  //5s一次
 
     // 为需求模型的运行  创建单独的线程 。  
     // std::thread PriorNeedThread(run_PriorNeed);
@@ -208,8 +208,8 @@ int main(int argc, char** argv){
         if( ros::isShuttingDown() )
             break;
         run_PriorNeed(&n);
-        ros::spinOnce();
         loop_rate.sleep();
+        ros::spinOnce();
     }
     
     // ros::spin();    //库是节点读取数据道消息响应循环,当消息到达的时候,回调函数就会被调用。当按下Ctrl+C时,节点会退出消息循环,于是循环结束。
@@ -269,7 +269,7 @@ void run_PriorNeed(ros::NodeHandle*  n_ptr){
                             ROS_INFO("Received wrong social attitude");
                             need_output.attitude    = "热情";   //enthusiastic,respectful,serious,disgust
                             need_output.move_speed  = 200;
-                            need_output.distance    = 900;
+                            need_output.distance    = 500;
                             need_output.voice_speed = 50;
                         }
                     }
@@ -278,7 +278,7 @@ void run_PriorNeed(ros::NodeHandle*  n_ptr){
                         ROS_WARN("Timeout: Failed to receive social attitude within %f seconds", t);
                         need_output.attitude    = "热情";   //enthusiastic,respectful,serious,disgust
                         need_output.move_speed  = 200;
-                        need_output.distance    = 900;
+                        need_output.distance    = 500;
                         need_output.voice_speed = 50;
                     }   
                     pub.publish(need_output);

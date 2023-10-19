@@ -18,20 +18,28 @@
             "weight" : 0.9, "type" : "INTERACTION", "is_light": false,
             "subBehavior":[
                 {
-                    "discription"   : "Look at and wave to target person.",
-                    "Gaze"          : {"is_necessary" : true,  "weight" : 1.0},
+                    "discription"   : "Look at target person.",
+                    "Gaze"          : {"is_necessary" : false,  "weight" : 0.5},
                     "Emotion"       : {"is_necessary" : true,  "weight" : 1.0},
-                    "Voice"         : {"is_necessary" : true, "weight" : 0.5},
+                    "Voice"         : {"is_necessary" : false, "weight" : 0.5},
+                    "Manipulator"   : {"is_necessary" : false,  "weight" : 0.5},
+                    "Mover"         : {"is_necessary" : true, "weight" : 1.0}
+                },
+                {
+                    "discription"   : "Move and wave to target person.",
+                    "Gaze"          : {"is_necessary" : false,  "weight" : 0.5},
+                    "Emotion"       : {"is_necessary" : true,  "weight" : 1.0},
+                    "Voice"         : {"is_necessary" : false, "weight" : 0.5},
                     "Manipulator"   : {"is_necessary" : true,  "weight" : 1.0},
-                    "Mover"         : {"is_necessary" : true, "weight" : 0.5}
+                    "Mover"         : {"is_necessary" : true, "weight" : 1.0}
                 },
                 {
                     "discription"   : "Say hello.",
-                    "Gaze"          : {"is_necessary" : true,  "weight" : 1.0},
+                    "Gaze"          : {"is_necessary" : false,  "weight" : 0.5},
                     "Emotion"       : {"is_necessary" : true,  "weight" : 1.0},
                     "Voice"         : {"is_necessary" : true,  "weight" : 1.0},
                     "Manipulator"   : {"is_necessary" : true, "weight" : 1.0},
-                    "Mover"         : {"is_necessary" : true, "weight" : 1.0}
+                    "Mover"         : {"is_necessary" : false, "weight" : 0.5}
                 }
             ]
         },{
@@ -39,20 +47,28 @@
             "weight" : 0.9, "type" : "INTERACTION", "is_light": false,
             "subBehavior":[
                 {
-                    "discription"   : "Look at and salute target person.",
-                    "Gaze"          : {"is_necessary" : true,  "weight" : 1.0},
+                    "discription"   : "Look at target person.",
+                    "Gaze"          : {"is_necessary" : false,  "weight" : 0.5},
                     "Emotion"       : {"is_necessary" : true,  "weight" : 1.0},
-                    "Voice"         : {"is_necessary" : true, "weight" : 0.5},
+                    "Voice"         : {"is_necessary" : false, "weight" : 0.5},
+                    "Manipulator"   : {"is_necessary" : false,  "weight" : 0.5},
+                    "Mover"         : {"is_necessary" : true, "weight" : 1.0}
+                },
+                {
+                    "discription"   : "Move and wave to target person.",
+                    "Gaze"          : {"is_necessary" : false,  "weight" : 0.5},
+                    "Emotion"       : {"is_necessary" : true,  "weight" : 1.0},
+                    "Voice"         : {"is_necessary" : false, "weight" : 0.5},
                     "Manipulator"   : {"is_necessary" : true,  "weight" : 1.0},
-                    "Mover"         : {"is_necessary" : true, "weight" : 0.5}
+                    "Mover"         : {"is_necessary" : true, "weight" : 1.0}
                 },
                 {
                     "discription"   : "Say hello.",
-                    "Gaze"          : {"is_necessary" : true,  "weight" : 1.0},
+                    "Gaze"          : {"is_necessary" : false,  "weight" : 0.5},
                     "Emotion"       : {"is_necessary" : true,  "weight" : 1.0},
                     "Voice"         : {"is_necessary" : true,  "weight" : 1.0},
                     "Manipulator"   : {"is_necessary" : true, "weight" : 1.0},
-                    "Mover"         : {"is_necessary" : true, "weight" : 1.0}
+                    "Mover"         : {"is_necessary" : false, "weight" : 0.5}
                 }
             ]
         },{

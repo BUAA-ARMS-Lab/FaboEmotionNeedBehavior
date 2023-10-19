@@ -63,7 +63,7 @@ public:
         per_list.push_back( per );
         printf(  YELLOW "     Update Peception: "NONE);
         cout<< per.intention ;//<<" and "<<per.intention_2;
-        cout<<" "<< endl;
+        cout<<" 用户："<<per.person_name<< endl;
         updateInit_perception = true;
     }
 
