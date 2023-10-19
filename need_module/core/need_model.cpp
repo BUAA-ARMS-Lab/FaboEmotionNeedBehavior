@@ -11,7 +11,7 @@
 
 using namespace  std;
 // time_t inner_need::time_for_wandor  =  0;
-perception_filter *Filter = new perception_filter(20);   //TODO: 确定合适的per过滤时长阈值。
+perception_filter *Filter = new perception_filter(30);   //TODO: 确定合适的per过滤时长阈值。
 
 // ros node
 ros::Subscriber sub_perception;
