@@ -37,6 +37,7 @@ bool perception_filter::Whether_OK( social_msg::perception_msg per) {
               )
             {
                 double diff = abs(iter->time - per.time);
+                std::cout<<"意图过滤： "<<per.person_name<<"的"<<per.intention<<",相隔时间为"<<diff<<"秒"<<std::endl;
                 
                 if( diff < time_thresh)  {
                     std::cout<<"意图过滤： "<<per.person_name<<"的"<<per.intention<<",相隔时间小于"<<time_thresh<<"秒"<<std::endl;
