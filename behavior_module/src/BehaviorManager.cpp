@@ -123,6 +123,7 @@ bool BehaviorManager::ReadInNewNeed(const behavior_module::need_msg &msg)
     }
     else {
         (*new_behavior).configureByNeedMsg(msg);
+
         int insert_location = AddNewBehavior(*new_behavior);
         ComputeParallel();
 

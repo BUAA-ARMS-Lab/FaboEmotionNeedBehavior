@@ -15,21 +15,28 @@ bool perception_filter::Whether_OK( social_msg::perception_msg per) {
         
         // 检测是否 重复;, 
         // 内容是完备
-        if( per.intention == "" ||  per.p  == NULL || per.person_name =="" || per.IDtype ==""){
+        if( per.intention == "" ||  per.p  == NULL  || per.IDtype ==""){
             return false;  /* intention为空的话,不传入prior need即可。 */
         }
-        //  时间  如果时间差小于阈值,则false； 如果大于阈值,说明很长时间没收到这类percepiton了,则true；
-        // for(auto iter = per_list.end(); iter != per_list.begin(); iter-- ){
-        //     if(
-        //         iter->person_name_ == per.person_name_  &&  iter->IDtype_ == per.IDtype_ &&  
-        //         iter->person_name_ == per.person_name_ &&  iter->intention_ == per.intention_  &&  
-        //         iter->speech_ == per.speech_   )
-        //     {
-        //         double diff = abs(iter->time_ - per.time_);
 
-        //         if( diff < time_thresh)  return false; 
-        //     }
-        // }
+        //用于当前测试
+        if(per.person_name =="")
+            per.person_name = "路人甲";
+
+        //  时间  如果时间差小于阈值,则false； 如果大于阈值,说明很长时间没收到这类percepiton了,则true；
+        for(auto iter = per_list.end(); iter != per_list.begin(); iter-- ){
+            if(
+                iter->person_name == per.person_name  
+                &&  iter->IDtype == per.IDtype
+                &&  iter->intention == per.intention  
+                // &&  iter->speech_ == per.speech_   
+              )
+            {
+                double diff = abs(iter->time - per.time);
+
+                if( diff < time_thresh)  return false; 
+            }
+        }
         per_list.push_back( per );
         return true;
     }
