@@ -19,6 +19,10 @@ bool perception_filter::Whether_OK( social_msg::perception_msg per) {
             return false;  /* intention为空的话,不传入prior need即可。 */
         }
 
+        if( per.intention == "闲聊" ){
+            return false;  
+        }
+
         //用于当前测试
         if(per.person_name =="")
             per.person_name = "路人甲";
@@ -33,10 +37,14 @@ bool perception_filter::Whether_OK( social_msg::perception_msg per) {
               )
             {
                 double diff = abs(iter->time - per.time);
-
-                if( diff < time_thresh)  return false; 
+                
+                if( diff < time_thresh)  {
+                    std::cout<<"意图过滤： "<<per.person_name<<"的"<<per.intention<<",相隔时间小于"<<time_thresh<<"秒"<<std::endl;
+                    return false; 
+                }
             }
         }
+
         per_list.push_back( per );
         return true;
     }
