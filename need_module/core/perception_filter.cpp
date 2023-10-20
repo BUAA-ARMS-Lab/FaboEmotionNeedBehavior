@@ -31,7 +31,7 @@ bool perception_filter::Whether_OK( social_msg::perception_msg& per) {
 
 
         //  时间  如果时间差小于阈值,则false； 如果大于阈值,说明很长时间没收到这类percepiton了,则true；
-        
+
         // std::cout<<"         【意图过滤】 "<<per.person_name<<"的"<<per.intention<<std::endl;
         // for(auto iter = per_filter_list.end(); iter != per_filter_list.begin(); iter-- ){
         //     std::cout<<"【debug】 "<<iter->IDtype<<std::endl;
@@ -76,9 +76,8 @@ bool perception_filter::Whether_OK( social_msg::perception_msg& per) {
             }
         }
         
-        social_msg::perception_msg temp ;
-        temp = per;
-        per_filter_list.push_back( temp );
+
+        per_filter_list.push_back( per );
         return true;
     }
 
