@@ -96,26 +96,83 @@
             "weight" : 0.7, "type" : "INTERACTION", "is_light": false,
             "subBehavior":[
                 {
-                    "discription"   : "Tell the intention to measure the body temporature.",
-                    "Gaze"          : {"is_necessary" : true, "weight" : 1.0},
-                    "Emotion"       : {"is_necessary" : false, "weight" : 1.0},
+                    "discription"   : "tell to target.",
+                    "Gaze"          : {"is_necessary" : false, "weight" : 1.0},
+                    "Emotion"       : {"is_necessary" : true, "weight" : 1.0},
                     "Voice"         : {"is_necessary" : true, "weight" : 1.0},
-                    "Manipulator"   : {"is_necessary" : false, "weight" : 1.0},
+                    "Manipulator"   : {"is_necessary" : true, "weight" : 1.0},
+                    "Mover"         : {"is_necessary" : false,  "weight" : 1.0}
+                },
+                {
+                    "discription"   : "rotate to target.",
+                    "Gaze"          : {"is_necessary" : false, "weight" : 0.5},
+                    "Emotion"       : {"is_necessary" : true, "weight" : 1.0},
+                    "Voice"         : {"is_necessary" : false, "weight" : 0.5},
+                    "Manipulator"   : {"is_necessary" : false, "weight" : 0.5},
                     "Mover"         : {"is_necessary" : true,  "weight" : 1.0}
                 },
                 {
-                    "discription"   : "Move to the person who needs to be measured.",
-                    "Gaze"          : {"is_necessary" : true,  "weight" : 1.0},
-                    "Emotion"       : {"is_necessary" : false,  "weight" : 1.0},
-                    "Voice"         : {"is_necessary" : false,  "weight" : 1.0},
-                    "Manipulator"   : {"is_necessary" : false, "weight" : 1.0},
+                    "discription"   : "move to target.",
+                    "Gaze"          : {"is_necessary" : false, "weight" : 0.5},
+                    "Emotion"       : {"is_necessary" : true, "weight" : 1.0},
+                    "Voice"         : {"is_necessary" : false, "weight" : 0.5},
+                    "Manipulator"   : {"is_necessary" : false, "weight" : 0.5},
                     "Mover"         : {"is_necessary" : true,  "weight" : 1.0}
-                },{
-                    "discription"   : "Measure temporature.",
-                    "Gaze"          : {"is_necessary" : true,  "weight" : 1.0},
-                    "Emotion"       : {"is_necessary" : false, "weight" : 1.0},
-                    "Voice"         : {"is_necessary" : false, "weight" : 1.0},
-                    "Manipulator"   : {"is_necessary" : false, "weight" : 1.0},
+                },
+                {
+                    "discription"   : "Temperaturing 4.",
+                    "Gaze"          : {"is_necessary" : false,  "weight" : 0.5},
+                    "Emotion"       : {"is_necessary" : false, "weight" : 0.5},
+                    "Voice"         : {"is_necessary" : true, "weight" : 1.0},
+                    "Manipulator"   : {"is_necessary" : true, "weight" : 1.0},
+                    "Mover"         : {"is_necessary" : true,  "weight" : 1.0}
+                },
+                {
+                    "discription"   : "Temperaturing 5.",
+                    "Gaze"          : {"is_necessary" : false,  "weight" : 0.5},
+                    "Emotion"       : {"is_necessary" : false, "weight" : 0.5},
+                    "Voice"         : {"is_necessary" : true, "weight" : 1.0},
+                    "Manipulator"   : {"is_necessary" : true, "weight" : 1.0},
+                    "Mover"         : {"is_necessary" : true,  "weight" : 1.0}
+                },
+                {
+                    "discription"   : "Temperaturing 6.",
+                    "Gaze"          : {"is_necessary" : false,  "weight" : 0.5},
+                    "Emotion"       : {"is_necessary" : false, "weight" : 0.5},
+                    "Voice"         : {"is_necessary" : true, "weight" : 1.0},
+                    "Manipulator"   : {"is_necessary" : true, "weight" : 1.0},
+                    "Mover"         : {"is_necessary" : true,  "weight" : 1.0}
+                },
+                {
+                    "discription"   : "Temperaturing 7.",
+                    "Gaze"          : {"is_necessary" : false,  "weight" : 0.5},
+                    "Emotion"       : {"is_necessary" : false, "weight" : 0.5},
+                    "Voice"         : {"is_necessary" : true, "weight" : 1.0},
+                    "Manipulator"   : {"is_necessary" : true, "weight" : 1.0},
+                    "Mover"         : {"is_necessary" : true,  "weight" : 1.0}
+                },
+                {
+                    "discription"   : "Temperaturing 8.",
+                    "Gaze"          : {"is_necessary" : false,  "weight" : 0.5},
+                    "Emotion"       : {"is_necessary" : false, "weight" : 0.5},
+                    "Voice"         : {"is_necessary" : true, "weight" : 1.0},
+                    "Manipulator"   : {"is_necessary" : true, "weight" : 1.0},
+                    "Mover"         : {"is_necessary" : true,  "weight" : 1.0}
+                },
+                {
+                    "discription"   : "Temperaturing 9.",
+                    "Gaze"          : {"is_necessary" : false,  "weight" : 0.5},
+                    "Emotion"       : {"is_necessary" : false, "weight" : 0.5},
+                    "Voice"         : {"is_necessary" : true, "weight" : 1.0},
+                    "Manipulator"   : {"is_necessary" : true, "weight" : 1.0},
+                    "Mover"         : {"is_necessary" : true,  "weight" : 1.0}
+                },
+                {
+                    "discription"   : "Temperaturing 10.",
+                    "Gaze"          : {"is_necessary" : false,  "weight" : 0.5},
+                    "Emotion"       : {"is_necessary" : false, "weight" : 0.5},
+                    "Voice"         : {"is_necessary" : true, "weight" : 1.0},
+                    "Manipulator"   : {"is_necessary" : true, "weight" : 1.0},
                     "Mover"         : {"is_necessary" : true,  "weight" : 1.0}
                 }
             ]

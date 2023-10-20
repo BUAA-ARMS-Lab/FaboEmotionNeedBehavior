@@ -114,7 +114,7 @@ void RobotStatusUpdate(const social_msg::robot_status& msg){
 // void BehaviorUpdate(const social_msg::bhvPara::ConstPtr& behavior_ ,  ros::NodeHandle*  n){
 void BehaviorFinishedUpdate(const social_msg::idleState::ConstPtr& msg,  ros::NodeHandle*  n_ptr){
     
-    if(msg->hehavior_name == "MeasureTempareture"){
+    if(msg->hehavior_name == "MeasureTemperature"){
         social_msg::need_msg need_output;
         need_output.person_name =  msg->person_name;
         need_output.scene = "school";
