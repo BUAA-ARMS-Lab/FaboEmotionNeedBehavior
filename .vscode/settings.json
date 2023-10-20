@@ -107,6 +107,8 @@
         "state": "cpp",
         "stateattribute": "cpp",
         "stateset": "cpp",
-        "uniform": "cpp"
+        "uniform": "cpp",
+        "bit": "cpp",
+        "charconv": "cpp"
     }
 }

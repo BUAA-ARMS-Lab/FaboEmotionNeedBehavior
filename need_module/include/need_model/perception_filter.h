@@ -14,13 +14,13 @@
 class perception_filter{
 public:
     double time_;
-    static std::vector<social_msg::perception_msg>  per_list;   /* 如何让这个list  始终不变。 static？？ */
+    static std::vector<social_msg::perception_msg>  per_filter_list;   /* 如何让这个list  始终不变。 static？？ */
     social_msg::perception_msg per;
     double time_thresh;
 public:
     perception_filter(){};
     perception_filter( double time ): time_thresh(time){};
-    bool Whether_OK( social_msg::perception_msg per) ;
+    bool Whether_OK( social_msg::perception_msg& per) ;
     
 };
 
