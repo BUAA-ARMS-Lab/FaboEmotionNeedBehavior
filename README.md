@@ -80,3 +80,4 @@ roslaunch interface_sim interface_sim_cfg.launch
 
     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
     
+rostopic pub /perception_msg social_msg/perception_msg "{time: 0.0, person_name: '王老师', IDtype: '老师', scene: 'school', target_angle: 20.0, target_distance: 1000.0,  intention: '人机交互', p: 1.0, intention_2: '', p_2: 0.0, person_speech: '', speech: '王老师早上好啊',  person_emotion: 'Happy'}" 
