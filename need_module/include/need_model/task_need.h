@@ -46,6 +46,7 @@ class task_need{
                 if(
                     per_.intention ==  iter->intention  &&
                     per_.IDtype == iter->IDtype  &&
+                    per_.scene ==  iter->scene  &&
                     // per_.person_emotion_ == iter->person_emotion  &&
                     vector8_compare(rob_emotion_ , iter->rob_emotion)  &&                    
                     vector8_compare(rob_status_ , iter->rob_status ) 

@@ -111,6 +111,7 @@ public:
         if( per_list.size() == 0  ){   //即便感知为空,还是要把情感状态和身体状态的发送给  需求计算模型。
             social_msg::perception_msg per_none;  
             per_none.p = 0;
+            per_none.scene = "school";
             task_model -> update( per_none, emotion_, body_ );  
             inner_model -> update(per_none, emotion_, body_); 
             

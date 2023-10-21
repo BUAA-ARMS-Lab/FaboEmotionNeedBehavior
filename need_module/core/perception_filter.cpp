@@ -19,13 +19,13 @@ bool perception_filter::Whether_OK( social_msg::perception_msg& per) {
             return false;  /* intention为空的话,不传入prior need即可。 */
         }
 
-        if( per.intention == "日常闲聊" || per.intention == "问询" || per.intention == "普通指令" ){
+        if( /* per.intention == "日常闲聊" || */ per.intention == "家长验证" || per.intention == "普通指令" ){
             return false;  
         }
 
         //用于当前测试
         // if(per.person_name =="")
-            per.person_name = "路人甲";
+            // per.person_name = "路人甲";
 
 
 

@@ -19,7 +19,7 @@
             "subBehavior":[
                 {
                     "discription"   : "Look at target person.",
-                    "Gaze"          : {"is_necessary" : false,  "weight" : 0.5},
+                    "Gaze"          : {"is_necessary" : true,  "weight" : 1.0},
                     "Emotion"       : {"is_necessary" : true,  "weight" : 1.0},
                     "Voice"         : {"is_necessary" : false, "weight" : 0.5},
                     "Manipulator"   : {"is_necessary" : false,  "weight" : 0.5},
@@ -27,7 +27,7 @@
                 },
                 {
                     "discription"   : "Move and wave to target person.",
-                    "Gaze"          : {"is_necessary" : false,  "weight" : 0.5},
+                    "Gaze"          : {"is_necessary" : true,  "weight" : 1.0},
                     "Emotion"       : {"is_necessary" : true,  "weight" : 1.0},
                     "Voice"         : {"is_necessary" : false, "weight" : 0.5},
                     "Manipulator"   : {"is_necessary" : true,  "weight" : 1.0},
@@ -35,11 +35,11 @@
                 },
                 {
                     "discription"   : "Say hello.",
-                    "Gaze"          : {"is_necessary" : false,  "weight" : 0.5},
+                    "Gaze"          : {"is_necessary" : true,  "weight" : 1.0},
                     "Emotion"       : {"is_necessary" : true,  "weight" : 1.0},
                     "Voice"         : {"is_necessary" : true,  "weight" : 1.0},
                     "Manipulator"   : {"is_necessary" : true, "weight" : 1.0},
-                    "Mover"         : {"is_necessary" : false, "weight" : 0.5}
+                    "Mover"         : {"is_necessary" : true,  "weight" : 1.0}
                 }
             ]
         },{
@@ -48,7 +48,7 @@
             "subBehavior":[
                 {
                     "discription"   : "Look at target person.",
-                    "Gaze"          : {"is_necessary" : false,  "weight" : 0.5},
+                    "Gaze"          : {"is_necessary" : true,  "weight" : 1.0},
                     "Emotion"       : {"is_necessary" : true,  "weight" : 1.0},
                     "Voice"         : {"is_necessary" : false, "weight" : 0.5},
                     "Manipulator"   : {"is_necessary" : false,  "weight" : 0.5},
@@ -56,7 +56,7 @@
                 },
                 {
                     "discription"   : "Move and wave to target person.",
-                    "Gaze"          : {"is_necessary" : false,  "weight" : 0.5},
+                    "Gaze"          : {"is_necessary" : true,  "weight" : 1.0},
                     "Emotion"       : {"is_necessary" : true,  "weight" : 1.0},
                     "Voice"         : {"is_necessary" : false, "weight" : 0.5},
                     "Manipulator"   : {"is_necessary" : true,  "weight" : 1.0},
@@ -64,11 +64,11 @@
                 },
                 {
                     "discription"   : "Say hello.",
-                    "Gaze"          : {"is_necessary" : false,  "weight" : 0.5},
+                    "Gaze"          : {"is_necessary" : true,  "weight" : 1.0},
                     "Emotion"       : {"is_necessary" : true,  "weight" : 1.0},
                     "Voice"         : {"is_necessary" : true,  "weight" : 1.0},
                     "Manipulator"   : {"is_necessary" : true, "weight" : 1.0},
-                    "Mover"         : {"is_necessary" : false, "weight" : 0.5}
+                    "Mover"         : {"is_necessary" : true,  "weight" : 1.0}
                 }
             ]
         },{
@@ -79,16 +79,16 @@
                     "discription"   : "Face to the target object.",
                     "Gaze"          : {"is_necessary" : true, "weight" : 1.0},
                     "Emotion"       : {"is_necessary" : true,  "weight" : 1.0},
-                    "Voice"         : {"is_necessary" : false, "weight" : 1.0},
-                    "Manipulator"   : {"is_necessary" : false, "weight" : 1.0},
-                    "Mover"         : {"is_necessary" : true,  "weight" : 1.0}
+                    "Voice"         : {"is_necessary" : false, "weight" : 0.5},
+                    "Manipulator"   : {"is_necessary" : false, "weight" : 0.5},
+                    "Mover"         : {"is_necessary" : false, "weight" : 0.5}
                 },{
                     "discription"   : "Answer the question.",
                     "Gaze"          : {"is_necessary" : true, "weight" : 1.0},
                     "Emotion"       : {"is_necessary" : true,  "weight" : 1.0},
                     "Voice"         : {"is_necessary" : true, "weight" : 1.0},
-                    "Manipulator"   : {"is_necessary" : false, "weight" : 1.0},
-                    "Mover"         : {"is_necessary" : true,  "weight" : 1.0}
+                    "Manipulator"   : {"is_necessary" : true, "weight" : 1.0},
+                    "Mover"         : {"is_necessary" : false, "weight" : 0.5}
                 }
             ]
         },{
@@ -105,7 +105,7 @@
                 },
                 {
                     "discription"   : "rotate to target.",
-                    "Gaze"          : {"is_necessary" : false, "weight" : 0.5},
+                    "Gaze"          : {"is_necessary" : true, "weight" : 1.0},
                     "Emotion"       : {"is_necessary" : true, "weight" : 1.0},
                     "Voice"         : {"is_necessary" : false, "weight" : 0.5},
                     "Manipulator"   : {"is_necessary" : false, "weight" : 0.5},
@@ -195,11 +195,11 @@
             "subBehavior":[
                 {
                     "discription"   : "Tell target to wait.",
-                    "Gaze"          : {"is_necessary" : false,  "weight" : 1.0},
-                    "Emotion"       : {"is_necessary" : false,  "weight" : 1.0},
-                    "Voice"         : {"is_necessary" : true, "weight" : 0.5},
-                    "Manipulator"   : {"is_necessary" : false,  "weight" : 1.0},
-                    "Mover"         : {"is_necessary" : false, "weight" : 0.5}
+                    "Gaze"          : {"is_necessary" : true, "weight" : 1.0},
+                    "Emotion"       : {"is_necessary" : false,  "weight" : 0.5},
+                    "Voice"         : {"is_necessary" : true,  "weight" : 1.0},
+                    "Manipulator"   : {"is_necessary" : false,  "weight" : 0.5},
+                    "Mover"         : {"is_necessary" : false,  "weight" : 0.5}
                 }
             ]
         },{
@@ -207,14 +207,14 @@
             "weight" : 0.85, "type" : "INTERACTION", "is_light": false,
             "subBehavior":[
                 {
-                    "discription"   : "Move towards the target interactive object and spread hands.",
-                    "Gaze"          : {"is_necessary" : true, "weight" : 1.0},
+                    "discription"   : "转向目标对象.",
+                    "Gaze"          : {"is_necessary" : false, "weight" : 0.5},
                     "Emotion"       : {"is_necessary" : true,  "weight" : 1.0},
-                    "Voice"         : {"is_necessary" : false, "weight" : 1.0},
-                    "Manipulator"   : {"is_necessary" : true, "weight" : 1.0},
+                    "Voice"         : {"is_necessary" : false, "weight" : 0.5},
+                    "Manipulator"   : {"is_necessary" : false, "weight" : 0.5},
                     "Mover"         : {"is_necessary" : true,  "weight" : 1.0}
                 },{
-                    "discription"   : "Ask the interactive object for purpose.",
+                    "discription"   : "移动到目标对象并展开双臂/翅膀.",
                     "Gaze"          : {"is_necessary" : true, "weight" : 1.0},
                     "Emotion"       : {"is_necessary" : true,  "weight" : 1.0},
                     "Voice"         : {"is_necessary" : true, "weight" : 1.0},
@@ -222,8 +222,10 @@
                     "Mover"         : {"is_necessary" : true,  "weight" : 1.0}
                 }
             ]
-        },{
-            "name" : "ParentsValidation",
+        },
+        
+        {   
+            "name" : "ParentsValidation  no use",
             "weight" : 0.60, "type" : "INTERACTION", "is_light": false,
             "subBehavior":[
                 {
@@ -270,7 +272,9 @@
                     "Mover"         : {"is_necessary" : true,  "weight" : 1.0}
                 }
             ]
-        },{
+        },
+        
+        {
             "name" : "KeepOrder",
             "weight" : 0.80, "type" : "INTERACTION", "is_light": false,
             "subBehavior":[

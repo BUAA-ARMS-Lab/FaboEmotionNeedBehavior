@@ -53,6 +53,7 @@ public:
             task_doc[i]["intention"]  >> temp.intention ;
             std::cout << "intention" << std::endl;
             task_doc[i]["IDtype"]  >> temp.IDtype ; 
+            task_doc[i]["scene"]  >> temp.scene ; 
             std::cout <<  "    第" << i+1 << "个: " << temp.need_name << "\n";
             task_doc[i]["person_emotion"]  >> temp.person_emotion ;
             task_doc[i]["rob_emotion"] >> temp.rob_emotion;
