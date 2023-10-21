@@ -279,15 +279,23 @@
             "weight" : 0.80, "type" : "INTERACTION", "is_light": false,
             "subBehavior":[
                 {
-                    "discription"   : "KeepOrder.",
+                    "discription"   : "转向目标对象.",
                     "Gaze"          : {"is_necessary" : true, "weight" : 1.0},
                     "Emotion"       : {"is_necessary" : true,  "weight" : 1.0},
-                    "Voice"         : {"is_necessary" : false, "weight" : 1.0},
-                    "Manipulator"   : {"is_necessary" : true, "weight" : 1.0},
+                    "Voice"         : {"is_necessary" : false, "weight" : 0.5},
+                    "Manipulator"   : {"is_necessary" : false, "weight" : 0.5},
                     "Mover"         : {"is_necessary" : true,  "weight" : 1.0}
                 },
                 {
-                    "discription"   : "KeepOrder.",
+                    "discription"   : "后退半米.",
+                    "Gaze"          : {"is_necessary" : false, "weight" : 0.5},
+                    "Emotion"       : {"is_necessary" : true,  "weight" : 1.0},
+                    "Voice"         : {"is_necessary" : false, "weight" : 0.5},
+                    "Manipulator"   : {"is_necessary" : false, "weight" : 0.5},
+                    "Mover"         : {"is_necessary" : true,  "weight" : 1.0}
+                },
+                {
+                    "discription"   : "伸手示意并语音维持秩序.",
                     "Gaze"          : {"is_necessary" : true, "weight" : 1.0},
                     "Emotion"       : {"is_necessary" : true,  "weight" : 1.0},
                     "Voice"         : {"is_necessary" : true, "weight" : 1.0},
