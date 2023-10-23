@@ -1,0 +1,8 @@
+<launch>
+<!-- name是节点名字 pkg是ros包名(自己创建的) type 是启动的文件  output用于输出/打印 至命令行-->
+    <node name="emotion_module" pkg="emotion_module" type="main.py" args="0"  output="screen"/>
+
+    
+    <node name="need_module" pkg="need_module" type="need_model" output="screen"/>
+
+</launch>

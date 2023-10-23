@@ -1,0 +1,7 @@
+<launch>
+
+<!-- rosrun behavior_module behavior_node -->
+
+    <node name="behavior_module" pkg="behavior_module" type="behavior_node" output="screen"/>
+
+</launch>
