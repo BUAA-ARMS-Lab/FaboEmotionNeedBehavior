@@ -40,10 +40,10 @@ class NeedSatisfied{
         void perception_to_needSatisfied( const perception &p){
             social_msg::need_satisfy_msg msg;
             if( p.intention_ == "Uncooperate"){
-                msg.need_name = "MeasureTempareture";
+                msg.need_name = "MeasureTemperature";
                 msg.satisfy_value = -2;
                 pub.publish(msg);
-                printf(  BLUE "     NeedSatisfied for MeasureTempareture \n"NONE);
+                printf(  BLUE "     NeedSatisfied for MeasureTemperature \n"NONE);
             } 
         }
 

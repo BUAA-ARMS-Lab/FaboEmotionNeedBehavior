@@ -137,7 +137,7 @@ enum NeedType {
 
 
 // static int NeedTypeCheck(std::string name){
-//     if(name == "Greet" || name == "MeasureTempareture" || name == "Anwser" || name == "ParentIdentity")
+//     if(name == "Greet" || name == "MeasureTemperature" || name == "Anwser" || name == "ParentIdentity")
 //         return  TaskNeed;
 //     if(name == "Doubt" || name == "Chat" || name == "Charge" || name == "Wander")
 //         return InnerNeed;
