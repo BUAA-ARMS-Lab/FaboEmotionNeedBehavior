@@ -16,7 +16,7 @@ class task_need{
         std::vector<double> rob_emotion_;
         std::string person_emotion_;
         std::vector<double> rob_status_;
-        string yaml_name = "../../../personality_template/need/TaskNeed.yaml" ;
+        string yaml_name = "../../data/TaskNeed.yaml" ;
     public:
         task_need( ){
             /* 生成need */                

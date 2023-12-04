@@ -48,7 +48,8 @@ add_message_files( FILES
         behavior_msg.msg
         idleState.msg    
         
-        
+        # 可视化
+        behavior_list.msg
 
 
         # #由行为模块生成
@@ -79,6 +80,8 @@ add_message_files( FILES
         # /BehaviorModule/bhvGet.msg
         # /BehaviorModule/bhvReply.msg
         # # NeedList.msg
+
+        
 )
 generate_messages( DEPENDENCIES    roscpp  std_msgs geometry_msgs )
 

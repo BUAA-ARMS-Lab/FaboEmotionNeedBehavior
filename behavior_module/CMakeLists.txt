@@ -62,6 +62,7 @@ add_message_files(
   behavior_msg.msg
   behavior_feedback_msg.msg
   idleState.msg
+  behavior_list.msg
 )
 
 ## Generate services in the 'srv' folder

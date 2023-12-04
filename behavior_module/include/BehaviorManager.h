@@ -10,6 +10,7 @@
 #include <std_msgs/Header.h>
 #include <behavior_module/need_msg.h>
 #include <behavior_module/behavior_msg.h>
+#include <behavior_module/behavior_list.h>
 #include <behavior_module/behavior_feedback_msg.h>
 #include <behavior_module/idleState.h>
 
@@ -172,24 +173,26 @@ public:
      * @param n 行为管理器所关联的节点句柄，用于接受和发送话题。
      * @param data_path 存储行为数据的json文件目录。
      */
-    BehaviorManager(ros::NodeHandle& n, string data_path):n_(n)
-    {
+    BehaviorManager(ros::NodeHandle& n, string data_path);
+    // :n_(n)
+    // {
 
-        printInColor("==================================\n", BLUE);
-        printInColor(" Welcome to use behavior_module! \n", BLUE);
-        printInColor("==================================\n", BLUE);
-        publisher_behavior_ = n_.advertise<behavior_module::behavior_msg>("/BehaviorInstruction", 1000);
-        publisher_idlestate_ = n_.advertise<behavior_module::idleState>("/idleState",1000);
-        subscriber_need_ = n_.subscribe("/need_lists", 1000, &BehaviorManager::need_msg_callback, this);
-        subscriber_behavior_feedback_ = n_.subscribe("/BehaviorFeedback", 1000, &BehaviorManager::behavior_feedback_callback, this);
-        ReadInBehaviorLibrary(data_path);
-        sleep(1.2);
-        TellIdleState(true, nullptr);
-    };
+    //     printInColor("==================================\n", BLUE);
+    //     printInColor(" Welcome to use behavior_module! \n", BLUE);
+    //     printInColor("==================================\n", BLUE);
+    //     publisher_behavior_ = n_.advertise<behavior_module::behavior_msg>("/BehaviorInstruction", 1000);
+    //     publisher_idlestate_ = n_.advertise<behavior_module::idleState>("/idleState",1000);
+    //     subscriber_need_ = n_.subscribe("/need_lists", 1000, &BehaviorManager::need_msg_callback, this);
+    //     subscriber_behavior_feedback_ = n_.subscribe("/BehaviorFeedback", 1000, &BehaviorManager::behavior_feedback_callback, this);
+    //     ReadInBehaviorLibrary(data_path);
+    //     sleep(1.2);
+    //     TellIdleState(true, nullptr);
+    // };
 
 private:
     ros::NodeHandle n_;
     ros::Publisher publisher_behavior_;
+    ros::Publisher publisher_behavior_list_;
     ros::Publisher publisher_idlestate_;
     ros::Subscriber subscriber_behavior_feedback_;
     ros::Subscriber subscriber_need_;
@@ -216,13 +219,13 @@ private:
     void WaitToUpdate(float wait_seconds);
 
     void UpdateBehaviorPub();
-    void need_msg_callback(const behavior_module::need_msg &msg)
-    {
-        cout << "\n---------------------------------------------------" << endl;
-        printInColor("【Received need_msg】", BLUE);
-        cout << msg.need_name << endl << endl;
-        ReadInNewNeed(msg);
-    }
+    void need_msg_callback(const behavior_module::need_msg &msg);
+    // {
+    //     cout << "\n---------------------------------------------------" << endl;
+    //     printInColor("【Received need_msg】", BLUE);
+    //     cout << msg.need_name << endl << endl;
+    //     ReadInNewNeed(msg);
+    // }
 
     void behavior_feedback_callback(const behavior_module::behavior_feedback_msg &msg);
 
@@ -235,6 +238,8 @@ private:
     void PrintBehaviors(vector<Behavior> &behaviors);
 
     void PrintBehaviorMsgInfo(behavior_module::behavior_msg);
+
+    void visualize_behavior_list();
 
     // 数据库所有行为名称的集合，用于在响应需求时判断是否有对应的行为
     set<std::string> msbehaviorsCatalog;

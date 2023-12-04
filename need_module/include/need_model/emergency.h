@@ -13,7 +13,7 @@ class Emergency {
     private:
         std::vector<need> read_need_lists;
         social_msg::perception_msg per_;
-        string yaml_name = "../../../personality_template/need/Emergency.yaml" ;
+        string yaml_name = "../../data/Emergency.yaml" ;
 
     public:
         Emergency(){

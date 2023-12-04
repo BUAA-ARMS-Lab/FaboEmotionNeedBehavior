@@ -18,7 +18,7 @@ from social_msg.msg import perception_msg
 from social_msg.msg import attitude_query  
 from social_msg.msg import idleState
 # 是否开始print
-print_state = False
+print_state = True
 
 class Watcher():
     '''
