@@ -116,7 +116,7 @@ public:
         target_distance = msg.target_distance;
         person_emotion = msg.person_emotion;
         rob_emotion_intensity = msg.rob_emotion_intensity;
-        // weight = msg.weight; // TODO：是否由需求给出权重
+        weight = msg.weight; // TODO：是否由需求给出权重
         speech = msg.speech;
         rob_emotion = msg.rob_emotion;
         satisfy_value = msg.satisfy_value;
