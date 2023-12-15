@@ -435,7 +435,7 @@ def data_process(print_state_):
               time_cur = time.time()
               if print_state:
                      print("机器人~~~~~~闲置了%f秒"%(time_cur - time_init)) 
-              if ( (time_cur - time_init) > 30 ):
+              if ( (time_cur - time_init) > 20 ):
                      delta_e[7] = 0.6   #current_e  delta_e
                      unique_msg.append([rospy.get_time()-stimulus_t, 'None', 0, 'None', 'None', 'None', 'enthusiastic', 'None'])
                      idleState_flag  = 0

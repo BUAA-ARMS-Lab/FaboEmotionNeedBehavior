@@ -131,7 +131,8 @@ public:
                 // b）当存在外界感知信息且意图感知信息的概率方差,大于0.0025时（两概率之差0.1）,根据概率最高的意图生成需求。
                 // b）当存在外界感知信息且意图感知信息的概率方差,大于0.000625时（两概率之差0.05）,根据概率最高的意图生成需求。
                 social_msg::perception_msg per = per_list[i];
-                if( varianceTop2(per) > 0.0006251 ) {
+                // if( varianceTop2(per) > 0.0006251 ) {
+                if( varianceTop2(per) > 0.0000001 ) {   //TODO：去掉了Doubt行为
                     task_model -> update( per, emotion_, body_ );
                     inner_model -> update(per, emotion_, body_); //此时,也会有内部需求生成。  
                     emergency_model -> update( per );

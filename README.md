@@ -83,6 +83,30 @@ roslaunch interface_sim interface_sim_cfg.launch
     git fetch origin
     git branch -u origin/main main
     git remote set-head origin -a
+
+rostopic pub /BehaviorInstruction behavior_module/behavior_msg "header:
+  seq: 0
+  stamp: {secs: 0, nsecs: 0}
+  frame_id: ''
+name: 'Stop_All_Actions_Now'
+scene: 'school'
+type: ''
+total_phase: 0
+current_phase: 0
+occupancy: [1, 1, 1, 1, 1]
+target: ''
+target_angle: 0.0
+target_distance: 0.0
+speech: ''
+rob_emotion: ''
+rob_emotion_intensity: 0
+attitude: ''
+move_speed: 0.0
+distance: 0.0
+voice_speed: 0.0" 
+
+
+
 一、学校
 （1）问好
 rostopic pub /perception_msg social_msg/perception_msg "{time: 0.0, person_name: '王老师', IDtype: '老师', scene: 'school', target_angle: 20.0, target_distance: 1000.0,  intention: '人机交互', p: 1.0, intention_2: '', p_2: 0.0, person_speech: '', speech: '王老师早上好啊',  person_emotion: 'Happy'}" 
@@ -183,3 +207,83 @@ rostopic pub /perception_msg social_msg/perception_msg "{time: 0.0, person_name:
 三、医院
 （2）问询
 rostopic pub /perception_msg social_msg/perception_msg "{time: 0.0, person_name: '王老师', IDtype: '病人', scene: 'hospital', target_angle: 0.0, target_distance: 1000.0,  intention: '问询', p: 1.0, intention_2: '', p_2: 0.0, person_speech: '', speech: '抱歉，我也不知道呢',  person_emotion: 'Happy'}" 
+
+
+
+
+
+
+
+rostopic pub /BehaviorInstruction behavior_module/behavior_msg "header:
+  seq: 0
+  stamp: {secs: 10101010, nsecs: 0}
+  frame_id: ''
+name: 'Answer'
+scene: 'hospital'
+type: ''
+total_phase: 2
+current_phase: 0
+occupancy: [1, 1, 1, 1, 1]
+target: '小明'
+target_angle: 0.0
+target_distance: 1000.0
+speech: '你好啊，你是生病了吗？'
+rob_emotion: 'Calm'
+rob_emotion_intensity: 1
+attitude: '热情'
+move_speed: 200.0
+distance: 1000.0
+voice_speed: 0.0"  -1
+
+
+
+
+
+rostopic pub /BehaviorInstruction behavior_module/behavior_msg "header:
+  seq: 0
+  stamp: {secs: 0, nsecs: 0}
+  frame_id: ''
+name: 'Wander'
+scene: 'school'
+type: ''
+total_phase: 8
+current_phase:   0 
+occupancy: [1, 1, 1, 1, 1]
+target: ''
+target_angle: 0.0
+target_distance: 0.0
+speech: '123456'
+rob_emotion: ''
+rob_emotion_intensity: 0
+attitude: ''
+move_speed: 200.0
+distance: 1000.0
+voice_speed: 0.0"  -1
+
+
+
+
+rostopic pub /BehaviorInstruction behavior_module/behavior_msg "header:
+  seq: 0
+  stamp: {secs: 0, nsecs: 0}
+  frame_id: ''
+name: 'Stop_All_Actions_Now'
+scene: 'school'
+type: ''
+total_phase: 0
+current_phase: 0
+occupancy: [1, 1, 1, 1, 1]
+target: ''
+target_angle: 0.0
+target_distance: 0.0
+speech: ''
+rob_emotion: ''
+rob_emotion_intensity: 0
+attitude: ''
+move_speed: 0.0
+distance: 0.0
+voice_speed: 0.0"  -1
+
+
+
+

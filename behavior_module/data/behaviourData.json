@@ -5,7 +5,63 @@
             "weight" : 0.2, "type" : "EXPRESSION", "is_light": true,
             "subBehavior":[
                 {
-                    "discription"   : "Move around.",
+                    "discription"   : "Move around 1.",
+                    "Gaze"          : {"is_necessary" : true, "weight" : 1.0},
+                    "Emotion"       : {"is_necessary" : true,  "weight" : 1.0},
+                    "Voice"         : {"is_necessary" : true, "weight" : 1.0},
+                    "Manipulator"   : {"is_necessary" : true, "weight" : 1.0},
+                    "Mover"         : {"is_necessary" : true,  "weight" : 1.0}
+                },
+                {
+                    "discription"   : "Move around 2.",
+                    "Gaze"          : {"is_necessary" : true, "weight" : 1.0},
+                    "Emotion"       : {"is_necessary" : true,  "weight" : 1.0},
+                    "Voice"         : {"is_necessary" : true, "weight" : 1.0},
+                    "Manipulator"   : {"is_necessary" : true, "weight" : 1.0},
+                    "Mover"         : {"is_necessary" : true,  "weight" : 1.0}
+                },
+                {
+                    "discription"   : "Move around 3.",
+                    "Gaze"          : {"is_necessary" : true, "weight" : 1.0},
+                    "Emotion"       : {"is_necessary" : true,  "weight" : 1.0},
+                    "Voice"         : {"is_necessary" : true, "weight" : 1.0},
+                    "Manipulator"   : {"is_necessary" : true, "weight" : 1.0},
+                    "Mover"         : {"is_necessary" : true,  "weight" : 1.0}
+                },
+                {
+                    "discription"   : "Move around 4.",
+                    "Gaze"          : {"is_necessary" : true, "weight" : 1.0},
+                    "Emotion"       : {"is_necessary" : true,  "weight" : 1.0},
+                    "Voice"         : {"is_necessary" : true, "weight" : 1.0},
+                    "Manipulator"   : {"is_necessary" : true, "weight" : 1.0},
+                    "Mover"         : {"is_necessary" : true,  "weight" : 1.0}
+                },
+                {
+                    "discription"   : "Move around 5.",
+                    "Gaze"          : {"is_necessary" : true, "weight" : 1.0},
+                    "Emotion"       : {"is_necessary" : true,  "weight" : 1.0},
+                    "Voice"         : {"is_necessary" : true, "weight" : 1.0},
+                    "Manipulator"   : {"is_necessary" : true, "weight" : 1.0},
+                    "Mover"         : {"is_necessary" : true,  "weight" : 1.0}
+                },
+                {
+                    "discription"   : "Move around 6.",
+                    "Gaze"          : {"is_necessary" : true, "weight" : 1.0},
+                    "Emotion"       : {"is_necessary" : true,  "weight" : 1.0},
+                    "Voice"         : {"is_necessary" : true, "weight" : 1.0},
+                    "Manipulator"   : {"is_necessary" : true, "weight" : 1.0},
+                    "Mover"         : {"is_necessary" : true,  "weight" : 1.0}
+                },
+                {
+                    "discription"   : "Move around 7.",
+                    "Gaze"          : {"is_necessary" : true, "weight" : 1.0},
+                    "Emotion"       : {"is_necessary" : true,  "weight" : 1.0},
+                    "Voice"         : {"is_necessary" : true, "weight" : 1.0},
+                    "Manipulator"   : {"is_necessary" : true, "weight" : 1.0},
+                    "Mover"         : {"is_necessary" : true,  "weight" : 1.0}
+                },
+                {
+                    "discription"   : "Move around 8.",
                     "Gaze"          : {"is_necessary" : true, "weight" : 1.0},
                     "Emotion"       : {"is_necessary" : true,  "weight" : 1.0},
                     "Voice"         : {"is_necessary" : true, "weight" : 1.0},
@@ -142,38 +198,6 @@
                     "Voice"         : {"is_necessary" : true, "weight" : 1.0},
                     "Manipulator"   : {"is_necessary" : true, "weight" : 1.0},
                     "Mover"         : {"is_necessary" : true,  "weight" : 1.0}
-                },
-                {
-                    "discription"   : "Temperaturing 7.",
-                    "Gaze"          : {"is_necessary" : false,  "weight" : 0.5},
-                    "Emotion"       : {"is_necessary" : false, "weight" : 0.5},
-                    "Voice"         : {"is_necessary" : true, "weight" : 1.0},
-                    "Manipulator"   : {"is_necessary" : true, "weight" : 1.0},
-                    "Mover"         : {"is_necessary" : true,  "weight" : 1.0}
-                },
-                {
-                    "discription"   : "Temperaturing 8.",
-                    "Gaze"          : {"is_necessary" : false,  "weight" : 0.5},
-                    "Emotion"       : {"is_necessary" : false, "weight" : 0.5},
-                    "Voice"         : {"is_necessary" : true, "weight" : 1.0},
-                    "Manipulator"   : {"is_necessary" : true, "weight" : 1.0},
-                    "Mover"         : {"is_necessary" : true,  "weight" : 1.0}
-                },
-                {
-                    "discription"   : "Temperaturing 9.",
-                    "Gaze"          : {"is_necessary" : false,  "weight" : 0.5},
-                    "Emotion"       : {"is_necessary" : false, "weight" : 0.5},
-                    "Voice"         : {"is_necessary" : true, "weight" : 1.0},
-                    "Manipulator"   : {"is_necessary" : true, "weight" : 1.0},
-                    "Mover"         : {"is_necessary" : true,  "weight" : 1.0}
-                },
-                {
-                    "discription"   : "Temperaturing 10.",
-                    "Gaze"          : {"is_necessary" : false,  "weight" : 0.5},
-                    "Emotion"       : {"is_necessary" : false, "weight" : 0.5},
-                    "Voice"         : {"is_necessary" : true, "weight" : 1.0},
-                    "Manipulator"   : {"is_necessary" : true, "weight" : 1.0},
-                    "Mover"         : {"is_necessary" : true,  "weight" : 1.0}
                 }
             ]
         },{
@@ -181,7 +205,15 @@
             "weight" : 0.99, "type" : "INTERACTION", "is_light": false,
             "subBehavior":[
                 {
-                    "discription"   : "Inform the temporature .",
+                    "discription"   : "Inform the temporature 1.",
+                    "Gaze"          : {"is_necessary" : true, "weight" : 1.0},
+                    "Emotion"       : {"is_necessary" : true, "weight" : 1.0},
+                    "Voice"         : {"is_necessary" : true,  "weight" : 1.0},
+                    "Manipulator"   : {"is_necessary" : true, "weight" : 1.0},
+                    "Mover"         : {"is_necessary" : true, "weight" : 1.0}
+                },
+                {
+                    "discription"   : "Inform the temporature 2.",
                     "Gaze"          : {"is_necessary" : true, "weight" : 1.0},
                     "Emotion"       : {"is_necessary" : true, "weight" : 1.0},
                     "Voice"         : {"is_necessary" : true,  "weight" : 1.0},
@@ -278,14 +310,6 @@
             "name" : "KeepOrder",
             "weight" : 0.80, "type" : "INTERACTION", "is_light": false,
             "subBehavior":[
-                {
-                    "discription"   : "转向目标对象.",
-                    "Gaze"          : {"is_necessary" : true, "weight" : 1.0},
-                    "Emotion"       : {"is_necessary" : true,  "weight" : 1.0},
-                    "Voice"         : {"is_necessary" : false, "weight" : 0.5},
-                    "Manipulator"   : {"is_necessary" : false, "weight" : 0.5},
-                    "Mover"         : {"is_necessary" : true,  "weight" : 1.0}
-                },
                 {
                     "discription"   : "后退半米.",
                     "Gaze"          : {"is_necessary" : false, "weight" : 0.5},

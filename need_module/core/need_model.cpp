@@ -16,7 +16,7 @@ std::mutex data_mutex;
 
 
 // time_t inner_need::time_for_wandor  =  0;
-perception_filter *Filter = new perception_filter(1000000);   //TODO: 确定合适的per过滤时长阈值。
+perception_filter *Filter = new perception_filter(30);   //TODO: 确定合适的per过滤时长阈值，单位秒
 
 // ros node
 ros::Subscriber sub_perception;
@@ -41,6 +41,42 @@ void operator >> (const social_msg::need_msg& msg, need_wu & need) {
 prior_need PriorNeed;
 void run_PriorNeed(ros::NodeHandle*  n_ptr);
 
+bool NoPeopleFace(string speech){
+
+    if(speech == "抱歉没有检测到人脸，请您调整下位置。"){
+        social_msg::need_msg need_output;
+        need_output.person_name =  "";
+        need_output.scene = "school";
+        need_output.IDtype = "学生";
+        need_output.need_name = "Answer";  
+        need_output.target_angle = 0;
+        need_output.target_distance = 1000;
+        need_output.rob_emotion = "Joy";//TODO: need_lists[i].rob_emotion;
+        need_output.rob_emotion_intensity = 2;
+        need_output.person_emotion = "";//need_lists[i].person_emotion
+        need_output.weight = 1.0;
+        need_output.speech = "抱歉没有检测到人脸，请您调整下位置。";
+        need_output.qt_order = period_cur;
+        need_output.satisfy_value = 1.0;
+        need_output.attitude    = "热情";   //enthusiastic,respectful,serious,disgust
+        need_output.move_speed  = 200;
+        need_output.distance    = 1000;
+        need_output.voice_speed = 50;
+        need_output.target_angle = 0.0;
+        // need_output.target_distance = 1000;
+        pub.publish(need_output);
+        std::cout <<  "    Output Need"<< ": 没有检测到人脸时的行为" << " ,Weight: " <<need_output.weight;
+        if (  need_output.person_name != "")
+            std::cout <<" ,for " <<need_output.person_name<<" as " <<need_output.IDtype;
+        std::cout<<std::endl;
+
+        return true;
+    }
+    else
+      return false;
+
+}
+
 
 // 回调函数
 void PerceptionUpdate(const social_msg::perception_msg& msg){
@@ -50,7 +86,7 @@ void PerceptionUpdate(const social_msg::perception_msg& msg){
     // per.intention_ = msg.intention;
     // per.p_ = msg.p;
     // per.intention_2_ = msg.intention_2;
-    // if(  msg.intention_2 == ""    || msg.p_2 == 0  || msg.p_2 == NULL ){
+    // if(  msg.intention_2 == ""    || msg.p_2     == 0  || msg.p_2 == NULL ){
     //     per.p_2_ = 0;
     // }
     // else{
@@ -74,6 +110,8 @@ void PerceptionUpdate(const social_msg::perception_msg& msg){
 
     std::lock_guard<std::mutex> lock(data_mutex);
 
+    if( NoPeopleFace(msg.speech) )
+        return;
     if( Filter->Whether_OK(per) )    //如果,“感知过滤器”认为当前感知是有效的,则update
         PriorNeed.PerceptionUpdate(per);
 
@@ -120,7 +158,7 @@ void BehaviorFinishedUpdate(const social_msg::idleState::ConstPtr& msg,  ros::No
         need_output.scene = "school";
         need_output.IDtype = msg->IDtype;
         need_output.need_name = "TellTemparetureResult";  
-        need_output.target_angle = msg->target_angle;
+        need_output.target_angle = 90;
         need_output.target_distance = msg->target_distance;
         need_output.rob_emotion = "Joy";//TODO: need_lists[i].rob_emotion;
         need_output.rob_emotion_intensity = 2;
@@ -136,7 +174,7 @@ void BehaviorFinishedUpdate(const social_msg::idleState::ConstPtr& msg,  ros::No
         query.motivation = need_output.need_name;
         query.person_name = need_output.person_name;
         query_attitude.publish(query);
-        ros::Duration timeout(5);
+        ros::Duration timeout(0.2);
         social_msg::attitude_msg::ConstPtr result = ros::topic::waitForMessage<social_msg::attitude_msg>("attitude", *n_ptr, timeout);
         if (result != NULL)
         {
@@ -156,6 +194,7 @@ void BehaviorFinishedUpdate(const social_msg::idleState::ConstPtr& msg,  ros::No
                 need_output.move_speed  = 200;
                 need_output.distance    = 500;
                 need_output.voice_speed = 50;
+                // need_output.target_distance = 1000;
             }
         }
         else
@@ -233,7 +272,7 @@ void run_PriorNeed(ros::NodeHandle*  n_ptr){
                     query.motivation = need_lists[j].need_name;
                     query.person_name = need_lists[j].person_name;
                     query_attitude.publish(query);
-                    double t = 1.0;
+                    double t = 0.2;   //课题一的等待时间
                     ros::Duration timeout(t);
                     ROS_INFO("Need waiting for social attitude");
                     social_msg::attitude_msg::ConstPtr result = ros::topic::waitForMessage<social_msg::attitude_msg>("attitude", *n_ptr, timeout);
@@ -278,7 +317,7 @@ void run_PriorNeed(ros::NodeHandle*  n_ptr){
                         ROS_WARN("Timeout: Failed to receive social attitude within %f seconds", t);
                         need_output.attitude    = "热情";   //enthusiastic,respectful,serious,disgust
                         need_output.move_speed  = 200;
-                        need_output.distance    = 500;
+                        need_output.distance    = 1000;
                         need_output.voice_speed = 50;
                     }   
                     pub.publish(need_output);

@@ -441,6 +441,9 @@ void BehaviorManager::UpdateBehaviorPub()
         if(!mbPauseFlag)
         {
             msg.name = "Stop_All_Actions_Now";
+            // msg.header.stamp = ros::Time::now();
+            msg.header.stamp.sec = 123456789;
+            // std::cout << "msg.header.stamp = " << msg.header.stamp.sec << std::endl;
             publisher_behavior_.publish(msg);
             PrintBehaviorMsgInfo(msg);
             mbPauseFlag = true;

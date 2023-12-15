@@ -23,9 +23,9 @@ import os
 # csv_name = "/home/zhjd/ws/src/social_system/need_module/script/"+'test(school).csv'
 # csv_name = "/home/zhjd/ws/src/social_system/need_module/script/"+'test(school).csv'
 sys.stdout.write( '选择刺激输入源,【1】行为打断,【2】行为并行:  ' )
-str = input();
+str = input()
 current_folder_path = os.path.dirname(os.path.abspath(__file__))
-
+str = 1
 
 
 
@@ -37,7 +37,7 @@ def talker():
         
         print(" ")
         print(" ")
-
+        
         if str == 1 :
                 time.sleep(1)     
                 need = need_msg()
@@ -47,7 +47,7 @@ def talker():
                 need.scene = "school"
                 need.person_name = "小明"
                 need.IDtype = "学生"
-                need.target_angle = 0
+                need.target_angle = 30
                 need.target_distance = 1000
                 need.rob_emotion = "Joy"
                 need.rob_emotion_intensity = 1
@@ -63,7 +63,7 @@ def talker():
                 pub_need.publish(need)
 
 
-                time.sleep(15)     #TODO:   具体间隔时间待定
+                time.sleep(18)     #TODO:   具体间隔时间待定
 
                 
                 print("发送对小明的维持秩序需求")
