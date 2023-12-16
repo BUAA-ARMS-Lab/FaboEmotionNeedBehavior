@@ -19,7 +19,7 @@ void BtManager::set_ros_node(ros::NodeHandle& n){
 
     // on behavior
     sub_hehavior = n.subscribe("/BehaviorInstruction", 1000, &BtManager::behavior_callback, this);
-    pub_hehaviorFeedback = n.advertise<behavior_module::behavior_feedback_msg>("/BehaviorFeedback", 1000);
+    pub_hehaviorFeedback = n.advertise<social_msg::behavior_feedback_msg>("/BehaviorFeedback", 1000);
 
     // wheel/head motion
     sub_wheelMotion = n.subscribe("/wheelMotion", 1000, &BtManager::wheelMotion_callback, this);
@@ -105,7 +105,7 @@ void BtManager::headMotion(const int angle, const int vel) {
     sendBtData(order);
 }
 
-void BtManager::behavior_callback(const behavior_module::behavior_msg &msg){
+void BtManager::behavior_callback(const social_msg::behavior_msg &msg){
     std::string bluetooth_message = "";
     bluetooth_message = bluetooth_message
                         + msg.name + "," 
@@ -138,7 +138,7 @@ void BtManager::cmdVel_callback(const geometry_msgs::Twist msg) {
 }
 
 void BtManager::processBehaviorFeedback(string behaviorFeedback_str){
-    behavior_module::behavior_feedback_msg msg;
+    social_msg::behavior_feedback_msg msg;
     stringstream ss(behaviorFeedback_str);
     string type, phase_str;
     ss >> type;

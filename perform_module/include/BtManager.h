@@ -10,11 +10,13 @@
 #ifndef BTMANAGER_H
 #define BTMANAGER_H
 
-#include <behavior_module/behavior_msg.h>
+#include <social_msg/behavior_msg.h>
 #include <perform_module/HeadMotion_msg.h>
 #include <perform_module/WheelMotion_msg.h>
 #include <geometry_msgs/Twist.h>
-#include <behavior_module/behavior_feedback_msg.h>
+#include <social_msg/behavior_feedback_msg.h>
+
+
 #include "utils.h"
 #include <string>
 #include "BtRecall.h"
@@ -68,7 +70,7 @@ private:
     void wheelMotion(const int v_left, const int v_right, const int time);
     void headMotion(const int angle, const int vel);
 
-    void behavior_callback(const behavior_module::behavior_msg &msg);
+    void behavior_callback(const social_msg::behavior_msg &msg);
     void wheelMotion_callback(const perform_module::WheelMotion_msg &msg);
     void headMotion_callback(const perform_module::HeadMotion_msg &msg);
     void cmdVel_callback(const geometry_msgs::Twist msg);

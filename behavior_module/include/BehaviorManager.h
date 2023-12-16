@@ -8,11 +8,17 @@
 #include <unistd.h>
 #include <fstream>
 #include <std_msgs/Header.h>
-#include <behavior_module/need_msg.h>
-#include <behavior_module/behavior_msg.h>
-#include <behavior_module/behavior_list.h>
-#include <behavior_module/behavior_feedback_msg.h>
-#include <behavior_module/idleState.h>
+// #include <behavior_module/need_msg.h>
+// #include <behavior_module/behavior_msg.h>
+// #include <behavior_module/behavior_list.h>
+// #include <behavior_module/behavior_feedback_msg.h>
+// #include <behavior_module/idleState.h>
+
+#include <social_msg/need_msg.h>
+#include <social_msg/behavior_msg.h>
+#include <social_msg/behavior_list.h>
+#include <social_msg/behavior_feedback_msg.h>
+#include <social_msg/idleState.h>
 
 #include "utils.h"
 // #include <bits/stdc++.h>
@@ -106,7 +112,8 @@ public:
         }
     }
 
-    void configureByNeedMsg(const behavior_module::need_msg &msg)
+    // void configureByNeedMsg(const behavior_module::need_msg &msg)
+    void configureByNeedMsg(const social_msg::need_msg &msg)
     {
         name = msg.need_name;
         scene = msg.scene;
@@ -211,15 +218,17 @@ public:  //zhjd
 
 private:
     Behavior* GetBehaviorByName(string name);
-    bool ReadInNewNeed(const behavior_module::need_msg &msg);
+    // bool ReadInNewNeed(const behavior_module::need_msg &msg);
+    bool ReadInNewNeed(const social_msg::need_msg &msg);
     void PrintBehaviorLibraryInfo();
 
-    behavior_module::behavior_msg GenerateBehaviorMsg(const Behavior& beh);
+    social_msg::behavior_msg GenerateBehaviorMsg(const Behavior& beh);
 
     void WaitToUpdate(float wait_seconds);
 
     void UpdateBehaviorPub();
-    void need_msg_callback(const behavior_module::need_msg &msg);
+    // void need_msg_callback(const behavior_module::need_msg &msg);
+    void need_msg_callback(const social_msg::need_msg &msg);
     // {
     //     cout << "\n---------------------------------------------------" << endl;
     //     printInColor("【Received need_msg】", BLUE);
@@ -227,7 +236,7 @@ private:
     //     ReadInNewNeed(msg);
     // }
 
-    void behavior_feedback_callback(const behavior_module::behavior_feedback_msg &msg);
+    void behavior_feedback_callback(const social_msg::behavior_feedback_msg &msg);
 
     int InsertBehavior(Behavior &new_behavior);
 
@@ -237,7 +246,7 @@ private:
 
     void PrintBehaviors(vector<Behavior> &behaviors);
 
-    void PrintBehaviorMsgInfo(behavior_module::behavior_msg);
+    void PrintBehaviorMsgInfo(social_msg::behavior_msg);
 
     void visualize_behavior_list();
 

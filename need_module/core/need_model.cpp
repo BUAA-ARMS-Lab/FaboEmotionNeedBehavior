@@ -14,7 +14,7 @@ using namespace  std;
 #include <mutex>
 std::mutex data_mutex;
 
-
+double defalut_speed = 200;
 // time_t inner_need::time_for_wandor  =  0;
 perception_filter *Filter = new perception_filter(30);   //TODO: 确定合适的per过滤时长阈值，单位秒
 
@@ -59,7 +59,7 @@ bool NoPeopleFace(string speech){
         need_output.qt_order = period_cur;
         need_output.satisfy_value = 1.0;
         need_output.attitude    = "热情";   //enthusiastic,respectful,serious,disgust
-        need_output.move_speed  = 200;
+        need_output.move_speed  = defalut_speed;
         need_output.distance    = 1000;
         need_output.voice_speed = 50;
         need_output.target_angle = 0.0;
@@ -191,7 +191,7 @@ void BehaviorFinishedUpdate(const social_msg::idleState::ConstPtr& msg,  ros::No
             else{
                 ROS_INFO("Received wrong social attitude");
                 need_output.attitude    = "热情";   //enthusiastic,respectful,serious,disgust
-                need_output.move_speed  = 200;
+                need_output.move_speed  = defalut_speed;
                 need_output.distance    = 500;
                 need_output.voice_speed = 50;
                 // need_output.target_distance = 1000;
@@ -307,7 +307,7 @@ void run_PriorNeed(ros::NodeHandle*  n_ptr){
                         else{
                             ROS_INFO("Received wrong social attitude");
                             need_output.attitude    = "热情";   //enthusiastic,respectful,serious,disgust
-                            need_output.move_speed  = 200;
+                            need_output.move_speed  = defalut_speed;
                             need_output.distance    = 500;
                             need_output.voice_speed = 50;
                         }
@@ -316,7 +316,7 @@ void run_PriorNeed(ros::NodeHandle*  n_ptr){
                     {
                         ROS_WARN("Timeout: Failed to receive social attitude within %f seconds", t);
                         need_output.attitude    = "热情";   //enthusiastic,respectful,serious,disgust
-                        need_output.move_speed  = 200;
+                        need_output.move_speed  = defalut_speed;
                         need_output.distance    = 1000;
                         need_output.voice_speed = 50;
                     }   

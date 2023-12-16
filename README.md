@@ -84,7 +84,7 @@ roslaunch interface_sim interface_sim_cfg.launch
     git branch -u origin/main main
     git remote set-head origin -a
 
-rostopic pub /BehaviorInstruction behavior_module/behavior_msg "header:
+rostopic pub /BehaviorInstruction social_msg/behavior_msg "header:
   seq: 0
   stamp: {secs: 0, nsecs: 0}
   frame_id: ''
@@ -210,11 +210,9 @@ rostopic pub /perception_msg social_msg/perception_msg "{time: 0.0, person_name:
 
 
 
+# hospital answer
 
-
-
-
-rostopic pub /BehaviorInstruction behavior_module/behavior_msg "header:
+rostopic pub /BehaviorInstruction social_msg/behavior_msg "header:
   seq: 0
   stamp: {secs: 10101010, nsecs: 0}
   frame_id: ''
@@ -237,9 +235,9 @@ voice_speed: 0.0"  -1
 
 
 
+# Wander
 
-
-rostopic pub /BehaviorInstruction behavior_module/behavior_msg "header:
+rostopic pub /BehaviorInstruction social_msg/behavior_msg "header:
   seq: 0
   stamp: {secs: 0, nsecs: 0}
   frame_id: ''
@@ -261,9 +259,8 @@ distance: 1000.0
 voice_speed: 0.0"  -1
 
 
-
-
-rostopic pub /BehaviorInstruction behavior_module/behavior_msg "header:
+# Stop_All_Actions_Now
+rostopic pub /BehaviorInstruction social_msg/behavior_msg "header:
   seq: 0
   stamp: {secs: 0, nsecs: 0}
   frame_id: ''
@@ -285,5 +282,31 @@ distance: 0.0
 voice_speed: 0.0"  -1
 
 
+# WarmGreet
 
+rostopic pub /BehaviorInstruction social_msg/behavior_msg "header:
+  seq: 0
+  stamp: {secs: 0, nsecs: 0}
+  frame_id: ''
+name: 'WarmGreet'
+scene: 'school'
+type: ''
+total_phase: 3
+current_phase:   0 
+occupancy: [1, 1, 1, 1, 1]
+target: ''
+target_angle: 15.0
+target_distance: 1000.0
+speech: '小明你好阿'
+rob_emotion: ''
+rob_emotion_intensity: 0
+attitude: ''
+move_speed: 200.0
+distance: 1000.0
+voice_speed: 0.0"  -1
 
+# Other Order
+rosrun need_module need_model 1
+rosrun behavior_module behavior_node
+rostopic echo /BehaviorInstruction
+rosrun behavior_module sub_beh_feedback.py

@@ -25,7 +25,7 @@ void BehaviorManager::PrintBehaviorseries()
     return;
 }
 
-void BehaviorManager::PrintBehaviorMsgInfo(behavior_module::behavior_msg msg)
+void BehaviorManager::PrintBehaviorMsgInfo(social_msg::behavior_msg msg)
 {
     printInColor("【Sent behavior_msg】", BLUE);
     cout << "   " <<  msg.name << "\t" << msg.target << "\t" << msg.type << "\t" << (int)msg.current_phase << "/" << (int)msg.total_phase << "\t";
@@ -78,9 +78,9 @@ BehaviorManager::BehaviorManager(ros::NodeHandle& n, string data_path):n_(n)
     printInColor("==================================\n", BLUE);
     printInColor(" Welcome to use behavior_module! \n", BLUE);
     printInColor("==================================\n", BLUE);
-    publisher_behavior_ = n_.advertise<behavior_module::behavior_msg>("/BehaviorInstruction", 1000);
-    publisher_idlestate_ = n_.advertise<behavior_module::idleState>("/idleState",1000);
-    publisher_behavior_list_ = n_.advertise<behavior_module::behavior_list>("/BehaviorList",1000);
+    publisher_behavior_ = n_.advertise<social_msg::behavior_msg>("/BehaviorInstruction", 1000);
+    publisher_idlestate_ = n_.advertise<social_msg::idleState>("/idleState",1000);
+    publisher_behavior_list_ = n_.advertise<social_msg::behavior_list>("/BehaviorList",1000);
     subscriber_need_ = n_.subscribe("/need_lists", 1000, &BehaviorManager::need_msg_callback, this);
     subscriber_behavior_feedback_ = n_.subscribe("/BehaviorFeedback", 1000, &BehaviorManager::behavior_feedback_callback, this);
     ReadInBehaviorLibrary(data_path);
@@ -186,7 +186,7 @@ void BehaviorManager::ReadInBehaviorLibrary(const string &config_file)
 
 // 二、接收需求信息，生成新的行为，并“准备”添加进行为队列
 // 2.1 接收需求，
-void BehaviorManager::need_msg_callback(const behavior_module::need_msg &msg)
+void BehaviorManager::need_msg_callback(const social_msg::need_msg &msg)
 {
     cout << "\n---------------------------------------------------" << endl;
     printInColor("【Received need_msg】", BLUE);
@@ -206,7 +206,7 @@ void BehaviorManager::need_msg_callback(const behavior_module::need_msg &msg)
 // 2.2 根据需求的名字，从mmbehaviorsLibrary中匹配和生成行为实例，并利用configureByNeedMsg给行为实例赋值。再将当前行为队列mvbehaviorsTotal的信息打印出来。
 // Handle need message and generate the behavior instance 
 // with mmbehaviorsLibrary data and need message's configuration.
-bool BehaviorManager::ReadInNewNeed(const behavior_module::need_msg &msg)
+bool BehaviorManager::ReadInNewNeed(const social_msg::need_msg &msg)
 {
     string need_name = msg.need_name;
     printInColor("【Add new behavior】", BLUE);
@@ -317,7 +317,7 @@ int BehaviorManager::AddNewBehavior(Behavior &new_behavior)
 void BehaviorManager::TellIdleState(bool state, Behavior *completedBehavior)
 {
     //TODO: tell EmotionModule the idle state
-    behavior_module::idleState msg;
+    social_msg::idleState msg;
     msg.idleState = state;
     // msg.idleState = true;
     if (completedBehavior == nullptr) {
@@ -435,7 +435,7 @@ void BehaviorManager::UpdateBehaviorPub()
         return;
     }
 
-    behavior_module::behavior_msg msg;
+    social_msg::behavior_msg msg;
 
     if (!mvbehaviorsCurrent.empty()){
         if(!mbPauseFlag)
@@ -451,7 +451,7 @@ void BehaviorManager::UpdateBehaviorPub()
         return;
     }
 
-    vector<behavior_module::behavior_msg> msgs;
+    vector<social_msg::behavior_msg> msgs;
 
     for(int i = 0 ; i < mParallelNum ; i++){
         mvbehaviorsCurrent.push_back(mvbehaviorsTotal[i]);
@@ -477,9 +477,9 @@ void BehaviorManager::UpdateBehaviorPub()
     }
 }
 
-behavior_module::behavior_msg BehaviorManager::GenerateBehaviorMsg(const Behavior& beh)
+social_msg::behavior_msg BehaviorManager::GenerateBehaviorMsg(const Behavior& beh)
 {
-    behavior_module::behavior_msg msg;
+    social_msg::behavior_msg msg;
     {
         msg.header.frame_id = beh.header.frame_id;
         msg.header.seq = beh.header.seq;
@@ -525,7 +525,7 @@ behavior_module::behavior_msg BehaviorManager::GenerateBehaviorMsg(const Behavio
 // 1. Update progress of sub-behaviors into mvbehaviorsTotal and parallelBehaviorSeries.
 // 2. Delete completed behaviors in mvbehaviorsTotal and parallelBehaviorSeries.
 // 3. Start function UpdateBehaviorPub when necessary.
-void BehaviorManager::behavior_feedback_callback(const behavior_module::behavior_feedback_msg &msg)
+void BehaviorManager::behavior_feedback_callback(const social_msg::behavior_feedback_msg &msg)
 {
     printInColor("【BehaviorFeedback】", GREEN);
     cout << msg.hehavior_name << "," << (int)msg.current_phase << endl;
@@ -640,9 +640,9 @@ void BehaviorManager::WaitToUpdate(float wait_seconds)
 
 // 七. 可视化
 void BehaviorManager::visualize_behavior_list(){
-    behavior_module::behavior_list list_msg;
+    social_msg::behavior_list list_msg;
     for(auto beh: mvbehaviorsTotal){
-        behavior_module::behavior_msg msg = GenerateBehaviorMsg(beh);
+        social_msg::behavior_msg msg = GenerateBehaviorMsg(beh);
         list_msg.behaviors.push_back( msg );
     }
     publisher_behavior_list_.publish(list_msg);
