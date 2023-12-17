@@ -180,7 +180,12 @@ void BehaviorManager::ReadInBehaviorLibrary(const string &config_file)
 
 
 
+// void BehaviorManager::clearBehaviorList()
+// {
+//     cout << "\n---------------------------------------------------" << endl;
+//     printInColor("【Clear All Behaviors and send Stop_All_Actions_Now】", RED);
 
+// }
 
 
 

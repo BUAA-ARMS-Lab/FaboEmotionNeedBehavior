@@ -260,6 +260,7 @@ voice_speed: 0.0"  -1
 
 
 # Stop_All_Actions_Now
+
 rostopic pub /BehaviorInstruction social_msg/behavior_msg "header:
   seq: 0
   stamp: {secs: 0, nsecs: 0}
@@ -305,8 +306,45 @@ move_speed: 200.0
 distance: 1000.0
 voice_speed: 0.0"  -1
 
+# Feedback
+rostopic pub /BehaviorFeedback social_msg/behavior_feedback_msg "header:
+  seq: 0
+  stamp:
+    secs: 1702730750
+    nsecs: 0
+  frame_id: ''
+hehavior_name: 'WarmGreet'
+total_phase: 3
+current_phase: 3" -1
+
+rostopic pub /BehaviorFeedback social_msg/behavior_feedback_msg "header:
+  seq: 0
+  stamp:
+    secs: 1702730395
+    nsecs: 0
+  frame_id: ''
+hehavior_name: 'MeasureTemperature'
+total_phase: 6
+current_phase: 6" -1
+
+rostopic pub /BehaviorFeedback social_msg/behavior_feedback_msg "header:
+  seq: 0
+  stamp:
+    secs: 1702731291
+    nsecs: 0
+  frame_id: ''
+hehavior_name: 'Answer'
+total_phase: 2
+current_phase: 2" -1
+
 # Other Order
 rosrun need_module need_model 1
 rosrun behavior_module behavior_node
 rostopic echo /BehaviorInstruction
 rosrun behavior_module sub_beh_feedback.py
+
+快捷键
+testn
+testb
+teste
+testf
