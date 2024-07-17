@@ -50,6 +50,9 @@ add_message_files( FILES
         
         # 可视化
         behavior_list.msg
+        
+        feedback_msg.msg
+        register_msg.msg
 
 
         # #由行为模块生成

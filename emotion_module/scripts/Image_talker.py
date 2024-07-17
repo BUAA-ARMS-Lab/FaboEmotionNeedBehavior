@@ -12,7 +12,8 @@ IMAGE_WIDTH=1280
 IMAGE_HEIGHT=720
 
 rospy.init_node('Image_talker', anonymous=True)
-pub = rospy.Publisher('emotion_img', Image, queue_size=1)
+pub = rospy.Publisher('color_frame', Image, queue_size=1)
+pub2 = rospy.Publisher('depth_frame', Image, queue_size=1)
 rate = rospy.Rate(1) # 1hz
 
 def publish_image(imgdata):
@@ -29,12 +30,13 @@ def publish_image(imgdata):
         image_temp.header=header
         image_temp.step=1241*3
         pub.publish(image_temp)
+        pub2.publish(image_temp)
         rospy.loginfo("图片成功发布")
         rate.sleep()
 
 if __name__ == '__main__':
     try:
-        img=cv2.imread('/home/zzzane/robot_empathy/src/emotion_module/image/emotion_img')
+        img=cv2.imread('/home/peng/codes/project3_ws/src/FaboEmotionNeedBehavior/emotion_module/image/emotion_img.png')
         publish_image(img)
     except rospy.ROSInterruptException:
         pass

@@ -56,6 +56,7 @@ void BehaviorManager::PrintBehaviors(vector<Behavior> &behaviors)
         else
             cout << behavior.target << "\t";
         cout << behavior.header.stamp.sec << "\t";
+        cout << behavior.speech << "\t";
         cout << endl;
         order ++;
     }

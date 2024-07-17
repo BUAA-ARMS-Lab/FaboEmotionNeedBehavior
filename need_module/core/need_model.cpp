@@ -16,7 +16,7 @@ std::mutex data_mutex;
 
 double defalut_speed = 200;
 // time_t inner_need::time_for_wandor  =  0;
-perception_filter *Filter = new perception_filter(30);   //TODO: 确定合适的per过滤时长阈值，单位秒
+perception_filter *Filter = new perception_filter(20);   //TODO: 确定合适的per过滤时长阈值，单位秒
 
 // ros node
 ros::Subscriber sub_perception;
@@ -174,7 +174,8 @@ void BehaviorFinishedUpdate(const social_msg::idleState::ConstPtr& msg,  ros::No
         query.motivation = need_output.need_name;
         query.person_name = need_output.person_name;
         query_attitude.publish(query);
-        ros::Duration timeout(0.2);
+        double t = 1;   //课题一的等待时间
+        ros::Duration timeout(t);
         social_msg::attitude_msg::ConstPtr result = ros::topic::waitForMessage<social_msg::attitude_msg>("attitude", *n_ptr, timeout);
         if (result != NULL)
         {
@@ -272,7 +273,7 @@ void run_PriorNeed(ros::NodeHandle*  n_ptr){
                     query.motivation = need_lists[j].need_name;
                     query.person_name = need_lists[j].person_name;
                     query_attitude.publish(query);
-                    double t = 0.2;   //课题一的等待时间
+                    double t = 1;   //课题一的等待时间
                     ros::Duration timeout(t);
                     ROS_INFO("Need waiting for social attitude");
                     social_msg::attitude_msg::ConstPtr result = ros::topic::waitForMessage<social_msg::attitude_msg>("attitude", *n_ptr, timeout);
