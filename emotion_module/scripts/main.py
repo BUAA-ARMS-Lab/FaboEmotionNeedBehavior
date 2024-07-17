@@ -122,6 +122,30 @@ def Picture_Synthesis(mother_img,son_img,coordinate):
         return M_Img
 
 
+from std_msgs.msg import Header
+# from sensor_msgs.msg import Image
+import sensor_msgs.msg
+IMAGE_WIDTH=1280
+IMAGE_HEIGHT=720
+# rospy.init_node('emotion_listener', anonymous=True,disable_signals=True)
+pub = rospy.Publisher('emotion_img', sensor_msgs.msg.Image, queue_size=1)
+# rate = rospy.Rate(10) # 1hz
+def publish_image(imgdata):
+        image_temp=sensor_msgs.msg.Image()
+        header = Header(stamp=rospy.Time.now())
+        header.frame_id = 'map'
+        image_temp.height=IMAGE_HEIGHT
+        image_temp.width=IMAGE_WIDTH
+        image_temp.encoding='rgb8'
+        image_temp.data=np.array(imgdata).tostring()
+        #print(imgdata)
+        #image_temp.is_bigendian=True
+        image_temp.header=header
+        image_temp.step=1241*3
+        pub.publish(image_temp)
+        rospy.loginfo("图片成功发布")
+        # rate.sleep()
+
 def visualization():
         '''
         *可视化功能模块,计算各情绪小球坐标,绘图并在本地储存
@@ -168,7 +192,8 @@ def visualization():
         cor_boring = (int(midpoint[0]+r_point[7]/math.sqrt(2)),int(midpoint[1]+r_point[7]/math.sqrt(2)))
         final_img=Picture_Synthesis(final_img,son_img=Image.open(os.path.join(root,"image/Boring_ball.png")),
                   coordinate=(cor_boring))
-
+        
+        # publish_image(final_img)
         final_img.save(os.path.join(root,"image/emotion_img.png"))
 
 def visualize_3d():
@@ -189,6 +214,7 @@ if __name__ == '__main__':
     # args = sys.argv[1:]
     # if len(args) > 0:
     #     print_state = sys.argv[1]
+
     Watcher()
     # print("debug: new emotion module ")
     thread1=myThread("Emotion Listener-thread",'listener')
