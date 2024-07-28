@@ -55,6 +55,7 @@
 #include "social_msg/idleState.h"
 #include "dynamic_reconfigure/server.h" 
 
+#include "social_msg/feedback_msg.h"
 
 // #include "perception.h"
 

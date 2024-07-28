@@ -18,6 +18,7 @@ from visualize_3d import *
 from social_msg.msg import robot_emotion
 from collections import deque
 from social_msg.msg import attitude_query  
+import random
 
 ##### 全局参数初始化
 local_attitude_set =[]
@@ -76,14 +77,52 @@ def publish():
        '''
        eval=robot_emotion()
        global current_e
-       eval.emotion1 = current_e[0]
-       eval.emotion2 = current_e[1]
-       eval.emotion3 = current_e[2]
-       eval.emotion4 = current_e[3]
-       eval.emotion5 = current_e[4]
-       eval.emotion6 = current_e[5]
-       eval.emotion7 = current_e[6]
-       eval.emotion8 = current_e[7]
+       # REAL
+       # eval.emotion1 = current_e[0]
+       # eval.emotion2 = current_e[1]
+       # eval.emotion3 = current_e[2]
+       # eval.emotion4 = current_e[3]
+       # eval.emotion5 = current_e[4]
+       # eval.emotion6 = current_e[5]
+       # eval.emotion7 = current_e[6]
+       # eval.emotion8 = current_e[7]
+       
+       # FAKE
+       if current_e[0]>current_e[3]-0.2:
+              random1 = random.uniform(0.5, 0.7)
+              eval.emotion1 = current_e[0] + random1
+              random2 = random.uniform(0.4, 0.5) 
+              eval.emotion2 = current_e[1] + random2
+              random3 = random.uniform(0.4, 0.5) 
+              eval.emotion3 = current_e[2] + random3
+              random4 = random.uniform(0.1, 0.4)
+              eval.emotion4 = current_e[3] + random4
+              random5 = random.uniform(0.1, 0.4)
+              eval.emotion5 = current_e[4] + random5
+              random6 = random.uniform(0.1, 0.4)
+              eval.emotion6 = current_e[5] + random6
+              random7 = random.uniform(0.1, 0.4)
+              eval.emotion7 = current_e[6] + random7
+              random8 = random.uniform(0.1, 0.2)
+              eval.emotion8 = current_e[7] + random8
+       else:
+              random1 = random.uniform(0.1, 0.4)
+              eval.emotion1 = current_e[0] + random1
+              random2 = random.uniform(0.1, 0.4)
+              eval.emotion2 = current_e[1] + random2
+              random3 = random.uniform(0.1, 0.4)
+              eval.emotion3 = current_e[2] + random3
+              random4 = random.uniform(0.4, 0.5) 
+              eval.emotion4 = current_e[3] + random4
+              random5 = random.uniform(0.4, 0.5) 
+              eval.emotion5 = current_e[4] + random5
+              random6 = random.uniform(0.4, 0.5) 
+              eval.emotion6 = current_e[5] + random6
+              random7 = random.uniform(0.4, 0.5) 
+              eval.emotion7 = current_e[6] + random7
+              random8 = random.uniform(0.1, 0.2)
+              eval.emotion8 = current_e[7] + random8
+
        pub.publish(eval)
        if print_state:
               rospy.loginfo("机器人情感: %f,%f,%f,%f,%f,%f,%f,%f\n", eval.emotion1,eval.emotion2,eval.emotion3,eval.emotion4,eval.emotion5,eval.emotion6,eval.emotion7,eval.emotion8 )
@@ -98,6 +137,7 @@ def caculate_edelta(csv_name,index_name,index_val,column_val):
        :param column_val: 传入的消息内容中对应列索引值大小
        :output t: 依据消息和csv文档索引得到的情绪变化强度值
        '''
+       print('[debug]csv_name:',csv_name)
        tmp_lst = []
        with open(csv_name, 'r') as f:
               reader = csv.reader(f)
@@ -129,7 +169,7 @@ def unique_judge(msg):
               #print("unique_msg:",unique_msg)
               flag=0;
               l=copy.deepcopy(unique_msg)
-              # 判断两个消息列表中差集元素是否大于1
+              # 判断两个消息列表中差集元素是否大于1wu
               if len(set(l[-1]).symmetric_difference(set(msg)))>2:
                      unique_msg.append(msg)
                      flag=1

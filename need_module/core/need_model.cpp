@@ -24,6 +24,9 @@ ros::Subscriber sub_robot_emotion;
 ros::Subscriber sub_robot_status;
 ros::Publisher pub;  //need
 ros::Publisher query_attitude;
+ros::Publisher pub_perception;
+ros::Publisher pub_feedback;
+
 ros::Subscriber sub_idleState;
 //全局变量: 
 bool print_status = false;  //是否实时输出需求模块的状态，默认不输出
@@ -118,6 +121,9 @@ void PerceptionUpdate(const social_msg::perception_msg& msg){
     
     // // 【暂时】需求满足节点,生成need_satisfied
     // need_satisfied.perception_to_needSatisfied( per );
+
+    // 转发
+    pub_perception.publish(per);
 }
 
 void RobotEmotionUpdate(const social_msg::robot_emotion& msg){
@@ -233,6 +239,10 @@ int main(int argc, char** argv){
     
     // 需求发布
     pub = n.advertise<social_msg::need_msg>("need_lists", 10);  
+
+    // 课题二转发
+    pub_perception = n.advertise<social_msg::perception_msg>("new_perception_msg", 10);  
+    pub_feedback = n.advertise<social_msg::feedback_msg>("new_feedback_msg", 10);  
 
     // 社交态度查询
     query_attitude = n.advertise<social_msg::attitude_query>("attitude_query", 1);  

@@ -1,0 +1,12 @@
+{
+    "python.autoComplete.extraPaths": [
+        "/home/peng/codes/project3_ws/devel/lib/python3/dist-packages",
+        "/home/peng/part1/catkin_kg/devel/lib/python3/dist-packages",
+        "/opt/ros/noetic/lib/python3/dist-packages"
+    ],
+    "python.analysis.extraPaths": [
+        "/home/peng/codes/project3_ws/devel/lib/python3/dist-packages",
+        "/home/peng/part1/catkin_kg/devel/lib/python3/dist-packages",
+        "/opt/ros/noetic/lib/python3/dist-packages"
+    ]
+}

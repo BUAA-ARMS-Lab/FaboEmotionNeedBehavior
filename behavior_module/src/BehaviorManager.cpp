@@ -16,6 +16,7 @@ void BehaviorManager::PrintBehaviorseries()
     PrintBehaviors(mvbehaviorsTotal);
     printInColor("- BehaviorsCurrent: \n", CYAN);
     PrintBehaviors(mvbehaviorsCurrent);
+    Publish_UI_Behaviors(mvbehaviorsCurrent);
 
     cout << endl;
     cout << " - 行为停止后有待并行的行为数量 :" << mParallelNum << endl;
@@ -34,6 +35,11 @@ void BehaviorManager::PrintBehaviorMsgInfo(social_msg::behavior_msg msg)
         cout << "," << (int)msg.occupancy[i];
     }
     cout << "}" << endl << endl;
+}
+
+void BehaviorManager::Publish_UI_Behaviors(vector<Behavior> &behaviors){
+    social_msg::behavior_msg msg = GenerateBehaviorMsg(behaviors[0]);
+    publisher_ui_behavior_.publish(msg);
 }
 
 void BehaviorManager::PrintBehaviors(vector<Behavior> &behaviors)
@@ -80,6 +86,7 @@ BehaviorManager::BehaviorManager(ros::NodeHandle& n, string data_path):n_(n)
     printInColor(" Welcome to use behavior_module! \n", BLUE);
     printInColor("==================================\n", BLUE);
     publisher_behavior_ = n_.advertise<social_msg::behavior_msg>("/BehaviorInstruction", 1000);
+    publisher_ui_behavior_ = n_.advertise<social_msg::behavior_msg>("/ui_BehaviorInstruction", 1000);
     publisher_idlestate_ = n_.advertise<social_msg::idleState>("/idleState",1000);
     publisher_behavior_list_ = n_.advertise<social_msg::behavior_list>("/BehaviorList",1000);
     subscriber_need_ = n_.subscribe("/need_lists", 1000, &BehaviorManager::need_msg_callback, this);

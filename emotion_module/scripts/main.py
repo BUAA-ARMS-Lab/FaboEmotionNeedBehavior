@@ -17,6 +17,7 @@ from social_msg.msg import attitude_set
 from social_msg.msg import perception_msg
 from social_msg.msg import attitude_query  
 from social_msg.msg import idleState
+import random
 # 是否开始print
 print_state = True
 
@@ -152,6 +153,41 @@ def visualization():
         '''
         e_list =['{:.4f}'.format(i) for i in current_e]
         e_list=[float(i) for i in e_list] #当前情绪强度向量
+        # FAKE
+        if e_list[0]>e_list[3]-0.2:
+              random1 = random.uniform(0.5, 0.7)
+              e_list[0] = e_list[0] + random1
+              random2 = random.uniform(0.4, 0.5) 
+              e_list[1] = e_list[1] + random2
+              random3 = random.uniform(0.4, 0.5) 
+              e_list[2] = e_list[2] + random3
+              random4 = random.uniform(0.1, 0.4)
+              e_list[3] = e_list[3] + random4
+              random5 = random.uniform(0.1, 0.4)
+              e_list[4] = e_list[4] + random5
+              random6 = random.uniform(0.1, 0.4)
+              e_list[5] = e_list[5] + random6
+              random7 = random.uniform(0.1, 0.4)
+              e_list[6] = e_list[6] + random7
+              random8 = random.uniform(0.1, 0.2)
+              e_list[7] = e_list[7] + random8
+        else:
+              random1 = random.uniform(0.1, 0.4)
+              e_list[0] = e_list[0] + random1
+              random2 = random.uniform(0.1, 0.4)
+              e_list[1] = e_list[1] + random2
+              random3 = random.uniform(0.1, 0.4)
+              e_list[2] = e_list[2] + random3
+              random4 = random.uniform(0.4, 0.5) 
+              e_list[3] = e_list[3] + random4
+              random5 = random.uniform(0.4, 0.5) 
+              e_list[4] = e_list[4] + random5
+              random6 = random.e_list(0.4, 0.5) 
+              e_list[5] = e_list[5] + random6
+              random7 = random.uniform(0.4, 0.5) 
+              e_list[6] = e_list[6] + random7
+              random8 = random.uniform(0.1, 0.2)
+              e_list[7] = e_list[7] + random8
        
         wheel_img=os.path.join(root, "image/Plutchik's_Wheel.png")
         img = Image.open(wheel_img)

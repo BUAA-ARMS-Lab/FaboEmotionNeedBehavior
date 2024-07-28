@@ -1,0 +1,31 @@
+{
+  "configurations": [
+    {
+      "browse": {
+        "databaseFilename": "${default}",
+        "limitSymbolsToIncludedHeaders": false
+      },
+      "includePath": [
+        "/home/peng/part1/catkin_kg/devel/include/**",
+        "/home/peng/codes/project3_ws/devel/include/**",
+        "/opt/ros/noetic/include/**",
+        "/home/peng/codes/project3_ws/src/FaboEmotionNeedBehavior/arm/arm_control/include/**",
+        "/home/peng/codes/project3_ws/src/FaboEmotionNeedBehavior/behavior_module/include/**",
+        "/home/peng/codes/project3_ws/src/FaboEmotionNeedBehavior/interface_sim/include/**",
+        "/home/peng/part1/catkin_kg/src/kg/include/**",
+        "/home/peng/codes/project3_ws/src/FaboEmotionNeedBehavior/need_module/include/**",
+        "/home/peng/codes/project3_ws/src/FaboEmotionNeedBehavior/perform_module/include/**",
+        "/home/peng/codes/project3_ws/src/FaboEmotionNeedBehavior/arm/rm_msgs/include/**",
+        "/home/peng/codes/project3_ws/src/camera_pub/include/**",
+        "/home/peng/part1/catkin_kg/src/robot1/include/**",
+        "/usr/include/**"
+      ],
+      "name": "ROS",
+      "intelliSenseMode": "gcc-x64",
+      "compilerPath": "/usr/bin/gcc",
+      "cStandard": "gnu11",
+      "cppStandard": "c++14"
+    }
+  ],
+  "version": 4
+}

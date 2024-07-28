@@ -54,7 +54,8 @@ add_message_files( FILES
         feedback_msg.msg
         register_msg.msg
 
-
+        # 
+        #input_data.msg
         # #由行为模块生成
         # /EmotionModule/need_satisfy_msg.msg
         # # 情感模块输出

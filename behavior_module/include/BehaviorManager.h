@@ -199,6 +199,7 @@ public:
 private:
     ros::NodeHandle n_;
     ros::Publisher publisher_behavior_;
+    ros::Publisher publisher_ui_behavior_;
     ros::Publisher publisher_behavior_list_;
     ros::Publisher publisher_idlestate_;
     ros::Subscriber subscriber_behavior_feedback_;
@@ -245,6 +246,8 @@ private:
     void PrintBehaviorseries();
 
     void PrintBehaviors(vector<Behavior> &behaviors);
+
+    void Publish_UI_Behaviors(vector<Behavior> &behaviors);
 
     void PrintBehaviorMsgInfo(social_msg::behavior_msg);
 
