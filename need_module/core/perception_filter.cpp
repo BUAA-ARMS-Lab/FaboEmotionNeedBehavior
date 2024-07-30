@@ -46,7 +46,7 @@ bool perception_filter::Whether_OK( social_msg::perception_msg& per) {
                 temp.person_name == per.person_name  
                 &&  temp.IDtype == per.IDtype
                 &&  temp.intention == per.intention  
-                // &&  iter->speech_ == per.speech_   
+                &&  temp.speech == per.speech   
               )
             {
                 double diff = abs(temp.time - per.time);

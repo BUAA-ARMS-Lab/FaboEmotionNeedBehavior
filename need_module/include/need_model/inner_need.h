@@ -220,7 +220,7 @@ class inner_need{
             std::vector<need> output_need_lists;
             need temp;
             temp = Doubt();  if( temp.weight > 0.5 )    output_need_lists.push_back(temp);
-            temp = Wander_boring();  if( temp.weight > 0.5 )    output_need_lists.push_back(temp);
+            temp = Wander_boring();  if( temp.weight > 1.0 )    output_need_lists.push_back(temp);
             // temp = Wander();  if( temp.weight > 0.5 )   output_need_lists.push_back(temp);/* 应该让漫步的需求,永久输出？ */
             // temp = Chat();   if( temp.weight > 0.5 )    output_need_lists.push_back(temp);
             temp = Charge(); if( temp.weight > 0.5 )    output_need_lists.push_back(temp);

@@ -563,6 +563,8 @@ void BehaviorManager::behavior_feedback_callback(const social_msg::behavior_feed
                             behavior.necessary_count[j] -= (behavior.subBehaviorSeries[i].mActuators[j]->is_necessary)?1:0;
                 }
                 behavior.current_phase = msg.current_phase;
+                std::vector<Behavior> bhs = {behavior};
+                Publish_UI_Behaviors(bhs);
                 // PrintBehaviorseries();
                 break;
             }

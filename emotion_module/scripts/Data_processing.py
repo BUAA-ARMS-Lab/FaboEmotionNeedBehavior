@@ -284,7 +284,9 @@ def callback_need(idleState):
        index_val = str(idleState.satisfy_value)
        column_val = idleState.hehavior_name
        ### 由  自我状态满足  带来的情绪变化状况 [ float_情绪种类,float_情绪变化强度 ]
-       need_eval= map(float,caculate_edelta(csv_name,index_name,index_val,column_val)) 
+       print('[debug]idleState.hehavior_name:',column_val)
+       if column_val is not None and column_val is not '':
+              need_eval= map(float,caculate_edelta(csv_name,index_name,index_val,column_val)) 
 
 
 # def callback_a_p(attitude_msg,perception_msg):  

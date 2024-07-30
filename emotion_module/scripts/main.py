@@ -129,7 +129,7 @@ import sensor_msgs.msg
 IMAGE_WIDTH=1280
 IMAGE_HEIGHT=720
 # rospy.init_node('emotion_listener', anonymous=True,disable_signals=True)
-pub = rospy.Publisher('emotion_img', sensor_msgs.msg.Image, queue_size=1)
+pub = rospy.Publisher('fake_emotion_img', sensor_msgs.msg.Image, queue_size=1)
 # rate = rospy.Rate(10) # 1hz
 def publish_image(imgdata):
         image_temp=sensor_msgs.msg.Image()

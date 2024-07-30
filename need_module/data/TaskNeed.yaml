@@ -316,6 +316,16 @@
   time: 0
   weight: 0.86 
   satisfy_value: 2
+- need_name: RespectGreet
+  intention: 人机交互  #Greet
+  IDtype: 陌生人
+  scene: family
+  person_emotion: Happy
+  rob_emotion: [0.0, 0, 0, 0, 0, 0, 0, 0 ]
+  rob_status: [0.1, 1, 1, 1, 1, 1, 1, 0 ]
+  time: 0
+  weight: 0.86 
+  satisfy_value: 2
 
 
 
@@ -342,6 +352,36 @@
 - need_name: Answer
   intention: 问询  #Query
   IDtype: 陌生人
+  scene: family
+  person_emotion: Happy
+  rob_emotion: [0.0, 0, 0, 0, 0, 0, 0, 0 ]
+  rob_status: [0.1, 1, 1, 1, 1, 1, 1, 0 ]
+  time: 0.05
+  weight: 0.85
+  satisfy_value: 0 
+- need_name: Answer
+  intention: 问询  #Query
+  IDtype: 小明的舅舅
+  scene: family
+  person_emotion: Happy
+  rob_emotion: [0.0, 0, 0, 0, 0, 0, 0, 0 ]
+  rob_status: [0.1, 1, 1, 1, 1, 1, 1, 0 ]
+  time: 0.05
+  weight: 0.85
+  satisfy_value: 0 
+- need_name: Answer
+  intention: 问询  #Query
+  IDtype: 舅舅
+  scene: family
+  person_emotion: Happy
+  rob_emotion: [0.0, 0, 0, 0, 0, 0, 0, 0 ]
+  rob_status: [0.1, 1, 1, 1, 1, 1, 1, 0 ]
+  time: 0.05
+  weight: 0.85
+  satisfy_value: 0 
+- need_name: Answer
+  intention: 问询  #Query
+  IDtype: 小明舅舅
   scene: family
   person_emotion: Happy
   rob_emotion: [0.0, 0, 0, 0, 0, 0, 0, 0 ]

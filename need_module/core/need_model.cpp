@@ -115,7 +115,7 @@ void PerceptionUpdate(const social_msg::perception_msg& msg){
 
     if( NoPeopleFace(msg.speech) )
         return;
-    if( Filter->Whether_OK(per) )    //如果,“感知过滤器”认为当前感知是有效的,则update
+    // if( Filter->Whether_OK(per) )    //如果,“感知过滤器”认为当前感知是有效的,则update
         PriorNeed.PerceptionUpdate(per);
 
     
@@ -241,7 +241,7 @@ int main(int argc, char** argv){
     pub = n.advertise<social_msg::need_msg>("need_lists", 10);  
 
     // 课题二转发
-    pub_perception = n.advertise<social_msg::perception_msg>("new_perception_msg", 10);  
+    pub_perception = n.advertise<social_msg::perception_msg>("ui_perception_msg", 10);  
     pub_feedback = n.advertise<social_msg::feedback_msg>("new_feedback_msg", 10);  
 
     // 社交态度查询

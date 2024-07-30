@@ -183,7 +183,7 @@ rostopic pub /perception_msg social_msg/perception_msg "{time: 0.0, person_name:
 （1）人机交互
 
 
-rostopic pub /perception_msg social_msg/perception_msg "{time: 0.0, person_name: '小明', IDtype: '孩子', scene: 'family', target_angle: 20.0, target_distance: 1000.0,  intention: '人机交互', p: 1.0, intention_2: '', p_2: 0.0, person_speech: '', speech: '',  person_emotion: 'Happy'}" 
+rostopic pub /perception_msg social_msg/perception_msg "{time: 0.0, person_name: '小明', IDtype: '孩子', scene: 'family', target_angle: 0.0, target_distance: 1000.0,  intention: '人机交互', p: 1.0, intention_2: '', p_2: 0.0, person_speech: '', speech: '',  person_emotion: 'Happy'}" 
 
 
 rostopic pub /perception_msg social_msg/perception_msg "{time: 0.0, person_name: '小明他爸', IDtype: '家长', scene: 'family', target_angle: 20.0, target_distance: 1000.0,  intention: '人机交互', p: 1.0, intention_2: '', p_2: 0.0, person_speech: '', speech: '',  person_emotion: 'Happy'}" 
