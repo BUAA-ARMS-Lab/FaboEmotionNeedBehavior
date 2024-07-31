@@ -18,6 +18,8 @@ from social_msg.msg import perception_msg
 from social_msg.msg import attitude_query  
 from social_msg.msg import idleState
 import random
+
+
 # 是否开始print
 print_state = True
 
@@ -123,29 +125,26 @@ def Picture_Synthesis(mother_img,son_img,coordinate):
         return M_Img
 
 
-from std_msgs.msg import Header
-# from sensor_msgs.msg import Image
-import sensor_msgs.msg
-IMAGE_WIDTH=1280
-IMAGE_HEIGHT=720
-# rospy.init_node('emotion_listener', anonymous=True,disable_signals=True)
-pub = rospy.Publisher('fake_emotion_img', sensor_msgs.msg.Image, queue_size=1)
-# rate = rospy.Rate(10) # 1hz
-def publish_image(imgdata):
-        image_temp=sensor_msgs.msg.Image()
-        header = Header(stamp=rospy.Time.now())
-        header.frame_id = 'map'
-        image_temp.height=IMAGE_HEIGHT
-        image_temp.width=IMAGE_WIDTH
-        image_temp.encoding='rgb8'
-        image_temp.data=np.array(imgdata).tostring()
-        #print(imgdata)
-        #image_temp.is_bigendian=True
-        image_temp.header=header
-        image_temp.step=1241*3
-        pub.publish(image_temp)
-        rospy.loginfo("图片成功发布")
-        # rate.sleep()
+# from sensor_msgs.msg import CompressedImage
+# from cv_bridge import CvBridge
+# import os
+# from std_msgs.msg import Header
+# import cv2
+# pub_image = rospy.Publisher('emotion_img', CompressedImage, queue_size=1)
+# def publish_image(imgdata):
+#         current_folder = os.path.dirname(os.path.abspath(__file__))
+#         print("Current folder:", current_folder)
+#         imgdata=cv2.imread('/home/peng/codes/project3_ws/src/FaboEmotionNeedBehavior/emotion_module/image/emotion_img.png')  
+#         # print("width:%d",imgdata.shape[1])
+#         # print("height:%d",imgdata.shape[0])
+#         if imgdata is not None:
+#             imgdata = imgdata[0:720,280:1000]    
+#             # print("width2:%d",imgdata.shape[1])
+#             # print("height2:%d",imgdata.shape[0])
+#             image_temp=CvBridge().cv2_to_compressed_imgmsg(imgdata,'jpg')
+#             pub.publish(image_temp)
+#             rospy.loginfo("图片成功发布")
+
 
 def visualization():
         '''
@@ -155,36 +154,42 @@ def visualization():
         e_list=[float(i) for i in e_list] #当前情绪强度向量
         # FAKE
         if e_list[0]>e_list[3]-0.2:
-              random1 = random.uniform(0.5, 0.7)
+              random1 = random.uniform(0.3, 0.35)
               e_list[0] = e_list[0] + random1
-              random2 = random.uniform(0.4, 0.5) 
+              if e_list[0]>1.0:
+                   e_list[0]=0.8
+              random2 = random.uniform(0.2, 0.25) 
               e_list[1] = e_list[1] + random2
-              random3 = random.uniform(0.4, 0.5) 
+              if e_list[1]>1.0:
+                   e_list[1]=0.8
+              random3 = random.uniform(0.2, 0.25) 
               e_list[2] = e_list[2] + random3
-              random4 = random.uniform(0.1, 0.4)
+              if e_list[2]>1.0:
+                   e_list[2]=0.8
+              random4 = random.uniform(0.05, 0.12)
               e_list[3] = e_list[3] + random4
-              random5 = random.uniform(0.1, 0.4)
+              random5 = random.uniform(0.05, 0.12)
               e_list[4] = e_list[4] + random5
-              random6 = random.uniform(0.1, 0.4)
+              random6 = random.uniform(0.05, 0.12)
               e_list[5] = e_list[5] + random6
-              random7 = random.uniform(0.1, 0.4)
+              random7 = random.uniform(0.05, 0.12)
               e_list[6] = e_list[6] + random7
-              random8 = random.uniform(0.1, 0.2)
+              random8 = random.uniform(0.05, 0.12)
               e_list[7] = e_list[7] + random8
         else:
-              random1 = random.uniform(0.1, 0.4)
+              random1 = random.uniform(0.05, 0.12)
               e_list[0] = e_list[0] + random1
-              random2 = random.uniform(0.1, 0.4)
+              random2 = random.uniform(0.05, 0.12)
               e_list[1] = e_list[1] + random2
-              random3 = random.uniform(0.1, 0.4)
+              random3 = random.uniform(0.05, 0.12)
               e_list[2] = e_list[2] + random3
-              random4 = random.uniform(0.4, 0.5) 
+              random4 = random.uniform(0.2, 0.3) 
               e_list[3] = e_list[3] + random4
-              random5 = random.uniform(0.4, 0.5) 
+              random5 = random.uniform(0.2, 0.3) 
               e_list[4] = e_list[4] + random5
-              random6 = random.e_list(0.4, 0.5) 
+              random6 = random.e_list(0.2, 0.3) 
               e_list[5] = e_list[5] + random6
-              random7 = random.uniform(0.4, 0.5) 
+              random7 = random.uniform(0.2, 0.3) 
               e_list[6] = e_list[6] + random7
               random8 = random.uniform(0.1, 0.2)
               e_list[7] = e_list[7] + random8

@@ -33,6 +33,8 @@ def perception_talker():
     pub_per = rospy.Publisher('perception_msg', perception_msg, queue_size=10)
     pub_fb = rospy.Publisher('feedback_msg', feedback_msg, queue_size=10)
 
+    input()
+    time.sleep(2)
     feedback = feedback_msg()
     feedback.person_name = "小明"
     feedback.IDtype = "孩子"
@@ -62,8 +64,8 @@ def perception_talker():
     # rospy.spin()
    
 
-    # # input()
-    time.sleep(10)
+    input()
+    # time.sleep(10)
     perc = perception_msg()
     perc.time = rospy.get_time()
     perc.person_name ="小明"
@@ -92,8 +94,8 @@ def perception_talker():
     pub_fb.publish(feedback)
 
 
-    # input()
-    time.sleep(16)
+    input()
+    # time.sleep(16)
     perc = perception_msg()
     perc.time = rospy.get_time()
     perc.person_name ="小明"
@@ -121,8 +123,8 @@ def perception_talker():
     pub_fb.publish(feedback)
 
 
-    # input()
-    time.sleep(16)
+    input()
+    # time.sleep(16)
     perc = perception_msg()
     perc.time = rospy.get_time()
     perc.person_name ="小明"
@@ -149,8 +151,8 @@ def perception_talker():
     feedback.language_feedback = 0
     pub_fb.publish(feedback)
     
-    # input()
-    time.sleep(16)
+    input()
+    # time.sleep(16)
     perc = perception_msg()
     perc.time = rospy.get_time()
     perc.person_name ="小明"
@@ -177,7 +179,7 @@ def perception_talker():
     feedback.language_feedback = 0
     pub_fb.publish(feedback)
 
-    # input()
+    input()
     # time.sleep(16)
     perc = perception_msg()
     perc.time = rospy.get_time()
@@ -205,7 +207,7 @@ def perception_talker():
     feedback.language_feedback = 0
     pub_fb.publish(feedback)
 
-    # input()
+    input()
     # time.sleep(16)
     perc = perception_msg()
     perc.time = rospy.get_time()
@@ -233,7 +235,7 @@ def perception_talker():
     feedback.language_feedback = 0
     pub_fb.publish(feedback)
 
-    # input()
+    input()
     # time.sleep(16)
     perc = perception_msg()
     perc.time = rospy.get_time()
@@ -261,7 +263,7 @@ def perception_talker():
     feedback.language_feedback = 0
     pub_fb.publish(feedback)
 
-    # input()
+    input()
     # time.sleep(16)
     perc = perception_msg()
     perc.time = rospy.get_time()
@@ -290,7 +292,7 @@ def perception_talker():
     feedback.language_feedback = 0
     pub_fb.publish(feedback)
 
-    # input()
+    input()
     distance += 400
     # time.sleep(20)
     perc = perception_msg()
@@ -319,7 +321,7 @@ def perception_talker():
     feedback.language_feedback = 0
     pub_fb.publish(feedback)
 
-    # input()
+    input()
     # time.sleep(16)
     perc = perception_msg()
     perc.time = rospy.get_time()
@@ -347,7 +349,7 @@ def perception_talker():
     feedback.language_feedback = 0
     pub_fb.publish(feedback)
 
-    # input()
+    input()
     # time.sleep(16)
     perc = perception_msg()
     perc.time = rospy.get_time()
@@ -375,7 +377,7 @@ def perception_talker():
     feedback.language_feedback = 0
     pub_fb.publish(feedback)
 
-    # input()
+    input()
     # time.sleep(16)
     perc = perception_msg()
     perc.time = rospy.get_time()

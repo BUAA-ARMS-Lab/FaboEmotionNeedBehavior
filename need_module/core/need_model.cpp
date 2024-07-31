@@ -161,7 +161,7 @@ void BehaviorFinishedUpdate(const social_msg::idleState::ConstPtr& msg,  ros::No
     if(msg->hehavior_name == "MeasureTemperature"){
         social_msg::need_msg need_output;
         need_output.person_name =  msg->person_name;
-        need_output.scene = "school";
+        need_output.scene = "family";
         need_output.IDtype = msg->IDtype;
         need_output.need_name = "TellTemparetureResult";  
         need_output.target_angle = 90;

@@ -101,7 +101,7 @@ def publish():
               eval.emotion5 = current_e[4] + random5
               random6 = random.uniform(0.1, 0.4)
               eval.emotion6 = current_e[5] + random6
-              random7 = random.uniform(0.1, 0.4)
+              random7 = random.uniform(0.1, 0.2)
               eval.emotion7 = current_e[6] + random7
               random8 = random.uniform(0.1, 0.2)
               eval.emotion8 = current_e[7] + random8
@@ -118,7 +118,7 @@ def publish():
               eval.emotion5 = current_e[4] + random5
               random6 = random.uniform(0.4, 0.5) 
               eval.emotion6 = current_e[5] + random6
-              random7 = random.uniform(0.4, 0.5) 
+              random7 = random.uniform(0.1, 0.2) 
               eval.emotion7 = current_e[6] + random7
               random8 = random.uniform(0.1, 0.2)
               eval.emotion8 = current_e[7] + random8

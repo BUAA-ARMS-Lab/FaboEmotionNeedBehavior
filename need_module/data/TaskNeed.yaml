@@ -389,3 +389,45 @@
   time: 0.05
   weight: 0.85
   satisfy_value: 0 
+
+
+- need_name: MeasureTemperature
+  intention: 体温测量  #MeasureTemperature
+  IDtype: 家长  #Parent
+  scene: family
+  person_emotion: Happy
+  rob_emotion: [0.0, 0, 0, 0, 0, 0, 0, 0 ]
+  rob_status: [0.1, 1, 1, 1, 1, 1, 1, 0 ]
+  time: 0
+  weight: 0.75
+  satisfy_value: 2
+- need_name: MeasureTemperature
+  intention: 体温测量  #MeasureTemperature
+  IDtype: 陌生人  #Stranger
+  scene: family
+  person_emotion: Happy
+  rob_emotion: [0, 0, 0, 0, 0, 0, 0, 0 ]
+  rob_status: [0.1, 1, 1, 1, 1, 1, 1, 0 ]
+  time: 0.0
+  weight: 1
+  satisfy_value: 2 
+- need_name: MeasureTemperature
+  intention: 体温测量  #MeasureTemperature
+  IDtype: 小明的舅舅  #Stranger
+  scene: family
+  person_emotion: Happy
+  rob_emotion: [0, 0, 0, 0, 0, 0, 0, 0 ]
+  rob_status: [0.1, 1, 1, 1, 1, 1, 1, 0 ]
+  time: 0.0
+  weight: 1
+  satisfy_value: 2 
+- need_name: MeasureTemperature
+  intention: 体温测量  #MeasureTemperature
+  IDtype: 小明舅舅  #Stranger
+  scene: family
+  person_emotion: Happy
+  rob_emotion: [0, 0, 0, 0, 0, 0, 0, 0 ]
+  rob_status: [0.1, 1, 1, 1, 1, 1, 1, 0 ]
+  time: 0.0
+  weight: 1
+  satisfy_value: 2 
